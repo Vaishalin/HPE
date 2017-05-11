@@ -111,6 +111,7 @@ public static void loadDevice() throws Exception
 	if ((config.getProperty("device_iOS"))!=null)
     {
 		System.out.println("entering inside load device1");
+		System.out.println("entering inside load device1");
     //command to select whether AN or iOS device to be selected
     device=driver.getDevice(config.getProperty("device_iOS"));
     device.open();
