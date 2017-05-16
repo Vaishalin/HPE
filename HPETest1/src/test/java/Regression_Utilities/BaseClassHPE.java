@@ -21,6 +21,7 @@ import org.openqa.selenium.WebElement;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 //import org.testng.log4testng.Logger;
 //import Regression_Utilities.XLS_Reader;
 //import Report.ExcelReportGenerator;
@@ -81,8 +82,11 @@ public static Logger logger = Logger.getLogger(BaseClassHPE.class);
 
 
 @BeforeSuite(alwaysRun=true)
-public static void loadDevice() throws Exception
+@Parameters("deviceId")
+public static void loadDevice(String deviceId) throws Exception
 {
+	if(deviceId!= null)
+		Device_ID = deviceId;
 	System.out.println("entering inside load device");
 	driver = new MobileDriver();
 	//Loading Configuration Property files
@@ -111,9 +115,11 @@ public static void loadDevice() throws Exception
 	if ((config.getProperty("device_iOS"))!=null)
     {
 		System.out.println("entering inside load device1");
-		System.out.println("entering inside load device1");
     //command to select whether AN or iOS device to be selected
-    device=driver.getDevice(config.getProperty("device_iOS"));
+		if(Device_ID!= null)
+			device=driver.getDevice(Device_ID);
+		else
+			device=driver.getDevice(config.getProperty("device_iOS"));
     device.open();
     Thread.sleep(10000);
     
