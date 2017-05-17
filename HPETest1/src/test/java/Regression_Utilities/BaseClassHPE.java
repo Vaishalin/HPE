@@ -82,11 +82,10 @@ public static Logger logger = Logger.getLogger(BaseClassHPE.class);
 
 
 @BeforeSuite(alwaysRun=true)
-@Parameters("deviceId")
-public static void loadDevice(String deviceId) throws Exception
+
+public static void loadDevice() throws Exception
 {
-	if(deviceId!= null)
-		Device_ID = deviceId;
+	
 	System.out.println("entering inside load device");
 	driver = new MobileDriver();
 	//Loading Configuration Property files
@@ -116,9 +115,6 @@ public static void loadDevice(String deviceId) throws Exception
     {
 		System.out.println("entering inside load device1");
     //command to select whether AN or iOS device to be selected
-		if(Device_ID!= null)
-			device=driver.getDevice(Device_ID);
-		else
 			device=driver.getDevice(config.getProperty("device_iOS"));
     device.open();
     Thread.sleep(10000);
