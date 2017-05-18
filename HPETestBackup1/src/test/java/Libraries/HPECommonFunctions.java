@@ -2975,16 +2975,18 @@ public static void ClickApply() throws Exception
                 		System.out.println("entering inside method");
                 		
                 		//visualdriver = device.getVisualDriver();
+                		/*
                 		IMobileWebDriver Text = device.getVisualDriver();
                 		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
                 		Text.findElement(By.linkText(linktext));
-                		
-                		
-                		//visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                		//WebElement Text = visualdriver.findElement(By.linkText(linktext));
-                		
-                		
-                		testLog.info("\n Element found is : " + linktext);
+                		*/
+                		visualdriver = device.getVisualDriver();
+                		visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                		WebElement Text = visualdriver.findElement(By.linkText(linktext));
+                		if (Text.isDisplayed())
+                		{
+                			testLog.info("\n Element found is : " + linktext);
+                		}
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
                 		CaptureScreenshot("TC_Fail_");	
