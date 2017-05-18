@@ -44,7 +44,7 @@
           <configuration>
           <suiteXmlFiles>
              <suiteXmlFile>TestNG.xml</suiteXmlFile>
-             <scope>HPEtest</scope> 
+           
            
           </suiteXmlFiles>          
         </configuration>   
