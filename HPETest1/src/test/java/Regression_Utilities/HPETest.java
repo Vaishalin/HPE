@@ -61,12 +61,13 @@ public class HPETest extends BaseClassHPE
 	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
+		String text="Sign In";
 		    HPECommonFunctions.screen();
 			System.out.println("Starting of TC_136_ValidateConnectivity");
 			HPECommonFunctions.screen();
 		    
 		    HPECommonFunctions.Open_App_HPE();
-		    HPECommonFunctions.VerifyConnectivity("Sign In");	
+		    HPECommonFunctions.VerifyConnectivity(text);	
 		    HPECommonFunctions.Close_App_HPE();
 			
 			HPECommonFunctions.screen();
