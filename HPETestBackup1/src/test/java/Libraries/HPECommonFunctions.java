@@ -2981,10 +2981,14 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		*/
                 		visualdriver = device.getVisualDriver();
+                		System.out.println("entering inside method1");
                 		visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                		System.out.println("entering inside method2");
                 		WebElement Text = visualdriver.findElement(By.linkText(linktext));
+                		System.out.println("entering inside method3");
                 		if (Text.isDisplayed())
                 		{
+                			System.out.println("entering inside is");
                 			testLog.info("\n Element found is : " + linktext);
                 		}
                 	} catch (Exception e) {
