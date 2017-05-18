@@ -3009,14 +3009,14 @@ public static void ClickApply() throws Exception
                 	public static void VerifyConnectivity(String linktext) throws Exception {
                     	try {
                     		
-                    		String text="Sign In";
+                    		//String text="Sign In";
                     		
                     		Thread.sleep(2000);
                     		IMobileWebDriver VerifyConnectivity = device.getVisualDriver();
                     		VerifyConnectivity.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                     		// device.getVisualDriver().findElementByLinkText(xpath).toString().contains(object_name);
                     		
-                    		VerifyConnectivity.findElement(By.linkText(text));
+                    		VerifyConnectivity.findElement(By.linkText(linktext));
                     		testLog.info("\n Element found is : " + linktext);
                     		testLog.info("\n User is connected to 4g or wifi");
                     	} catch (Exception e) {
