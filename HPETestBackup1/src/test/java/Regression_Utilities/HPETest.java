@@ -58,7 +58,7 @@ public class HPETest extends BaseClassHPE
 {	
 	
 	public static String date=null;
-	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
+	@Test(priority=1,groups={"Primary","Secondary"},enabled=false)
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
 		    HPECommonFunctions.screen();
@@ -815,7 +815,7 @@ public void TC_104_ValidateInvoiceAvailableIsNotClickable()throws Exception
 
 
 
-@Test(priority=32,groups={"Primary"},enabled=false)
+@Test(priority=32,groups={"Primary"},enabled=true)
 public void TC_116_ValidatetheMenuItems()throws Exception
 
 {
