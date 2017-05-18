@@ -2975,11 +2975,17 @@ public static void ClickApply() throws Exception
                 		System.out.println("entering inside method");
                 		
                 		//visualdriver = device.getVisualDriver();
-                		/*
+                		
                 		IMobileWebDriver Text = device.getVisualDriver();
-                		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
+                		System.out.println("entering inside method1");
+                		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                		System.out.println("entering inside method2");
                 		Text.findElement(By.linkText(linktext));
-                		*/
+                		System.out.println("entering inside method3");
+                		testLog.info("\n Element found is : " + linktext);
+                		System.out.println("entering inside method4");
+                		
+                		/*
                 		visualdriver = device.getVisualDriver();
                 		System.out.println("entering inside method1");
                 		visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -2991,6 +2997,7 @@ public static void ClickApply() throws Exception
                 			System.out.println("entering inside is");
                 			testLog.info("\n Element found is : " + linktext);
                 		}
+                		*/
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
                 		CaptureScreenshot("TC_Fail_");	
