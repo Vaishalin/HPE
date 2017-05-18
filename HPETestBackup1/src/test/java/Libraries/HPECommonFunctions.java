@@ -31,6 +31,7 @@ import com.perfectomobile.httpclient.utils.FileUtils;
 import com.perfectomobile.selenium.MobileCoordinates;
 import com.perfectomobile.selenium.MobileDriver;
 import com.perfectomobile.selenium.MobilePoint;
+import com.perfectomobile.selenium.api.IMobileDriver;
 import com.perfectomobile.selenium.api.IMobileWebDriver;
 import com.perfectomobile.selenium.by.ByMobile;
 
@@ -43,10 +44,11 @@ public class HPECommonFunctions extends HPEOperations
 {
 
 	//public static IMobileWebDriver visualdriver = device.getVisualDriver();
-	//public static IMobileWebDriver visualdriver = device.getVisualDriver();
+	public static IMobileWebDriver visualdriver = device.getVisualDriver();
 	public static IMobileWebDriver nativedriver = device.getNativeDriver();
 	public static IMobileWebDriver domdriver = device.getDOMDriver();
 	//public static WebDriver driver =null;
+	public static IMobileDriver driver1 = null;   
 	public static String VersionNo=null;
 	public static MobileDriver driver = null; //Interface for getting device,provides methods for uploading and downloading items to/from the media repository, downloading the execution report
 	public static String Device_Model=device.getProperty("Model");
@@ -2972,13 +2974,16 @@ public static void ClickApply() throws Exception
                 	try {
                 		System.out.println("entering inside method");
                 		
-                		visualdriver = device.getVisualDriver();
-                		//IMobileWebDriver Text = device.getVisualDriver();
-                		visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                		WebElement Text = visualdriver.findElement(By.linkText(linktext));
+                		//visualdriver = device.getVisualDriver();
+                		IMobileWebDriver Text = device.getVisualDriver();
+                		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
+                		Text.findElement(By.linkText(linktext));
                 		
-                		//Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
-                		//Text.findElement(By.linkText(linktext));
+                		
+                		//visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                		//WebElement Text = visualdriver.findElement(By.linkText(linktext));
+                		
+                		
                 		testLog.info("\n Element found is : " + linktext);
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
