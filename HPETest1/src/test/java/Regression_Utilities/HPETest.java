@@ -58,7 +58,7 @@ public class HPETest extends BaseClassHPE
 {	
 	
 	public static String date=null;
-	@Test(priority=1,groups={"Primary","Secondary"},enabled=false)
+	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
 		//String text="Sign In";
@@ -67,7 +67,7 @@ public class HPETest extends BaseClassHPE
 			HPECommonFunctions.screen();
 		    
 		    HPECommonFunctions.Open_App_HPE();
-		    HPECommonFunctions.VerifyConnectivity("Sign In");	
+		    //HPECommonFunctions.VerifyConnectivity("Sign In");	
 		    HPECommonFunctions.Close_App_HPE();
 			
 			HPECommonFunctions.screen();
@@ -76,7 +76,7 @@ public class HPETest extends BaseClassHPE
 		    
 	}
 	
-@Test(priority=2,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=2,groups={"Primary","Secondary"},enabled=false)
 public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
 {             
               
