@@ -42,7 +42,8 @@ public class HPECommonFunctions extends HPEOperations
 
 {
 
-	public static IMobileWebDriver visualdriver = device.getVisualDriver();
+	//public static IMobileWebDriver visualdriver = device.getVisualDriver();
+	//public static IMobileWebDriver visualdriver = device.getVisualDriver();
 	public static IMobileWebDriver nativedriver = device.getNativeDriver();
 	public static IMobileWebDriver domdriver = device.getDOMDriver();
 	//public static WebDriver driver =null;
@@ -2969,9 +2970,15 @@ public static void ClickApply() throws Exception
                 //Method to verify the text on any page (Checkpoint)
                 public static void Find_Text(String linktext) throws Exception {
                 	try {
-                		IMobileWebDriver Text = device.getVisualDriver();
-                		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
-                		Text.findElement(By.linkText(linktext));
+                		System.out.println("entering inside method");
+                		
+                		visualdriver = device.getVisualDriver();
+                		//IMobileWebDriver Text = device.getVisualDriver();
+                		visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                		WebElement Text = visualdriver.findElement(By.linkText(linktext));
+                		
+                		//Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
+                		//Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);

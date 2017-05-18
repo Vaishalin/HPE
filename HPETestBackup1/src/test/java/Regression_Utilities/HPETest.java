@@ -822,11 +822,14 @@ public void TC_116_ValidatetheMenuItems()throws Exception
      HPECommonFunctions.screen();
      System.out.println("Starting of TC_116_ValidatetheMenuItems");
      HPECommonFunctions.screen(); 
-     
+     /*
      HPECommonFunctions.Open_App_HPE();
      HPEOperations.Login_App();
-     HPECommonFunctions.ClickMenuBar();     
-     HPECommonFunctions.Find_Text(config.getProperty("Home"));
+     HPECommonFunctions.ClickMenuBar();  
+     */
+     //HPECommonFunctions.Find_Text(config.getProperty("Home"));
+     HPECommonFunctions.Find_Text("Home");
+     /*
      HPECommonFunctions.Find_Text(config.getProperty("Preferences"));
      HPECommonFunctions.Find_Text(config.getProperty("GetSupport_Button"));
      HPECommonFunctions.Find_Text(config.getProperty("PrivacyStatement"));
@@ -834,6 +837,7 @@ public void TC_116_ValidatetheMenuItems()throws Exception
      HPECommonFunctions.Find_Text(config.getProperty("TermsAndConditions"));     
      HPECommonFunctions.ClickSignOut1();
      HPECommonFunctions.Close_App_HPE();
+     */
 
      HPECommonFunctions.screen();
      System.out.println("Ending of TC_116_ValidatetheMenuItems");
