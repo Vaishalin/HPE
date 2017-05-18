@@ -29,15 +29,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 import org.testng.annotations.Parameters;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-
 
 import Libraries.HPECommonFunctions;
 
 import Libraries.HPEOperations;
 //import Report.ExcelReportGenerator;
 
+import com.beust.jcommander.Parameter;
 //import com.beust.jcommander.Parameters;
 import com.perfectomobile.httpclient.utils.FileUtils;
 import com.perfectomobile.selenium.MobileCoordinates;
@@ -58,43 +56,11 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class HPETest extends BaseClassHPE
 {	
+	
 	public static String date=null;
-	 public static String spath=null;
-	
-	ExtentTest logger;
-   HashMap<String,String> testDataMap = new HashMap<String, String>(); 
-   String absolutePathOfReport=getAbsolutePath(); 
-   //String  R3Report = absolutePathOfReport + "//" + "src" + "//" + "Report" + "//" + "Result.html"; 
-   String  R3Report = absolutePathOfReport+"//src//Report//" + "Result.html";
-   //File file= new File(path +"../src/Report/Report*.xlsx");
-   //String  R3Report = "C:\\HPE" + "//" + "Result.html";
-   
-   ExtentReports extent =new ExtentReports(R3Report); 
-   
-   
-   public String getAbsolutePath() {  
-         
-         try {
-              File dir1 = new File(".");
-             
-              spath = dir1.getCanonicalPath();
-              spath = spath.replaceAll("////", "////////");
-         } catch (IOException e) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-         }
-         return spath;
-       
-       
-         } 
-
-	
 	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
-		
-			logger=extent.startTest("TC_136_ValidateConnectivity()");
-		
 		    HPECommonFunctions.screen();
 			System.out.println("Starting of TC_136_ValidateConnectivity");
 			HPECommonFunctions.screen();
@@ -107,9 +73,6 @@ public class HPETest extends BaseClassHPE
 		    System.out.println("Ending of TC_136_ValidateConnectivity");
 		    HPECommonFunctions.screen();
 		    
-		    extent.endTest(logger);
-            extent.flush();
-
 	}
 	
 @Test(priority=2,groups={"Primary","Secondary"},enabled=false)
