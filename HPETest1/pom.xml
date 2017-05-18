@@ -44,7 +44,7 @@
           <configuration>
           <suiteXmlFiles>
              <suiteXmlFile>TestNG.xml</suiteXmlFile>  
-             <type>maven-plugin</type>
+         
           </suiteXmlFiles>          
         </configuration> 
 
