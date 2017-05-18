@@ -50,6 +50,9 @@ import com.perfectomobile.httpclient.MediaType;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+
 
 //import datatable.XLS_Reader;
 //import com.perfectomobile.PerfectoLabUtils;
@@ -58,6 +61,38 @@ public class HPETest extends BaseClassHPE
 {	
 	
 	public static String date=null;
+	public static String spath=null;
+    public static String val=null;
+    
+    //public static String reportpath="C:\\HPE";
+    
+    ExtentTest logger;
+    HashMap<String,String> testDataMap = new HashMap<String, String>(); 
+    String absolutePathOfReport=getAbsolutePath(); 
+    //String  R3Report = absolutePathOfReport + "//" + "src" + "//" + "Report" + "//" + "Result.html"; 
+    String  R3Report = absolutePathOfReport+"//src//Report//" + "Result.html";
+    //File file= new File(path +"../src/Report/Report*.xlsx");
+    //String  R3Report = "C:\\HPE" + "//" + "Result.html";
+    
+    ExtentReports extent =new ExtentReports(R3Report); 
+    
+    
+    public String getAbsolutePath() {  
+          
+          try {
+               File dir1 = new File(".");
+              
+               spath = dir1.getCanonicalPath();
+               spath = spath.replaceAll("////", "////////");
+          } catch (IOException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+          }
+          return spath;
+        
+        
+          }
+    
 	@Test(priority=1,groups={"Primary","Secondary"},enabled=false)
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
@@ -75,10 +110,14 @@ public class HPETest extends BaseClassHPE
 		    
 	}
 	
-@Test(priority=2,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=2,groups={"Primary","Secondary"},enabled=true)
 public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
 {             
               
+	
+
+    	  logger=extent.startTest("TC_134_ValidateErrorMessageForWrongUsername()");
+    	  
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_134_ValidateErrorMessageForWrongUsername");
           HPECommonFunctions.screen();
@@ -95,6 +134,10 @@ public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
           HPECommonFunctions.screen();
           System.out.println("Ending of TC_134_ValidateErrorMessageForWrongUsername");
           HPECommonFunctions.screen();
+          
+          extent.endTest(logger);
+          extent.flush();
+
            
 }
 
@@ -815,7 +858,7 @@ public void TC_104_ValidateInvoiceAvailableIsNotClickable()throws Exception
 
 
 
-@Test(priority=32,groups={"Primary"},enabled=true)
+@Test(priority=32,groups={"Primary"},enabled=false)
 public void TC_116_ValidatetheMenuItems()throws Exception
 
 {
