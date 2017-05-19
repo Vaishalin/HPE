@@ -2047,7 +2047,7 @@ public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	HPECommonFunctions.screen();
 } 
 
-@Test(priority=77,groups={"Primary"},enabled=false)
+@Test(priority=77,groups={"Primary"},enabled=true)
 public void TC_29_ValidateAutoPopulateOfDateinAdvancedSearch()throws Exception{
 
 	HPECommonFunctions.screen();
