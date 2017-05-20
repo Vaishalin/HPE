@@ -58,7 +58,7 @@ public class HPETest extends BaseClassHPE
 {	
 	
 	public static String date=null;
-	@Test(priority=1,groups={"Primary","Secondary"},enabled=false)
+	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
 		//String text="Sign In";
@@ -67,7 +67,7 @@ public class HPETest extends BaseClassHPE
 			HPECommonFunctions.screen();
 		    
 		    HPECommonFunctions.Open_App_HPE();
-		    //HPECommonFunctions.VerifyConnectivity("Sign In");	
+		    HPECommonFunctions.VerifyConnectivity("Sign In");	
 		    HPECommonFunctions.Close_App_HPE();
 			
 			HPECommonFunctions.screen();
@@ -101,7 +101,7 @@ public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
 
 
 
-@Test(priority=3,groups={"Primary"},enabled=true)
+@Test(priority=3,groups={"Primary"},enabled=false)
 public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 {             
        
@@ -124,7 +124,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 }
 
 	
-	@Test(priority=4, groups={"Primary","Secondary"},enabled=true)
+	@Test(priority=4, groups={"Primary","Secondary"},enabled=false)
     public void TC_140_ValidateDeclineButton()throws Exception
     {    	
     	
@@ -148,7 +148,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
 	
     
-    @Test(priority=5,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=5,groups={"Primary","Secondary"},enabled=false)
     public void TC_139_ValidateAcceptButton()throws Exception
     {    	   	
     	
@@ -172,7 +172,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     }
     
-    @Test(priority=6, groups={"Primary"},enabled=true)
+    @Test(priority=6, groups={"Primary"},enabled=false)
     public void TC_138_ValidateTermsConditionPage()throws Exception
     {    	
     	
@@ -198,7 +198,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=7,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=7,groups={"Primary","Secondary"},enabled=false)
     public void TC_123_ValidateFlagIcon_Home()throws Exception
     {    	   	
     	
@@ -224,7 +224,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     
     
     
-    @Test(priority=8,groups={"Primary"},enabled=true)
+    @Test(priority=8,groups={"Primary"},enabled=false)
     public void TC_125_ValidateOrderDeletionFromWatchlist()throws Exception
     {    	   	
     	
@@ -268,7 +268,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
   
-    @Test(priority=10,groups={"Primary"},enabled=true)
+    @Test(priority=10,groups={"Primary"},enabled=false)
     public void TC_115_Validate3LineMenu()throws Exception
     {    	   	
     	
@@ -316,7 +316,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 		    
     }
     
-    @Test(priority=12,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=12,groups={"Primary","Secondary"},enabled=false)
     public void TC_96_VerifyVersionNumberOnMenuPage()throws Exception
     {                
        
@@ -467,7 +467,7 @@ public void TC_94_BackButtonFromOrderDetailScreen()throws Exception
 	    
 }
 
-@Test(priority=18,groups={"Primary"},enabled=true)
+@Test(priority=18,groups={"Primary"},enabled=false)
 public void TC_95_BackButtonFromRecentSearchesScreen()throws Exception
 {    	   	
 	
@@ -965,7 +965,7 @@ public void TC_107_ValidateFAQsection()throws Exception
     
     }
 
-@Test(priority=37,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=37,groups={"Primary","Secondary"},enabled=false)
 public void TC_65_ValidatePoweredByHPEOSS()throws Exception
 {
 	
@@ -1011,7 +1011,7 @@ public void TC_10_SearchResultnumberValidation()throws Exception{
        
 }
 
-@Test(priority=39,groups={"Primary"},enabled=true)
+@Test(priority=39,groups={"Primary"},enabled=false)
 public void TC_62_VerifyOrderDetailsfromWatchListpage()throws Exception{
        
        
@@ -1218,7 +1218,7 @@ public void TC_9_ValidateOrderSearchDateAndTime()throws Exception
 }
 
 
-@Test(priority=47,groups={"Primary"},enabled=true)
+@Test(priority=47,groups={"Primary"},enabled=false)
 public void TC_126_ValidateNumberOfOrdersWatchList()throws Exception
 {    	   	
 	
@@ -1270,7 +1270,7 @@ public void TC_127_ValidateOrdersAddedReflectWatchList()throws Exception
 	
 }
 
-@Test(priority=49,groups={"Primary"},enabled=true)
+@Test(priority=49,groups={"Primary"},enabled=false)
 public void TC_128_ValidateOrdersemovedReflectWatchList()throws Exception
 {    	   	
 	
@@ -1354,7 +1354,7 @@ public void TC_33_ValidateOrderSearchDateAndTimeinSavedSearches()throws Exceptio
 }
 
 
-@Test(priority=52,groups={"Primary"},enabled=true)
+@Test(priority=52,groups={"Primary"},enabled=false)
 public void TC_118_ValidateWatchListPopUpScreen()throws Exception{
 
 	HPECommonFunctions.screen();
@@ -1549,7 +1549,7 @@ public void TC_20_AdvanceSearchEndCustomer()throws Exception
 }
 
 
-@Test(priority=59,groups={"Primary"},enabled=true)
+@Test(priority=59,groups={"Primary"},enabled=false)
 public void TC_51_CheckWatchListPageAfterOrdersFlgged()throws Exception
 {    	   	
 	
@@ -1607,7 +1607,7 @@ public void TC_35_ValidateUserPreferencesPage()throws Exception
 	    	HPECommonFunctions.screen();
 }
 
-@Test(priority=61,groups={"Primary"},enabled=true)
+@Test(priority=61,groups={"Primary"},enabled=false)
 public void TC_50_CheckWatchListPageWhenNoOrdersFlgged()throws Exception
 {    	   	
 	
@@ -2047,7 +2047,7 @@ public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	HPECommonFunctions.screen();
 } 
 
-@Test(priority=77,groups={"Primary"},enabled=true)
+@Test(priority=77,groups={"Primary"},enabled=false)
 public void TC_29_ValidateAutoPopulateOfDateinAdvancedSearch()throws Exception{
 
 	HPECommonFunctions.screen();
