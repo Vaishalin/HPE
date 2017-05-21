@@ -3010,16 +3010,19 @@ public static void ClickApply() throws Exception
                     	try {
                     		
                     		//String text="Sign In";
-                    		
+                    		System.out.println("Test1");
                     		Thread.sleep(2000);
                     		IMobileWebDriver VerifyConnectivity = device.getVisualDriver();
+                    		System.out.println("Test2");
                     		VerifyConnectivity.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                     		// device.getVisualDriver().findElementByLinkText(xpath).toString().contains(object_name);
-                    		
+                    		System.out.println("Test3");
                     		VerifyConnectivity.findElement(By.linkText(linktext));
+                    		System.out.println("Test4");
                     		testLog.info("\n Element found is : " + linktext);
                     		testLog.info("\n User is connected to 4g or wifi");
                     	} catch (Exception e) {
+                    		System.out.println("Test5");
                     		testLog.info("\nElement not found : " + linktext);
                     		testLog.info("\n User is not connected to 4g or wifi");
                     		CaptureScreenshot("TC_Fail_");	
