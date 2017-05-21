@@ -3021,8 +3021,8 @@ public static void ClickApply() throws Exception
                     		System.out.println("Test4");
                     		System.out.println(" User is connected to 4g or wifi");
                     		
-                    		//testLog.info("\n Element found is : " + linktext);
-                    		//testLog.info("\n User is connected to 4g or wifi");
+                    		testLog.info("\n Element found is : " + linktext);
+                    		testLog.info("\n User is connected to 4g or wifi");
                     	} catch (Exception e) {
                     		System.out.println("Test5");
                     		testLog.info("\nElement not found : " + linktext);
