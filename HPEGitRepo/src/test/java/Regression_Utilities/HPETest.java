@@ -50,8 +50,8 @@ import com.perfectomobile.httpclient.MediaType;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
+// import com.relevantcodes.extentreports.ExtentReports;
+// import com.relevantcodes.extentreports.ExtentTest;
 
 
 //import datatable.XLS_Reader;
@@ -66,7 +66,7 @@ public class HPETest extends BaseClassHPE
     
     //public static String reportpath="C:\\HPE";
     
-    ExtentTest logger;
+  //  ExtentTest logger;
     HashMap<String,String> testDataMap = new HashMap<String, String>(); 
     String absolutePathOfReport=getAbsolutePath(); 
     //String  R3Report = absolutePathOfReport + "//" + "src" + "//" + "Report" + "//" + "Result.html"; 
@@ -74,7 +74,7 @@ public class HPETest extends BaseClassHPE
     //File file= new File(path +"../src/Report/Report*.xlsx");
     //String  R3Report = "C:\\HPE" + "//" + "Result.html";
     
-    ExtentReports extent =new ExtentReports(R3Report); 
+  //  ExtentReports extent =new ExtentReports(R3Report); 
     
     
     public String getAbsolutePath() {  
@@ -100,7 +100,7 @@ public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
               
                 
 
-                  logger=extent.startTest("TC_134_ValidateErrorMessageForWrongUsername()");
+              //    logger=extent.startTest("TC_134_ValidateErrorMessageForWrongUsername()");
                   
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_134_ValidateErrorMessageForWrongUsername");
@@ -119,8 +119,8 @@ public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
           System.out.println("Ending of TC_134_ValidateErrorMessageForWrongUsername");
           HPECommonFunctions.screen();
           
-          extent.endTest(logger);
-          extent.flush();
+        //  extent.endTest(logger);
+        //  extent.flush();
 
            
 }
