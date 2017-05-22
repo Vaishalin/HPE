@@ -100,7 +100,7 @@ public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
               
                 
 
-              //    logger=extent.startTest("TC_134_ValidateErrorMessageForWrongUsername()");
+            logger=extent.startTest("TC_134_ValidateErrorMessageForWrongUsername()");
                   
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_134_ValidateErrorMessageForWrongUsername");
@@ -119,8 +119,8 @@ public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
           System.out.println("Ending of TC_134_ValidateErrorMessageForWrongUsername");
           HPECommonFunctions.screen();
           
-        //  extent.endTest(logger);
-        //  extent.flush();
+          extent.endTest(logger);
+          extent.flush();
 
            
 }
