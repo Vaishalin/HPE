@@ -47,6 +47,7 @@ import com.perfectomobile.selenium.by.ByMobile;
 import com.perfectomobile.selenium.options.MobileDeviceVital;
 import com.perfectomobile.selenium.options.rotate.MobileDeviceRotateOptions;
 import com.perfectomobile.httpclient.MediaType;
+import com.relevantcodes.extentreports.ExtentTest;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -64,9 +65,9 @@ public class HPETest extends BaseClassHPE
                 public static String spath=null;
     public static String val=null;
     
-    //public static String reportpath="C:\\HPE";
+    public static String reportpath="C:\\HPE";
     
-  //  ExtentTest logger;
+    ExtentTest logger;
     HashMap<String,String> testDataMap = new HashMap<String, String>(); 
     String absolutePathOfReport=getAbsolutePath(); 
     //String  R3Report = absolutePathOfReport + "//" + "src" + "//" + "Report" + "//" + "Result.html"; 
