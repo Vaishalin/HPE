@@ -61,7 +61,7 @@ public class HPETest extends BaseClassHPE
 	
 
 @Test(priority=1,groups={"Primary","Secondary"},enabled=true)
-public void TC_136_ValidateConnectivity()throws Exception
+public void TC_134_ValidateConnectivity()throws Exception
 {             
            
 		    HPECommonFunctions.screen();
@@ -79,6 +79,26 @@ public void TC_136_ValidateConnectivity()throws Exception
            
 }
 
+@Test(priority=2,groups={"Primary","Secondary"},enabled=true)
+public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
+{             
+   
+HPECommonFunctions.screen();
+System.out.println("Starting of TC_134_ValidateErrorMessageForWrongUsername");
+HPECommonFunctions.screen();
+ 
+
+HPECommonFunctions.Open_App_HPE();
+HPECommonFunctions.EnterWrongUserName(config.getProperty("WrongUserName"));
+HPECommonFunctions.EnterPassword();
+HPECommonFunctions.ClickSignIn1();        
+//HPECommonFunctions.VerifyErrorMessage(config.getProperty("Access_Denied"));
+//HPECommonFunctions.Close_App_HPE(logger);
+
+HPECommonFunctions.screen();
+System.out.println("Ending of TC_134_ValidateErrorMessageForWrongUsername");
+HPECommonFunctions.screen();
+}
 
 /*
 @AfterClass()
