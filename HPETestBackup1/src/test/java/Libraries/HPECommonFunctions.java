@@ -989,7 +989,7 @@ public class HPECommonFunctions extends HPEOperations
 			 Thread.sleep(5000);
 	         WebElement Accept = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
 	         Thread.sleep(2000);
-	         if (!Accept.isDisplayed())
+	         if(!Accept.isDisplayed())
 	         {
 	         Accept.click();
 	         Thread.sleep(5000);	         

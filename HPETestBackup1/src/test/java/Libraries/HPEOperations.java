@@ -74,13 +74,13 @@ public class HPEOperations extends BaseClassHPE
     	if(Device_Model.contains("iPhone"))
     	{
     	 	HPECommonFunctions.EnterUserName(config.getProperty("UserName"));    	 	   	 	
-            //HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
+            HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
             HPECommonFunctions.ClickSignIn();
             
     	}else if (Device_Model.contains("iPad"))
     	{
     		HPECommonFunctions.EnterUserName(config.getProperty("UserName"));    	 	   	 	
-            //HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
+            HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
             HPECommonFunctions.ClickSignIn();
     	} else
     	{
@@ -104,8 +104,8 @@ public class HPEOperations extends BaseClassHPE
     	 	             	
     		FirstLogin_App();
     		
-			WebElement TermsCondition = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
-			//WebElement TermsCondition = nativedriver.findElement(By.linkText("Terms and Conditions"));
+			//WebElement TermsCondition = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
+			WebElement TermsCondition = nativedriver.findElement(By.linkText("Terms and Conditions"));
 			if(!TermsCondition.isDisplayed())
 			{
 				HPECommonFunctions.SwipeUp();	    		   		
