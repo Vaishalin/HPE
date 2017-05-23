@@ -356,7 +356,7 @@ public class HPECommonFunctions extends HPEOperations
 					
 			// Method to Enter wrong password
             
-            public static void EnterPassword(ExtentTest logger) throws Exception
+            public static void EnterPassword() throws Exception
             {
                    if(Device_Model.contains("iPhone"))
                    {
@@ -494,7 +494,7 @@ public class HPECommonFunctions extends HPEOperations
               } 
 				
 				//Method to Click on Sign In Button for Android
-				public static void ClickSignIn1_iOS(ExtentTest logger) throws Exception
+				public static void ClickSignIn1_iOS() throws Exception
 				{
 					
 					//device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("51,87")));
@@ -517,7 +517,7 @@ public class HPECommonFunctions extends HPEOperations
 					{
 						Thread.sleep(5000);
 						System.out.println("Clicked on SignIn without any error");
-						logger.log(LogStatus.PASS, "PASS :" +"" + "Clicked on SignIn without any error" );
+						//logger.log(LogStatus.PASS, "PASS :" +"" + "Clicked on SignIn without any error" );
 					}
 				}
 		}
@@ -631,11 +631,11 @@ public class HPECommonFunctions extends HPEOperations
 				    
 		    
 		  //Method to click on Sign in button
-		    public static void ClickSignIn1(ExtentTest logger) throws Exception
+		    public static void ClickSignIn1() throws Exception
 				      {
 				    	if(Device_Model.contains("iPhone"))
 				    	{
-				    		ClickSignIn1_iOS(logger);
+				    		ClickSignIn1_iOS();
 				    		
 				    	}else
 				    	{
@@ -5550,7 +5550,7 @@ public static void ClickApply() throws Exception
                                 }
                  
                  //Method to enter wrong username
-                 public static void EnterWrongUserName(String WrongUserName, ExtentTest logger) throws Exception
+                 public static void EnterWrongUserName(String WrongUserName) throws Exception
                  {
                       try
                       {
@@ -5562,7 +5562,7 @@ public static void ClickApply() throws Exception
                  
                  UNElement.sendKeys(WrongUserName);
                  System.out.println("Entered Username");
-                 logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Username" );
+                 //logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Username" );
                  Thread.sleep(5000);
                       }
                  catch(Exception e)
