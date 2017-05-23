@@ -76,7 +76,7 @@ public class HPETest extends BaseClassHPE
 		    
 	}
 	
-	/*
+
 @Test(priority=2,groups={"Primary","Secondary"},enabled=true)
 public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
 {             
@@ -121,10 +121,9 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
         	HPECommonFunctions.screen();
             System.out.println("Ending of TC_135_ValidateErrorMessageForWrongPassword");
             HPECommonFunctions.screen();
-           
 }
 
-	
+/*
 	@Test(priority=4, groups={"Primary","Secondary"},enabled=true)
     public void TC_140_ValidateDeclineButton()throws Exception
     {    	
