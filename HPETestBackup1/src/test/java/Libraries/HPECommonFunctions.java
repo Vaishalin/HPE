@@ -334,9 +334,9 @@ public class HPECommonFunctions extends HPEOperations
 				
 				
 				}
-			/*
+			
 			//Enter Password in Password Field for iOS 
-			public static void EnterPassword_iOS(String Password, ExtentTest logger) throws Exception
+			public static void EnterPassword_iOS(String Password) throws Exception
 				{
 				
 				    WebElement PWDElement = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("PasswordiOS")));
@@ -346,13 +346,13 @@ public class HPECommonFunctions extends HPEOperations
 					//PWDElement.clear();
 					PWDElement.sendKeys(Password);
 					System.out.println("Entered Password");
-					logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Password" );
+					//logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Password" );
 					nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				
 					
 				
 				}
-				*/
+				
 					
 			// Method to Enter wrong password
             
@@ -5604,11 +5604,11 @@ public static void ClickApply() throws Exception
 
               // Method to Enter wrong password
                  
-                 public static void EnterWrongPassword(ExtentTest logger) throws Exception
+                 public static void EnterWrongPassword() throws Exception
                  {
                         if(Device_Model.contains("iPhone"))
                         {
-                              // EnterPassword_iOS(config.getProperty("WrongPassword"), logger);
+                              EnterPassword_iOS(config.getProperty("WrongPassword"));
                          } else
                          {
                         	 EnterPassword_AN(config.getProperty("WrongPassword"));
