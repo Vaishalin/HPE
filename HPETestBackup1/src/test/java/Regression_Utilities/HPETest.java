@@ -123,7 +123,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
             HPECommonFunctions.screen();
 }
 
-/*
+
 	@Test(priority=4, groups={"Primary","Secondary"},enabled=true)
     public void TC_140_ValidateDeclineButton()throws Exception
     {    	
@@ -930,7 +930,7 @@ public void TC_1_ValidateSearchResultPageInformation()throws Exception
 	    HPECommonFunctions.screen();
 	    
 }
-*/
+
 
 /*
 
