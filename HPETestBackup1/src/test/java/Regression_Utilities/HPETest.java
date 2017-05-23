@@ -61,7 +61,7 @@ public class HPETest extends BaseClassHPE
 
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
-		HPECommonFunctions.Close_App_HPE();
+	
 		    HPECommonFunctions.screen();
 			System.out.println("Starting of TC_136_ValidateConnectivity");
 			HPECommonFunctions.screen();
@@ -76,6 +76,7 @@ public class HPETest extends BaseClassHPE
 		    
 	}
 	
+	/*
 @Test(priority=2,groups={"Primary","Secondary"},enabled=true)
 public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
 {             
@@ -930,6 +931,7 @@ public void TC_1_ValidateSearchResultPageInformation()throws Exception
 	    HPECommonFunctions.screen();
 	    
 }
+*/
 
 /*
 
