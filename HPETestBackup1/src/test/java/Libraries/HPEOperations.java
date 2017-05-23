@@ -56,7 +56,7 @@ public class HPEOperations extends BaseClassHPE
     	 	
     	 	if((Device_Model.contains("iPhone")) && (Device_Model.contains("iPad")))
         	{
-            HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
+            //HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
             }else
     	    {
     		HPECommonFunctions.EnterPassword_AN("Password123");    		
@@ -74,13 +74,13 @@ public class HPEOperations extends BaseClassHPE
     	if(Device_Model.contains("iPhone"))
     	{
     	 	HPECommonFunctions.EnterUserName(config.getProperty("UserName"));    	 	   	 	
-            HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
+            //HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
             HPECommonFunctions.ClickSignIn();
             
     	}else if (Device_Model.contains("iPad"))
     	{
     		HPECommonFunctions.EnterUserName(config.getProperty("UserName"));    	 	   	 	
-            HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
+            //HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
             HPECommonFunctions.ClickSignIn();
     	} else
     	{

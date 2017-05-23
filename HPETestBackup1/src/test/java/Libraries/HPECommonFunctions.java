@@ -34,6 +34,8 @@ import com.perfectomobile.selenium.MobilePoint;
 import com.perfectomobile.selenium.api.IMobileDriver;
 import com.perfectomobile.selenium.api.IMobileWebDriver;
 import com.perfectomobile.selenium.by.ByMobile;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 
 //import Regression_Utilities.XLS_Reader;
@@ -143,7 +145,7 @@ public class HPECommonFunctions extends HPEOperations
         	  //nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
     	  	  Thread.sleep(2000);
-    	  	  System.out.println("Opened HPE-Go application");  	  
+    	  	  System.out.println("Opened HPE-Go application");  
     	  	  Thread.sleep(2000);
         	  
           }catch (Exception e)
@@ -249,7 +251,8 @@ public class HPECommonFunctions extends HPEOperations
 
   	  device.getNativeDriver(config.getProperty("AppName")).close();  	  
   	  Thread.sleep(2000);
-  	  System.out.println("Closed HPE-Go application");  	  
+  	  System.out.println("Closed HPE-Go application"); 
+  	  //logger.log(LogStatus.PASS, "PASS :" +"" + "Closed HPE-Go application" ); 
   	  Thread.sleep(20000);
      }
 	
@@ -331,9 +334,9 @@ public class HPECommonFunctions extends HPEOperations
 				
 				
 				}
-			
+			/*
 			//Enter Password in Password Field for iOS 
-			public static void EnterPassword_iOS(String Password) throws Exception
+			public static void EnterPassword_iOS(String Password, ExtentTest logger) throws Exception
 				{
 				
 				    WebElement PWDElement = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("PasswordiOS")));
@@ -343,19 +346,21 @@ public class HPECommonFunctions extends HPEOperations
 					//PWDElement.clear();
 					PWDElement.sendKeys(Password);
 					System.out.println("Entered Password");
+					logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Password" );
 					nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				
 					
 				
 				}
+				*/
 					
 			// Method to Enter wrong password
             
-            public static void EnterPassword() throws Exception
+            public static void EnterPassword(ExtentTest logger) throws Exception
             {
                    if(Device_Model.contains("iPhone"))
                    {
-                          EnterPassword_iOS(config.getProperty("Password"));
+                          //EnterPassword_iOS(config.getProperty("Password"), logger);
                    } else
                    {
                 	   EnterPassword_AN(config.getProperty("Password"));
@@ -441,7 +446,7 @@ public class HPECommonFunctions extends HPEOperations
                     {
                                   Thread.sleep(2000);
                                   
-                                  HPECommonFunctions.ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_GalaxyS7"+".png");
+                                  //HPECommonFunctions.ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_GalaxyS7"+".png");
 
                     }
 
@@ -463,6 +468,7 @@ public class HPECommonFunctions extends HPEOperations
 				}
 		}
 
+				
 				
 				public static void ClickOnKeypadGoButton_AN(String imagePath) throws Exception
                 
@@ -488,7 +494,7 @@ public class HPECommonFunctions extends HPEOperations
               } 
 				
 				//Method to Click on Sign In Button for Android
-				public static void ClickSignIn1_iOS() throws Exception
+				public static void ClickSignIn1_iOS(ExtentTest logger) throws Exception
 				{
 					
 					//device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("51,87")));
@@ -511,6 +517,7 @@ public class HPECommonFunctions extends HPEOperations
 					{
 						Thread.sleep(5000);
 						System.out.println("Clicked on SignIn without any error");
+						logger.log(LogStatus.PASS, "PASS :" +"" + "Clicked on SignIn without any error" );
 					}
 				}
 		}
@@ -624,11 +631,11 @@ public class HPECommonFunctions extends HPEOperations
 				    
 		    
 		  //Method to click on Sign in button
-		    public static void ClickSignIn1() throws Exception
+		    public static void ClickSignIn1(ExtentTest logger) throws Exception
 				      {
 				    	if(Device_Model.contains("iPhone"))
 				    	{
-				    		ClickSignIn1_iOS();
+				    		ClickSignIn1_iOS(logger);
 				    		
 				    	}else
 				    	{
@@ -3038,8 +3045,10 @@ public static void ClickApply() throws Exception
                     		VerifyConnectivity.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                     		// device.getVisualDriver().findElementByLinkText(xpath).toString().contains(object_name);
                     		VerifyConnectivity.findElement(By.linkText(linktext));
+                    		
                     		testLog.info("\n Element found is : " + linktext);
                     		testLog.info("\n User is connected to 4g or wifi");
+                    		
                     	} catch (Exception e) {
                     		testLog.info("\nElement not found : " + linktext);
                     		testLog.info("\n User is not connected to 4g or wifi");
@@ -5399,7 +5408,7 @@ public static void ClickApply() throws Exception
                 	            {
                 	            System.out.println("Paragraph 8 button is not Present");                          
                 	            CaptureScreenshot("TC_Fail_"); 
-                	            Open_App_HPE();
+                	            //Open_App_HPE();
                 	            //ClickSignOut();
                 	            Close_App_HPE();
 	                             Thread.sleep(2000);
@@ -5541,7 +5550,7 @@ public static void ClickApply() throws Exception
                                 }
                  
                  //Method to enter wrong username
-                 public static void EnterWrongUserName(String WrongUserName) throws Exception
+                 public static void EnterWrongUserName(String WrongUserName, ExtentTest logger) throws Exception
                  {
                       try
                       {
@@ -5553,11 +5562,12 @@ public static void ClickApply() throws Exception
                  
                  UNElement.sendKeys(WrongUserName);
                  System.out.println("Entered Username");
+                 logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Username" );
                  Thread.sleep(5000);
                       }
                  catch(Exception e)
              	{
-             		System.out.println("Unable to find password field");				
+             		System.out.println("Unable to find Username field");				
              		CaptureScreenshot("TC_Fail_");				
              		//ClickSignout();
              		Close_App_HPE();
@@ -5594,11 +5604,11 @@ public static void ClickApply() throws Exception
 
               // Method to Enter wrong password
                  
-                 public static void EnterWrongPassword() throws Exception
+                 public static void EnterWrongPassword(ExtentTest logger) throws Exception
                  {
                         if(Device_Model.contains("iPhone"))
                         {
-                               EnterPassword_iOS(config.getProperty("WrongPassword"));
+                              // EnterPassword_iOS(config.getProperty("WrongPassword"), logger);
                          } else
                          {
                         	 EnterPassword_AN(config.getProperty("WrongPassword"));
@@ -7062,13 +7072,13 @@ public static void HPEProdcutNumber() throws Exception
  {
        if(Device_Model.contains("Pixel"))
        {
-              ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Pixel"+".png");
+              //ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Pixel"+".png");
        } else if(Device_Model.contains("iPhone"))
        {
     	   System.out.println("No need to close the keypad in iphone");
        }else 
        {
-           ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Galaxy"+".png");
+           //ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Galaxy"+".png");
     }
  }
 
