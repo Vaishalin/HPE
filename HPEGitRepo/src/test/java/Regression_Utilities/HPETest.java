@@ -245,7 +245,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     }
     
-    @Test(priority=9,groups={"Primary","Secondary"},enabled=false)
+    @Test(priority=9,groups={"Primary","Secondary"},enabled=true)
     public void TC_5_ValidateOrderDetailsPage()throws Exception
     {                
        
@@ -268,7 +268,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
   
-    @Test(priority=10,groups={"Primary"},enabled=false)
+    @Test(priority=10,groups={"Primary"},enabled=true)
     public void TC_115_Validate3LineMenu()throws Exception
     {    	   	
     	
@@ -293,7 +293,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=11,groups={"Primary"},enabled=false)
+    @Test(priority=11,groups={"Primary"},enabled=true)
     public void TC_93_BackButtonFromWatchListPage()throws Exception
     {    	   	
     	
@@ -316,7 +316,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 		    
     }
     
-    @Test(priority=12,groups={"Primary","Secondary"},enabled=false)
+    @Test(priority=12,groups={"Primary","Secondary"},enabled=true)
     public void TC_96_VerifyVersionNumberOnMenuPage()throws Exception
     {                
        
@@ -339,7 +339,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
                   
     }
     
-    @Test(priority=13,groups={"Primary"},enabled=false)
+    @Test(priority=13,groups={"Primary"},enabled=true)
     public void TC_105_VerifyGetSupportOption()throws Exception
     {                
        
@@ -363,7 +363,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
                   
     }
     
-    @Test(priority=14,groups={"Primary"},enabled=false)
+    @Test(priority=14,groups={"Primary"},enabled=true)
     public void TC_106_ClickGetSupportOption()throws Exception
     {                
        
@@ -389,7 +389,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=15,groups={"Primary"},enabled=false)
+    @Test(priority=15,groups={"Primary"},enabled=true)
     public void TC_91_BackButtonFromSearchResultsPage()throws Exception
     {    	   	
     	
@@ -520,7 +520,7 @@ public void TC_32_ValidateDeletionOfSearchFromRecentSearchesScreen()throws Excep
 
 
 
-@Test(priority=20,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=20,groups={"Primary","Secondary"},enabled=true)
 public void TC_17_ValidateAdvanceSearchFunctionality()throws Exception
 {    	   	
 	
@@ -543,7 +543,7 @@ public void TC_17_ValidateAdvanceSearchFunctionality()throws Exception
 	    
 }
 
-@Test(priority=21,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=21,groups={"Primary","Secondary"},enabled=true)
 public void TC_19_ValidateFilterIconFunctionality()throws Exception
 {    	   	
 	
@@ -589,7 +589,7 @@ public void TC_55_CommonPageLayoutForAlerts()throws Exception
 	    
 }
 
-@Test(priority=23,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=23,groups={"Primary","Secondary"},enabled=true)
 public void TC_16_ValidateBackArrowButton()throws Exception
 {                
    
@@ -638,7 +638,7 @@ public void TC_98_ValidateInvoiceAvailableDeliveredOrders()throws Exception
    
 }
 
-@Test(priority=25,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=25,groups={"Primary","Secondary"},enabled=true)
 public void TC_18_ValidateSortIcon()throws Exception
 {                
    
@@ -816,7 +816,7 @@ public void TC_104_ValidateInvoiceAvailableIsNotClickable()throws Exception
 
 
 
-@Test(priority=32,groups={"Primary"},enabled=false)
+@Test(priority=32,groups={"Primary"},enabled=true)
 public void TC_116_ValidatetheMenuItems()throws Exception
 
 {
@@ -843,7 +843,7 @@ public void TC_116_ValidatetheMenuItems()throws Exception
 
 }
 
-@Test(priority=33,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=33,groups={"Primary","Secondary"},enabled=true)
 public void TC_117_MainMenuPages()throws Exception
 {                
    
@@ -879,7 +879,7 @@ public void TC_117_MainMenuPages()throws Exception
    
 }
 
-@Test(priority=34,groups={"Primary"},enabled=false)
+@Test(priority=34,groups={"Primary"},enabled=true)
 public void TC_108_ValidateContactUS()throws Exception
 {
 		HPECommonFunctions.screen();
@@ -933,7 +933,7 @@ public void TC_1_ValidateSearchResultPageInformation()throws Exception
 
 
 
-@Test(priority=36,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=36,groups={"Primary","Secondary"},enabled=true)
 public void TC_107_ValidateFAQsection()throws Exception
 {
        HPECommonFunctions.screen();
@@ -1031,7 +1031,7 @@ public void TC_62_VerifyOrderDetailsfromWatchListpage()throws Exception{
 }
 
 
-@Test(priority=40,groups={"Primary"},enabled=false)
+@Test(priority=40,groups={"Primary"},enabled=true)
 public void TC_15_ValidateClearIconSearchPage()throws Exception
 {                
    
@@ -1055,7 +1055,7 @@ public void TC_15_ValidateClearIconSearchPage()throws Exception
    
 }
 
-@Test(priority=41,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=41,groups={"Primary","Secondary"},enabled=true)
 public void TC_14_ValidateSearchBarFunctionality()throws Exception
 {                
    
@@ -1108,7 +1108,7 @@ public void TC_61_VerifyUIOrderDetailsPageFromWatchList()throws Exception
 }
 
 
-@Test(priority=43,groups={"Primary"},enabled=false)
+@Test(priority=43,groups={"Primary"},enabled=true)
 public void TC_8_ValidateSearchTips()throws Exception
 {      
        HPECommonFunctions.screen();
@@ -1164,7 +1164,7 @@ public void TC_60_VerifyBasicInfoOrderDetailsfromSearchPage()throws Exception{
 
 
 
-@Test(priority=45,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=45,groups={"Primary","Secondary"},enabled=true)
 public void TC_77_ValidateTermsAndConditionPageFromMenu()throws Exception
 {      
        HPECommonFunctions.screen();
@@ -1298,7 +1298,7 @@ public void TC_128_ValidateOrdersemovedReflectWatchList()throws Exception
 	
 }
 
-@Test(priority=50,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=50,groups={"Primary","Secondary"},enabled=true)
 public void TC_130_ValidateOrderElements()throws Exception{
         
         
