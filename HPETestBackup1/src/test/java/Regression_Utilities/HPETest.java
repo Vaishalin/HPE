@@ -932,7 +932,7 @@ public void TC_1_ValidateSearchResultPageInformation()throws Exception
 }
 
 
-/*
+
 
 @Test(priority=36,groups={"Primary","Secondary"},enabled=true)
 public void TC_107_ValidateFAQsection()throws Exception
@@ -2073,7 +2073,7 @@ public void TC_29_ValidateAutoPopulateOfDateinAdvancedSearch()throws Exception{
 }
 
 
-*/
+
 
 
 
