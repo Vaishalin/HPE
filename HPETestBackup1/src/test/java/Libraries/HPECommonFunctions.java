@@ -1719,7 +1719,7 @@ public static void ClickSignOut1() throws Exception
 			{
 			
 			WebElement WatchFlagIcon = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchFlagIcon")));
-			if(!WatchFlagIcon.isDisplayed())
+			if(WatchFlagIcon.isDisplayed())
 			{
 				Reporter.log("Watchlist FlagIcon is Present");
 				Thread.sleep(2000);
@@ -1893,7 +1893,7 @@ public static void ClickSignOut1() throws Exception
 				try
 				{
 				WebElement MenuSlide = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Home")));
-				if(!MenuSlide.isDisplayed())
+				if(MenuSlide.isDisplayed())
 				{				
 					Reporter.log("User is able to see a menu slide from the left");
 					Reporter.log("User is able to see a menu slide from the left");
@@ -2096,7 +2096,7 @@ public static void ClickSignOut1() throws Exception
 	                                                              
 	                    		 WebElement SearchPage = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SearchPageTitle")));
 	                    		 Thread.sleep(1000);
-	                    		 if (!SearchPage.isDisplayed())
+	                    		 if (SearchPage.isDisplayed())
 	                    		 {
 	                    			 Reporter.log("Search Page is displayed");
 	                    			 Thread.sleep(5000);
@@ -2347,7 +2347,7 @@ public static void ClickSignOut1() throws Exception
 
                                  Thread.sleep(5000);
                                  WebElement Invoice = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Invoice Available")));
-                                 if(!Invoice.isDisplayed())
+                                 if(Invoice.isDisplayed())
                                  {
                                 	 Reporter.log("Invoice is available from OSS");
                             
@@ -2440,7 +2440,7 @@ public static void ClickSignOut1() throws Exception
                  {
                          Thread.sleep(5000);
                          WebElement VersionNumber = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("VersionNumber")));
-                         if(!VersionNumber.isDisplayed())
+                         if(VersionNumber.isDisplayed())
                          {
                         	 VersionNo = VersionNumber.getAttribute("name");
                         	 Reporter.log("Version Number is Present & below is the Version Number");
@@ -2497,7 +2497,7 @@ public static void ClickSignOut1() throws Exception
                                {
                                Thread.sleep(5000);
                                WebElement GetSupport = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("GetSupport")));
-                               if(!GetSupport.isDisplayed())
+                               if(GetSupport.isDisplayed())
                                {
                                       
                                       GetSupport.click();
@@ -2800,7 +2800,7 @@ public static void ClickApply() throws Exception
 				try
 				{			
 				WebElement Alerts = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Alerts")));
-				if(!Alerts.isDisplayed())
+				if(Alerts.isDisplayed())
 				{				
 					Alerts.click();
 					Reporter.log("Clicked on Alerts");
@@ -2919,7 +2919,7 @@ public static void ClickApply() throws Exception
 				try
 				{			
 				WebElement WatchList = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchList1")));
-				if(!WatchList.isDisplayed())
+				if(WatchList.isDisplayed())
 				{				
 					WatchList.click();
 					Reporter.log("Clicked on WatchList");
@@ -2966,7 +2966,7 @@ public static void ClickApply() throws Exception
                		WebElement AlertsPage = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("AlertsPageTitle")));
                		 
                		Thread.sleep(1000);
-               		 if (!AlertsPage.isDisplayed())
+               		 if (AlertsPage.isDisplayed())
                		 {
                			 Reporter.log("Alerts Page is displayed");
                			 //Thread.sleep(5000);
@@ -3099,7 +3099,7 @@ public static void ClickApply() throws Exception
      				try
      				{			
      				WebElement Search = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Search")));
-     				if(!Search.isDisplayed())
+     				if(Search.isDisplayed())
      				{				
      					Thread.sleep(5000);
      					Search.click();
@@ -3204,7 +3204,7 @@ public static void ClickApply() throws Exception
      				{	
 						nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 						WebElement RecentSearch = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("RecentSearches")));
-						if(!RecentSearch.isDisplayed())
+						if(RecentSearch.isDisplayed())
      				{				
      					Thread.sleep(5000);
      					RecentSearch.click();
@@ -3738,7 +3738,7 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement AdvancedSearch = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("AdvancedSearch")));
-	                     if(!AdvancedSearch.isDisplayed())
+	                     if(AdvancedSearch.isDisplayed())
 	                 {
 	    	            
 	                    	 AdvancedSearch.click();
@@ -3871,7 +3871,7 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement Close = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Close")));
-	                         if(!Close.isDisplayed())
+	                         if(Close.isDisplayed())
 	                 {
 	    	            
 	                        	 CaptureScreenshot("TC_Fail_");                         
@@ -4105,7 +4105,7 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement Apply = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Apply")));
-	                         if(!Apply.isDisplayed())
+	                         if(Apply.isDisplayed())
 	                 {
 	    	            
 	                        	 Apply.click();
@@ -4172,7 +4172,7 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement Invoice = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Invoice")));
-	                         if(!Invoice.isEnabled())
+	                         if(Invoice.isEnabled())
 	                 {
 	    	                   	 Reporter.log("Invoice Available icon is Clickable");
 	                        	 CaptureScreenshot("TC_Fail_");
@@ -4200,7 +4200,7 @@ public static void ClickApply() throws Exception
 	                     try
 	                     {
 	                     WebElement LoginPage = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignIn")));
-	                     if(!LoginPage.isDisplayed())
+	                     if(LoginPage.isDisplayed())
 	                     {                          
 	                           Reporter.log("User is on the login page");
 	                           Thread.sleep(5000);                      
@@ -4282,7 +4282,7 @@ public static void ClickApply() throws Exception
 	                                 try
 	                                 {                    
 	                                 WebElement SignOut1 = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("PreSignOut")));
-	                                 if(!SignOut1.isDisplayed())
+	                                 if(SignOut1.isDisplayed())
 	                                 {                          
 	                                       SignOut1.click();
 	                                       Reporter.log("Clicked on SignOut");
@@ -4342,7 +4342,7 @@ public static void ClickApply() throws Exception
 	            	nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	           
 	            WebElement Home = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Home")));
-	            if(!Home.isDisplayed())
+	            if(Home.isDisplayed())
 	            {      
 	            Home.click();
 	            Reporter.log("Clicked on Home");
@@ -4461,7 +4461,7 @@ public static void ClickApply() throws Exception
                           {
                    
                    WebElement PrivacyStatementOption = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Home")));
-                   if(!PrivacyStatementOption.isDisplayed())
+                   if(PrivacyStatementOption.isDisplayed())
                    {
                           PrivacyStatementOption.click();
                           
@@ -4657,7 +4657,7 @@ public static void ClickApply() throws Exception
                             WebElement CustomerName = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("EndCustomerName")));
                             
                             
-                            if(!CustomerName.isDisplayed())
+                            if(CustomerName.isDisplayed())
                             {
                              EndCustomerName = CustomerName.getAttribute("name");
                              Reporter.log("End Customer Name is Present & below is the name");
@@ -5474,7 +5474,7 @@ public static void ClickApply() throws Exception
                      {
                              Thread.sleep(5000);
                              WebElement DateTime = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Date")));
-                             if(!DateTime.isDisplayed())
+                             if(DateTime.isDisplayed())
                              {
                             	 String DateTime1 = DateTime.getAttribute("name");
                             	 Reporter.log("Date & Time is Present & below is the Date & Time");
@@ -6584,7 +6584,7 @@ public static void HPEProdcutNumber() throws Exception
                                                       {
                                                               Thread.sleep(5000);
                                                               WebElement WatchListResult = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchListResults")));
-                                                              if (!WatchListResult.isDisplayed())
+                                                              if (WatchListResult.isDisplayed())
                                                               {
                                                             	  nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                                                             	  WatchListResult1 = WatchListResult.getAttribute("name");
@@ -6904,7 +6904,7 @@ public static void HPEProdcutNumber() throws Exception
                                     {
                                       nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                                     WebElement TermsAndConditions = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("T&C")));
-                                    if(!TermsAndConditions.isDisplayed())
+                                    if(TermsAndConditions.isDisplayed())
                                     {      
                                       TermsAndConditions.click();
                                     Reporter.log("Clicked on TermsAndConditions");
