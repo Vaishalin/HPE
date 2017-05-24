@@ -12,6 +12,13 @@
 
 <!--  <parameter name="deviceId" value=${deviceId}></parameter>-->
      <test name="HPETest">
+     <groups>
+        <run>      
+          <include name="Secondary"/>
+          <!-- <include name="Secondary"/>-->
+       </run>
+     </groups>
+     
         <classes>
            <class name="Regression_Utilities.HPETest"/>
         </classes>
