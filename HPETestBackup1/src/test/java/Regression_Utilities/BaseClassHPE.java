@@ -128,8 +128,8 @@ public static void loadDevice() throws Exception
     //testLog.info("Device OS is: "+Device_OS);
     Device_OS_Version=device.getProperty("osVersion");       
     //testLog.info("Device OS Version is: "+Device_OS_Version);
-    Reporter.log(Device_ID);
-    Reporter.log(Device_OS_Version);
+    
+  
     
 
     } else

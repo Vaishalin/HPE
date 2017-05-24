@@ -18,6 +18,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -59,11 +60,16 @@ public class HPETest extends BaseClassHPE
 	public static String date=null;
 	
 	
-	@Test(priority=1,groups={"Primary","Secondary"},enabled=false)
+	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
-	
+			Reporter.log("Application Name is: "+"HPE Go");
+			Reporter.log("Device ID is: "+Device_ID);
+			Reporter.log("Device Version is: "+Device_OS_Version);
+			Reporter.log("Device Model is: "+Device_Model);
+			Reporter.log("Device OS is: "+Device_OS);
+	    
 		    HPECommonFunctions.screen();
 			System.out.println("Starting of TC_136_ValidateConnectivity");
 			HPECommonFunctions.screen();
@@ -200,14 +206,13 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
 
     
-    @Test(priority=7,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=7,groups={"Primary","Secondary"},enabled=false)
     public void TC_123_ValidateFlagIcon_Home()throws Exception
     {    	   	
     	
     	    HPECommonFunctions.screen();
     		System.out.println("Starting of TC_123_ValidateFlagIcon_Home");
-    		HPECommonFunctions.screen();
-    	    
+    		HPECommonFunctions.screen();    	    
     	    		
     	    HPECommonFunctions.Open_App_HPE();
     		HPEOperations.Login_App();    		 		
