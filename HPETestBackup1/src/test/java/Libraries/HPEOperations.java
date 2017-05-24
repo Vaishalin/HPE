@@ -100,12 +100,13 @@ public class HPEOperations extends BaseClassHPE
     public static void Login_App_iOS() throws Exception
       {
     	try
+    	
     	  {
     	 	             	
     		FirstLogin_App();
     		
-			//WebElement TermsCondition = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
-			WebElement TermsCondition = nativedriver.findElement(By.linkText("Terms and Conditions"));
+			WebElement TermsCondition = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
+			//WebElement TermsCondition = nativedriver.findElement(By.linkText("Terms and Conditions"));
 			if(!TermsCondition.isDisplayed())
 			{
 				HPECommonFunctions.SwipeUp();	    		   		
