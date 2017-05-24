@@ -926,8 +926,8 @@ public class HPECommonFunctions extends HPEOperations
 		  //Method to click on Accept option
 	    public static void ClickAccept() throws Exception
 	      {
-	    	ClickAccept_iOS();
-	    	/*
+	    	
+	    	
 	    	
 	    	if(Device_Model.equals("iPhone-7"))
 	    	{
@@ -935,16 +935,16 @@ public class HPECommonFunctions extends HPEOperations
 	    	}else if(Device_Model.contains("iPad"))
 	    	{
 	    		ClickAccept_iOS();
-	    	}else if(Device_Model.equals("iPhone-6S"))
+	    	}else if(Device_Model.equals("iPhone-5S"))
 	    	{
 	    		ClickAccept_iOS();
 	    	}
-	    		else
+	    		else 
 	    	{
 	    		ClickAccept_AN();
 	    	}
 	    	
-	    	*/
+	    	
 	    	          
 	      }
 	    
@@ -984,7 +984,7 @@ public class HPECommonFunctions extends HPEOperations
 		public static void ClickAccept_iOS() throws Exception
 		{
 			
-			/*
+			
 		   try
 		   {
        
@@ -1001,12 +1001,13 @@ public class HPECommonFunctions extends HPEOperations
 		    }catch (Exception e)
 		{
 			System.out.println("User has already accepted the Terms & Conditions");
-		}   */
+		}   
 		
+			/*
 			device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("538,1228")));
 			System.out.println("Clicked on Accept");
 		    Thread.sleep(10000); 
-			
+			*/
 		
 		}	
 	
