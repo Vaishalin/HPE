@@ -926,6 +926,9 @@ public class HPECommonFunctions extends HPEOperations
 		  //Method to click on Accept option
 	    public static void ClickAccept() throws Exception
 	      {
+	    	ClickAccept_iOS();
+	    	/*
+	    	
 	    	if(Device_Model.equals("iPhone-7"))
 	    	{
 	    		ClickAccept_iOS();
@@ -940,6 +943,8 @@ public class HPECommonFunctions extends HPEOperations
 	    	{
 	    		ClickAccept_AN();
 	    	}
+	    	
+	    	*/
 	    	          
 	      }
 	    
