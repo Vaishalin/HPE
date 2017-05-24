@@ -2686,7 +2686,7 @@ public static void ClickSignOut1() throws Exception
 			//Method to click on search icon
 		    public static void ClickOnSearchIcon() throws Exception
 		      {
-		    	if(Device_Model.equals("iPhone-7"))
+		    	if(Device_Model.contains("iPhone"))
 		    	{
 		    		//ClickOnSearchIcon_iOS();
 		    		ClickSearchIcon_iOS("C://HPE//FunctionalTesting//Images//SearchIcon_iOS" +".png");
