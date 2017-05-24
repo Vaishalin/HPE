@@ -198,7 +198,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=7,groups={"Primary","Secondary"},enabled=false)
+    @Test(priority=7,groups={"Primary","Secondary"},enabled=true)
     public void TC_123_ValidateFlagIcon_Home()throws Exception
     {    	   	
     	
@@ -816,7 +816,7 @@ public void TC_104_ValidateInvoiceAvailableIsNotClickable()throws Exception
 
 
 
-@Test(priority=32,groups={"Primary"},enabled=true)
+@Test(priority=32,groups={"Primary"},enabled=false)
 public void TC_116_ValidatetheMenuItems()throws Exception
 
 {
