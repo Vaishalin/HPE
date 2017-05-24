@@ -58,7 +58,7 @@ public class HPETest extends BaseClassHPE
 {	
 	public static String date=null;
 	
-	/*
+	
 	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 
 	public void TC_136_ValidateConnectivity()throws Exception
@@ -198,7 +198,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     		
     }
-    */
+
     
     @Test(priority=7,groups={"Primary","Secondary"},enabled=true)
     public void TC_123_ValidateFlagIcon_Home()throws Exception
@@ -224,7 +224,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     }
     
-    /*
+  
     
     @Test(priority=8,groups={"Primary"},enabled=true)
     public void TC_125_ValidateOrderDeletionFromWatchlist()throws Exception
@@ -2074,7 +2074,7 @@ public void TC_29_ValidateAutoPopulateOfDateinAdvancedSearch()throws Exception{
 
 }
 
-*/
+
 
 
 
