@@ -707,7 +707,7 @@ public class HPECommonFunctions extends HPEOperations
 				
                 public static void SwipeUp() throws Exception
                 {
-                       if(Device_Model.equals("iPhone-7"))
+                       if(Device_Model.contains("iPhone"))
                        {
                     	   SwipeUp_iOS();
                        }if(Device_Model.equals("iPhone-5S"))
