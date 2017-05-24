@@ -19,6 +19,7 @@ import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 */
 
+import org.testng.Reporter;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
@@ -127,6 +128,9 @@ public static void loadDevice() throws Exception
     //testLog.info("Device OS is: "+Device_OS);
     Device_OS_Version=device.getProperty("osVersion");       
     //testLog.info("Device OS Version is: "+Device_OS_Version);
+    Reporter.log(Device_ID);
+    Reporter.log(Device_OS_Version);
+    
 
     } else
     {
