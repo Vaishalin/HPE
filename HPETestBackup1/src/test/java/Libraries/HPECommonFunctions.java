@@ -983,18 +983,12 @@ public class HPECommonFunctions extends HPEOperations
 		
 		public static void ClickAccept_iOS() throws Exception
 		{
+			
+			/*
 		   try
 		   {
-			   /*
-		     WebElement Accept; 
-	         WebDriverWait wait = new WebDriverWait(nativedriver, 20);
-	         //SearchResultiphone= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(iOS_Objects.getProperty("SearchResultiPhone"))));
-	         Accept= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Android_Objects.getProperty("Accept"))));
-	         Accept.click();
-	         Thread.sleep(10000);	         
-	         System.out.println("Clicked on Accept button");
-	         */
-	         
+       
+			   
 			 Thread.sleep(5000);
 	         WebElement Accept = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
 	         Thread.sleep(2000);
@@ -1007,7 +1001,12 @@ public class HPECommonFunctions extends HPEOperations
 		    }catch (Exception e)
 		{
 			System.out.println("User has already accepted the Terms & Conditions");
-		}   
+		}   */
+		
+			device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("538,1228")));
+			System.out.println("Clicked on Accept");
+		    Thread.sleep(10000); 
+			
 		
 		}	
 	
