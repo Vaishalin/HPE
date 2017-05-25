@@ -860,7 +860,7 @@ public void TC_117_MainMenuPages()throws Exception
           System.out.println("Starting of TC_117_MainMenuPages");
           HPECommonFunctions.screen();
        
-          //HPECommonFunctions.Close_App_HPE();
+          HPECommonFunctions.Close_App_HPE();
           HPECommonFunctions.Open_App_HPE();
           HPEOperations.Login_App();
           HPECommonFunctions.ClickMenuBar();
