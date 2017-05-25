@@ -59,6 +59,7 @@ public class HPETest extends BaseClassHPE
 {	
 	public static String date=null;
 	
+	/*
 	
 	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 
@@ -850,6 +851,7 @@ public void TC_116_ValidatetheMenuItems()throws Exception
 
 }
 
+*/
 @Test(priority=33,groups={"Primary","Secondary"},enabled=true)
 public void TC_117_MainMenuPages()throws Exception
 {                

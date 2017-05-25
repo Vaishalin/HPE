@@ -2995,13 +2995,13 @@ public static void ClickApply() throws Exception
                 		//visualdriver = device.getVisualDriver();
                 		
                 		IMobileWebDriver Text = device.getVisualDriver();
-                		Reporter.log("entering inside method1");
+                		//Reporter.log("entering inside method1");
                 		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                		Reporter.log("entering inside method2");
+                		//Reporter.log("entering inside method2");
                 		Text.findElement(By.linkText(linktext));
-                		Reporter.log("entering inside method3");
+                		//Reporter.log("entering inside method3");
                 		testLog.info("\n Element found is : " + linktext);
-                		Reporter.log("entering inside method4");
+                		//Reporter.log("entering inside method4");
                 		
                 		/*
                 		visualdriver = device.getVisualDriver();
