@@ -144,7 +144,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 }
 
 
-	@Test(priority=4, groups={"Primary","Secondary"},enabled=true)
+	@Test(priority=4, groups={"Primary","Secondary"},enabled=false)
     public void TC_140_ValidateDeclineButton()throws Exception
     {    	
 		Reporter.log("Application Name is: "+"HPE Go");
@@ -157,7 +157,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 		    System.out.println("Starting of TC_140_ValidateDeclineButton");
 		    HPECommonFunctions.screen();
 		    
-		   
+		    HPECommonFunctions.Close_App_HPE();
 		    HPECommonFunctions.Open_App_HPE();
     	    HPEOperations.FirstLogin_App();
     		HPECommonFunctions.SwipeUp();
@@ -173,7 +173,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
 	
     
-    @Test(priority=5,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=5,groups={"Primary","Secondary"},enabled=false)
     public void TC_139_ValidateAcceptButton()throws Exception
     {    	   	
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -202,7 +202,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     }
     
-    @Test(priority=6, groups={"Primary"},enabled=true)
+    @Test(priority=6, groups={"Primary"},enabled=false)
     public void TC_138_ValidateTermsConditionPage()throws Exception
     {    	
     	
@@ -233,10 +233,15 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
 
     
-    @Test(priority=7,groups={"Primary","Secondary"},enabled=false)
+    @Test(priority=7,groups={"Primary","Secondary"},enabled=true)
     public void TC_123_ValidateFlagIcon_Home()throws Exception
     {    	   	
-    	
+    		Reporter.log("Application Name is: "+"HPE Go");
+    		Reporter.log("Device ID is: "+Device_ID);
+    		Reporter.log("Device Version is: "+Device_OS_Version);
+    		Reporter.log("Device Model is: "+Device_Model);
+    		Reporter.log("Device OS is: "+Device_OS);
+    		
     	    HPECommonFunctions.screen();
     		System.out.println("Starting of TC_123_ValidateFlagIcon_Home");
     		HPECommonFunctions.screen();    	    
@@ -258,9 +263,14 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     
   
     
-    @Test(priority=8,groups={"Primary"},enabled=false)
+    @Test(priority=8,groups={"Primary"},enabled=true)
     public void TC_125_ValidateOrderDeletionFromWatchlist()throws Exception
     {    	   	
+       	Reporter.log("Application Name is: "+"HPE Go");
+    		Reporter.log("Device ID is: "+Device_ID);
+    		Reporter.log("Device Version is: "+Device_OS_Version);
+    		Reporter.log("Device Model is: "+Device_Model);
+    		Reporter.log("Device OS is: "+Device_OS);
     	
     	    HPECommonFunctions.screen();
     		System.out.println("Starting of TC_125_ValidateOrderDeletionFromWatchlist");
@@ -279,10 +289,16 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     }
     
-    @Test(priority=9,groups={"Primary","Secondary"},enabled=false)
+    @Test(priority=9,groups={"Primary","Secondary"},enabled=true)
     public void TC_5_ValidateOrderDetailsPage()throws Exception
     {                
        
+    		Reporter.log("Application Name is: "+"HPE Go");
+    		Reporter.log("Device ID is: "+Device_ID);
+    		Reporter.log("Device Version is: "+Device_OS_Version);
+    		Reporter.log("Device Model is: "+Device_Model);
+    		Reporter.log("Device OS is: "+Device_OS);
+    		
               HPECommonFunctions.screen();
               System.out.println("Starting of TC_5_ValidateOrderDetailsPage");
               HPECommonFunctions.screen();
@@ -332,9 +348,14 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=11,groups={"Primary"},enabled=false)
+    @Test(priority=11,groups={"Primary"},enabled=true)
     public void TC_93_BackButtonFromWatchListPage()throws Exception
     {    	   	
+       		Reporter.log("Application Name is: "+"HPE Go");
+    		Reporter.log("Device ID is: "+Device_ID);
+    		Reporter.log("Device Version is: "+Device_OS_Version);
+    		Reporter.log("Device Model is: "+Device_Model);
+    		Reporter.log("Device OS is: "+Device_OS);
     	
     	    HPECommonFunctions.screen();
     		System.out.println("Starting of TC_93_BackButtonFromWatchListPage");
@@ -355,9 +376,14 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 		    
     }
     
-    @Test(priority=12,groups={"Primary","Secondary"},enabled=false)
+    @Test(priority=12,groups={"Primary","Secondary"},enabled=true)
     public void TC_96_VerifyVersionNumberOnMenuPage()throws Exception
     {                
+       	Reporter.log("Application Name is: "+"HPE Go");
+    		Reporter.log("Device ID is: "+Device_ID);
+    		Reporter.log("Device Version is: "+Device_OS_Version);
+    		Reporter.log("Device Model is: "+Device_Model);
+    		Reporter.log("Device OS is: "+Device_OS);
        
               HPECommonFunctions.screen();
               System.out.println("Starting of TC_96_VerifyVersionNumberOnMenuPage");
@@ -470,10 +496,16 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=16,groups={"Primary"},enabled=false)
+    @Test(priority=16,groups={"Primary"},enabled=true)
     public void TC_92_BackButtonFromAlertsPage()throws Exception
     {    	   	
     	
+       	Reporter.log("Application Name is: "+"HPE Go");
+    		Reporter.log("Device ID is: "+Device_ID);
+    		Reporter.log("Device Version is: "+Device_OS_Version);
+    		Reporter.log("Device Model is: "+Device_Model);
+    		Reporter.log("Device OS is: "+Device_OS);
+    		
     	    HPECommonFunctions.screen();
     		System.out.println("Starting of TC_92_BackButtonFromAlertsPage");
     		HPECommonFunctions.screen();
@@ -529,6 +561,12 @@ public void TC_94_BackButtonFromOrderDetailScreen()throws Exception
 @Test(priority=18,groups={"Primary"},enabled=true)
 public void TC_95_BackButtonFromRecentSearchesScreen()throws Exception
 {    	   	
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
 	
 	Reporter.log("Application Name is: "+"HPE Go");
 	Reporter.log("Device ID is: "+Device_ID);
@@ -761,10 +799,16 @@ public void TC_18_ValidateSortIcon()throws Exception
    
 }
 
-@Test(priority=26,groups={"Primary"},enabled=false)
+@Test(priority=26,groups={"Primary"},enabled=true)
 public void TC_99_ValidateInvoiceDoesnotAvailableCancelledOrders()throws Exception
 {                
    
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_99_ValidateInvoiceDoesnotAvailableCancelledOrders");
           HPECommonFunctions.screen();
@@ -788,9 +832,15 @@ public void TC_99_ValidateInvoiceDoesnotAvailableCancelledOrders()throws Excepti
 }
 
 
-@Test(priority=27,groups={"Primary"},enabled=false)
+@Test(priority=27,groups={"Primary"},enabled=true)
 public void TC_100_ValidateInvoiceDoesnotAvailableSubmittedOrders()throws Exception
 {                
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
    
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_100_ValidateInvoiceDoesnotAvailableSubmittedOrders");
@@ -813,10 +863,15 @@ public void TC_100_ValidateInvoiceDoesnotAvailableSubmittedOrders()throws Except
    
 }
 
-@Test(priority=28,groups={"Primary"},enabled=false)
+@Test(priority=28,groups={"Primary"},enabled=true)
 public void TC_101_ValidateInvoiceDoesnotAvailableAcceptedOrders()throws Exception
 {                
-   
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_101_ValidateInvoiceDoesnotAvailableAcceptedOrders");
           HPECommonFunctions.screen();
@@ -919,6 +974,12 @@ public void TC_116_ValidatetheMenuItems()throws Exception
 
 {
 	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+	
 	Reporter.log("Application Name is: "+"HPE Go");
 	Reporter.log("Device ID is: "+Device_ID);
 	Reporter.log("Device Version is: "+Device_OS_Version);
@@ -991,9 +1052,16 @@ public void TC_117_MainMenuPages()throws Exception
    
 }
 
-@Test(priority=34,groups={"Primary"},enabled=false)
+@Test(priority=34,groups={"Primary"},enabled=true)
 public void TC_108_ValidateContactUS()throws Exception
 {
+	
+		Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
 		HPECommonFunctions.screen();
 		System.out.println("Starting of TC_108_ValidateContactUS");
 		HPECommonFunctions.screen();   
@@ -1054,7 +1122,8 @@ public void TC_107_ValidateFAQsection()throws Exception
 	Reporter.log("Device Version is: "+Device_OS_Version);
 	Reporter.log("Device Model is: "+Device_Model);
 	Reporter.log("Device OS is: "+Device_OS);
-       HPECommonFunctions.screen();
+	
+     HPECommonFunctions.screen();
      System.out.println("Starting of TC_107_ValidateFAQsection");
      HPECommonFunctions.screen();
      
@@ -1155,10 +1224,15 @@ public void TC_62_VerifyOrderDetailsfromWatchListpage()throws Exception{
 }
 
 
-@Test(priority=40,groups={"Primary"},enabled=false)
+@Test(priority=40,groups={"Primary"},enabled=true)
 public void TC_15_ValidateClearIconSearchPage()throws Exception
 {                
-   
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_15_ValidateClearIconSearchPage");
           HPECommonFunctions.screen();
@@ -1238,9 +1312,16 @@ public void TC_61_VerifyUIOrderDetailsPageFromWatchList()throws Exception
 }
 
 
-@Test(priority=43,groups={"Primary"},enabled=false)
+@Test(priority=43,groups={"Primary"},enabled=true)
 public void TC_8_ValidateSearchTips()throws Exception
 {      
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
        HPECommonFunctions.screen();
        System.out.println("Starting of TC_8_ValidateSearchTips");
        HPECommonFunctions.screen();
@@ -1263,10 +1344,15 @@ public void TC_8_ValidateSearchTips()throws Exception
 }
 
 
-@Test(priority=44,groups={"Primary"},enabled=false)
+@Test(priority=44,groups={"Primary"},enabled=true)
 public void TC_60_VerifyBasicInfoOrderDetailsfromSearchPage()throws Exception{
        
-       
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
      HPECommonFunctions.screen();
      System.out.println("Starting of TC_60_VerifyBasicInfoOrderDetailsfromSearchPage");
      HPECommonFunctions.screen();     
@@ -1297,6 +1383,12 @@ public void TC_60_VerifyBasicInfoOrderDetailsfromSearchPage()throws Exception{
 @Test(priority=45,groups={"Primary","Secondary"},enabled=true)
 public void TC_77_ValidateTermsAndConditionPageFromMenu()throws Exception
 {      
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
 	
 	Reporter.log("Application Name is: "+"HPE Go");
 	Reporter.log("Device ID is: "+Device_ID);
@@ -1496,8 +1588,14 @@ public void TC_33_ValidateOrderSearchDateAndTimeinSavedSearches()throws Exceptio
 }
 
 
-@Test(priority=52,groups={"Primary"},enabled=false)
+@Test(priority=52,groups={"Primary"},enabled=true)
 public void TC_118_ValidateWatchListPopUpScreen()throws Exception{
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
 
 	HPECommonFunctions.screen();
 	System.out.println("Starting TC_118_ValidateWatchListPopUpScreen");
@@ -1516,9 +1614,15 @@ public void TC_118_ValidateWatchListPopUpScreen()throws Exception{
 
 }
 
-@Test(priority=53,groups={"Primary"},enabled=false)
+@Test(priority=53,groups={"Primary"},enabled=true)
 public void TC_23_ValidateDateOrdered()throws Exception
 {
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
          HPECommonFunctions.screen();
          System.out.println("Starting of TC_23_ValidateDateOrdered");
          HPECommonFunctions.screen();
@@ -1546,9 +1650,16 @@ public void TC_23_ValidateDateOrdered()throws Exception
 
 }
 
-@Test(priority=54,groups={"Primary"},enabled=false)
+@Test(priority=54,groups={"Primary"},enabled=true)
 public void TC_24_ValidateEstimatedShipCompleteDate()throws Exception
 {
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
+		
          HPECommonFunctions.screen();
          System.out.println("Starting of TC_24_ValidateEstimatedShipCompleteDate");
      	 HPECommonFunctions.screen();
@@ -1576,9 +1687,15 @@ public void TC_24_ValidateEstimatedShipCompleteDate()throws Exception
 }
 
 
-@Test(priority=55,groups={"Primary"},enabled=false)
+@Test(priority=55,groups={"Primary"},enabled=true)
 public void TC_22_ValidateHPEProductNumber()throws Exception
 {
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
        		HPECommonFunctions.screen();
        		System.out.println("Starting of TC_22_ValidateHPEProductNumber");
        		HPECommonFunctions.screen();
@@ -1604,9 +1721,15 @@ public void TC_22_ValidateHPEProductNumber()throws Exception
 }
 
 
-@Test(priority=56,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=56,groups={"Primary","Secondary"},enabled=true)
 public void TC_21_AdvanceSearchShipAddress()throws Exception
 {
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
        		HPECommonFunctions.screen();
        		System.out.println("Starting of TC_21_AdvanceSearchShipAddress");
        		HPECommonFunctions.screen();
@@ -1663,9 +1786,15 @@ public void TC_26_AdvanceSearchMultipleConditions()throws Exception
 }
 
 
-@Test(priority=58,groups={"Primary"},enabled=false)
+@Test(priority=58,groups={"Primary"},enabled=true)
 public void TC_20_AdvanceSearchEndCustomer()throws Exception
 {
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
        		HPECommonFunctions.screen();
        		System.out.println("Starting of TC_20_AdvanceSearchEndCustomer");
        		HPECommonFunctions.screen();
@@ -1719,9 +1848,14 @@ public void TC_51_CheckWatchListPageAfterOrdersFlgged()throws Exception
 	    	HPECommonFunctions.screen();
 }
 
-@Test(priority=60,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=60,groups={"Primary","Secondary"},enabled=true)
 public void TC_35_ValidateUserPreferencesPage()throws Exception
 {    	   	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
 	
 	    	HPECommonFunctions.screen();
 	    	System.out.println("Starting of TC_35_ValidateUserPreferencesPage");
@@ -1773,6 +1907,12 @@ public void TC_50_CheckWatchListPageWhenNoOrdersFlgged()throws Exception
 @Test(priority=62,groups={"Primary"},enabled=false)
 public void TC_27_ValidateCalendarArrows()throws Exception
 {
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
        		 HPECommonFunctions.screen();
        		 System.out.println("Starting of TC_27_ValidateCalendarArrows");
        		 HPECommonFunctions.screen(); 
@@ -1830,9 +1970,14 @@ public void TC_27_ValidateCalendarArrows()throws Exception
 
 }
 
-@Test(priority=63,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=63,groups={"Primary","Secondary"},enabled=true)
 public void TC_129_ValidateOrderDetails()throws Exception
 {                
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
    
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_129_ValidateOrderDetails");
@@ -1853,9 +1998,14 @@ public void TC_129_ValidateOrderDetails()throws Exception
 }
 
 
-@Test(priority=64,groups={"Primary"},enabled=false)
+@Test(priority=64,groups={"Primary"},enabled=true)
 public void TC_57_VerifyLayoutCommonPageForSearch()throws Exception
 {                
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
    
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_57_VerifyLayoutCommonPageForSearch");
@@ -1876,9 +2026,15 @@ public void TC_57_VerifyLayoutCommonPageForSearch()throws Exception
 
 }
 
-@Test(priority=65,groups={"Primary"},enabled=false)
+@Test(priority=65,groups={"Primary"},enabled=true)
 public void TC_58_VerifyLayoutCommonPageForWatchList()throws Exception
-{                
+{        
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
    
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_58_VerifyLayoutCommonPageForWatchList");
@@ -1901,9 +2057,15 @@ public void TC_58_VerifyLayoutCommonPageForWatchList()throws Exception
 
 }
 
-@Test(priority=66,groups={"Primary"},enabled=false)
+@Test(priority=66,groups={"Primary"},enabled=true)
 public void TC_59_VerifyLayoutCommonPageForOrderDetailsPage()throws Exception
 {                
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
    
           HPECommonFunctions.screen();
           System.out.println("Starting of TC_59_VerifyLayoutCommonPageForOrderDetailsPage");
@@ -2036,9 +2198,14 @@ public void TC_56_ValidateLayoutofCommonPageSavedSearches()throws Exception{
 }
 
 
-@Test(priority=71,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=71,groups={"Primary","Secondary"},enabled=true)
 public void TC_54_ValidateCommonPageFooterFunctionality()throws Exception{
 	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
 	HPECommonFunctions.screen();
 	System.out.println("Starting TC_54_ValidateCommonPageFooterFunctionality");
 	HPECommonFunctions.screen();
@@ -2134,9 +2301,15 @@ public void TC_34_ValidateSearchUsingSavedSearches()throws Exception{
 
 
 
-@Test(priority=75,groups={"Primary"},enabled=false)
+@Test(priority=75,groups={"Primary"},enabled=true)
 public void TC_28_Validate90daysinCalendar()throws Exception
 {
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
    HPECommonFunctions.screen();
    System.out.println("Starting of TC_28_Validate90daysinCalendar");
    HPECommonFunctions.screen();
@@ -2163,9 +2336,14 @@ public void TC_28_Validate90daysinCalendar()throws Exception
 }
 
 
-@Test(priority=76,groups={"Primary","Secondary"},enabled=false)
+@Test(priority=76,groups={"Primary","Secondary"},enabled=true)
 public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
 	HPECommonFunctions.screen();
 	System.out.println("Starting TC_7_ValidateClickFunctionOfWatchListFlag");
 	HPECommonFunctions.screen();
@@ -2189,8 +2367,14 @@ public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	HPECommonFunctions.screen();
 } 
 
-@Test(priority=77,groups={"Primary"},enabled=false)
+@Test(priority=77,groups={"Primary"},enabled=true)
 public void TC_29_ValidateAutoPopulateOfDateinAdvancedSearch()throws Exception{
+	
+   	Reporter.log("Application Name is: "+"HPE Go");
+		Reporter.log("Device ID is: "+Device_ID);
+		Reporter.log("Device Version is: "+Device_OS_Version);
+		Reporter.log("Device Model is: "+Device_Model);
+		Reporter.log("Device OS is: "+Device_OS);
 
 	HPECommonFunctions.screen();
 	System.out.println("Starting TC_29_ValidateAutoPopulateOfDateinAdvancedSearch");
