@@ -1989,6 +1989,7 @@ public static void ClickSignOut1() throws Exception
                   	} catch (Exception e) {
                   		testLog.info("\nElement not found : " + linktext);
                   		testLog.info("\nSearch results found");
+                  		Reporter.log("No Search results found");
                   		
                   	}
                   }
@@ -2001,6 +2002,7 @@ public static void ClickSignOut1() throws Exception
                   		Text.findElement(By.linkText(linktext));
                   		testLog.info("\n Element found is : " + linktext);
                   		testLog.info("No Search results found");
+                  		Reporter.log("No Search results found");
                   		Close_App_HPE();
                   		//softAssert.assertTrue(false);                  		
                   		status1 = 1;
@@ -2017,6 +2019,7 @@ public static void ClickSignOut1() throws Exception
                   		Text.findElement(By.linkText(linktext));
                   		testLog.info("\nElement not found : " + linktext);
                   		testLog.info("\n'Invoice(s) Available from OSS' icon did not appear as expected");
+                  		Reporter.log("\n'Invoice(s) Available from OSS' icon did not appear as expected");
                   		/*ClickSignOut();
                   		Close_App_HPE();
                   		Assert.fail("'Invoice(s) Available from OSS' icon appeared");*/
@@ -2027,8 +2030,8 @@ public static void ClickSignOut1() throws Exception
                   		//ClickSignOut();
                   		Close_App_HPE();
                   		Thread.sleep(2000);
-                  		testLog.info("\n'Invoice(s) Available from OSS' icon did not appear as expected");
-                  		//Assert.fail("'Invoice(s) Available from OSS' icon appeared");
+                  		//testLog.info("\n'Invoice(s) Available from OSS' icon did not appear as expected");
+                  		Assert.fail("'Invoice(s) Available from OSS' icon appeared");
                   		status1 = 1;
                   		
                   	}
@@ -2052,6 +2055,7 @@ public static void ClickSignOut1() throws Exception
                   		//Close_App_HPE();
                   		Thread.sleep(2000);
                   		testLog.info("\n Shipping date did not appear as expected");
+                  		Reporter.log("\n Shipping date did not appear as expected");
                   		status1 = 1;
                   		
                   	}
@@ -3001,6 +3005,7 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		//Reporter.log("entering inside method3");
                 		testLog.info("\n Element found is : " + linktext);
+                		Reporter.log("\n Element found is : " + linktext);
                 		//Reporter.log("entering inside method4");
                 		
                 		/*
@@ -3013,7 +3018,7 @@ public static void ClickApply() throws Exception
                 		if (Text.isDisplayed())
                 		{
                 			Reporter.log("entering inside is");
-                			testLog.info("\n Element found is : " + linktext);
+                			testLog.info("\n Element found is : " + );
                 		}
                 		*/
                 	} catch (Exception e) {
@@ -3035,6 +3040,7 @@ public static void ClickApply() throws Exception
                 		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);
+                		Reporter.log("\n Element found is : " + linktext);
                 	
                 }
                 
@@ -3046,6 +3052,7 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);
                 		testLog.info("There are no orders tagged to Watchlist");
+                		Reporter.log("There are no orders tagged to Watchlist");
                 		Close_App_HPE();
                 	
                 }
@@ -3858,7 +3865,7 @@ public static void ClickApply() throws Exception
 					VerifyErrorMessage.findElement(By.linkText(linktext));
             		testLog.info("\n Element found is : " + linktext);
             		testLog.info("\n Invalid user or password");            		                  
-                               		
+            		Reporter.log("\n Invalid user or password");        		
 			
             	}
 				
@@ -4729,10 +4736,11 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);               		               		
                 		testLog.info("\nPrevious delivered date is found for the order displayed");
+                		Reporter.log("\nPrevious delivered date is found for the order displayed");
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
                 		testLog.info("\nPrevious delivered date is not found for the order displayed");
-                		
+                		Reporter.log("\nPrevious delivered date is not found for the order displayed");
                 	}
                 }
                 
@@ -4744,10 +4752,11 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);               		               		
                 		testLog.info("\nShip Complete / Date Shipped  is found for the order displayed");
+                		Reporter.log("\nShip Complete / Date Shipped  is found for the order displayed");
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
                 		testLog.info("\nShip Complete / Date Shipped  is not found for the order displayed");
-                		
+                		Reporter.log("\nShip Complete / Date Shipped  is not found for the order displayed");
                 	}
                 }
                 
@@ -6863,6 +6872,7 @@ public static void HPEProdcutNumber() throws Exception
                  TandC.findElement(By.linkText(linktext));
                  testLog.info("\n Element found is : " + linktext);
                  testLog.info("Terms & COnditions page is present");
+                 Reporter.log("Terms & COnditions page is present");
                  Thread.sleep(2000);
                  SwipeUp();
                  ClickDecline();
