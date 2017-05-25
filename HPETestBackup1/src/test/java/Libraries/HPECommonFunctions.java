@@ -6758,13 +6758,14 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                              	VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search_iPhone5S" +".png");
-                                                          }else
+                                                          }else if(Device_Model.equals("iPhone-6S"))
+                                                          {
+                                                           	VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search" +".png");
+                                                        }
+                                                             else
                                                              {
                                                                		VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search_Pixel" +".png");
-                                                             }else if(Device_Model.equals("iPhone-6S"))
-                                                             {
-                                                             	VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search" +".png");
-                                                          }
+                                                             }
                                                          }
 
                                                   
@@ -6778,13 +6779,14 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                            	VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist_iPhone5S" +".png");
-                                                            }else
+                                                            }else if(Device_Model.equals("iPhone-6S"))
+                                                            {
+                                                          	VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist" +".png");
+                                                           }
+                                                             else
                                                              {
                                                             	 VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist_Pixel" +".png");
-                                                             }else if(Device_Model.equals("iPhone-6S"))
-                                                             {
-                                                           	VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist" +".png");
-                                                            }
+                                                             }
                                                          }
                                                   
                                                   
