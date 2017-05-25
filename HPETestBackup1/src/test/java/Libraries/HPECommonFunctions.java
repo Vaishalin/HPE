@@ -3036,7 +3036,7 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		//Reporter.log("entering inside method3");
                 		testLog.info("\n Element found is : " + linktext);
-                		Reporter.log("\n Element found is : " + linktext);
+                		Reporter.log("Element found is : " + linktext);
                 		//Reporter.log("entering inside method4");
                 		
                 		/*
