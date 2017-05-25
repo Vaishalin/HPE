@@ -434,7 +434,7 @@ public class HPECommonFunctions extends HPEOperations
                            WebElement SignInElement = nativedriver.findElement(By.xpath(Android_Objects.getProperty("SignIn")));
                            Thread.sleep(2000);
                            SignInElement.click();
-                           } else        if (Device_Model.contains("Galaxy S6"))
+                           } else        if (Device_Model.contains("Galaxy S7"))
                     {
                                   Thread.sleep(2000);
                                   
@@ -614,7 +614,7 @@ public class HPECommonFunctions extends HPEOperations
 				    		
 				    	}else
 				    	{
-				    		ClickSignIn_AN();
+				    		ClickSignIn1_AN();
 				    	}
 				    	          
 				      }
