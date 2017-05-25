@@ -708,13 +708,17 @@ public class HPECommonFunctions extends HPEOperations
 				
                 public static void SwipeUp() throws Exception
                 {
-                       if(Device_Model.contains("iPhone"))
+                       if(Device_Model.equals("iPhone-7"))
                        {
                     	   SwipeUp_iOS();
-                       }if(Device_Model.equals("iPhone-5S"))
+                       }else if(Device_Model.equals("iPhone-5S"))
                        {
                     	   SwipeUp_iOS_iPhone5S();
-                       }else
+                       }else if(Device_Model.equals("iPhone-6S"))
+                       {
+                    	   SwipeUp_iOS();
+                       }
+                       else
                        {
                     	   SwipeUp_AN();
                        }
@@ -940,7 +944,10 @@ public class HPECommonFunctions extends HPEOperations
 	    	{
 	    		ClickAccept_iOS();
 	    	}
-	    		else 
+	    		else if(Device_Model.equals("iPhone-6S"))
+		    	{
+		    		ClickAccept_iOS();
+		    	}else
 	    	{
 	    		ClickAccept_AN();
 	    	}
@@ -1568,7 +1575,10 @@ public static void ClickSignOut1() throws Exception
 			    	}else if(Device_Model.contains("Galaxy"))
                     {
                         ClickGreenFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_Green_Galaxy" +".png");
-                 }
+                 } else if(Device_Model.equals("iPhone-6S"))
+			    	{
+			    		ClickGreenFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_Green" +".png");
+			    	}
 
 			    	          
 			      }
@@ -1674,7 +1684,10 @@ public static void ClickSignOut1() throws Exception
 					    	}else if(Device_Model.contains("Galaxy"))
                             {
                                 ClickWhiteFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_White_Galaxy" +".png");
-                         }
+                         } else if(Device_Model.equals("iPhone-6S"))
+					    	{
+					    		ClickWhiteFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_White" +".png");
+					    	}
 
 					    	          
 					      }
@@ -1694,7 +1707,10 @@ public static void ClickSignOut1() throws Exception
 					    	}else if(Device_Model.contains("Galaxy"))
                             {
                                 ClickFilterIcon("C://HPE//FunctionalTesting//Images//FilterIcon_Galaxy" +".png");
-                         }
+                         } else if(Device_Model.equals("iPhone-6S"))
+					    	{
+					    		ClickFilterIcon("C://HPE//FunctionalTesting//Images//FilterIcon" +".png");
+					    	}
 
 					    	          
 					      }
@@ -1883,6 +1899,9 @@ public static void ClickSignOut1() throws Exception
 
                 {
                 	ClickMenuBar("C://HPE//FunctionalTesting//Images//MenuBar_Pixel"+".png");
+                } else if(Device_Model.equals("iPhone-6S"))
+                { 
+                	ClickMenuBar("C://HPE//FunctionalTesting//Images//MenuBar"+".png");
                 }
                 
          }
@@ -2583,16 +2602,16 @@ public static void ClickSignOut1() throws Exception
  			    	}else if(Device_Model.equals("iPhone-5S"))
  			    	{
  			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_iPhone5S" +".png");
- 			    	}else if(Device_Model.equals("iPhone-5S"))
- 			    	{
- 			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_Tab" +".png");
  			    	}else if(Device_Model.contains("Pixel"))
                     {
  			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_AN"+".png");
                     }else if(Device_Model.contains("Galaxy"))
                     {
                     	VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_Galaxy" +".png");
-                    }
+                    }else if(Device_Model.equals("iPhone-6S"))
+ 			    	{
+ 			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton" +".png");
+ 			    	}
 
  			    				    	          
  			      }
@@ -2656,7 +2675,10 @@ public static void ClickSignOut1() throws Exception
                  } else if(Device_Model.contains("Galaxy S7"))
                  {
                         ClickBackButton("C://HPE//FunctionalTesting//Images//BackButton_Galaxy" +".png");
-                 }
+                 } else if(Device_Model.equals("iPhone-6S"))
+			    	{
+			    		ClickBackButton("C://HPE//FunctionalTesting//Images//BackButton" +".png");
+			    	}
 
 			    	          
 			      }
@@ -2693,7 +2715,7 @@ public static void ClickSignOut1() throws Exception
 			//Method to click on search icon
 		    public static void ClickOnSearchIcon() throws Exception
 		      {
-		    	if(Device_Model.contains("iPhone"))
+		    	if(Device_Model.equals("iPhone-7"))
 		    	{
 		    		//ClickOnSearchIcon_iOS();
 		    		ClickSearchIcon_iOS("C://HPE//FunctionalTesting//Images//SearchIcon_iOS" +".png");
@@ -2715,6 +2737,10 @@ public static void ClickSignOut1() throws Exception
 
 		    	{
 		    		ClickOnSearchIcon_AN("C://HPE//FunctionalTesting//Images//SearchIcon"+".png");
+		    	} else if(Device_Model.equals("iPhone-6S"))
+		    	{
+		    		//ClickOnSearchIcon_iOS();
+		    		ClickSearchIcon_iOS("C://HPE//FunctionalTesting//Images//SearchIcon_iOS" +".png");
 		    	}
 		    	          
 		      }   
@@ -2953,7 +2979,12 @@ public static void ClickApply() throws Exception
                 { 
                 	//ClickWatchListOnToolbar_iOS();
                 	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar_iPhone5S"+".png");
-                }else
+                }else if(Device_Model.equals("iPhone-6S"))
+                { 
+                	//ClickWatchListOnToolbar_iOS();
+                	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar"+".png");
+                }
+                else
                 {
                 	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar_Pixel"+".png");
                 }
@@ -3169,7 +3200,10 @@ public static void ClickApply() throws Exception
                                   } else if(Device_Model.contains("Galaxy"))  
                                   {
                                      ClickSearch_AN("C://HPE//FunctionalTesting//Images//SearcWatchListPage_Galaxy"+".png");   
-                                   }
+                                   } else if(Device_Model.equals("iPhone-6S"))
+                                   {
+                           	  		ClickSearch_AN("C://HPE//FunctionalTesting//Images//Footer_Search"+".png");
+                             }
 
                                             
                                  }
@@ -3275,6 +3309,9 @@ public static void ClickApply() throws Exception
                                   } else if(Device_Model.contains("Galaxy"))
                                   {
                                           ClickWatchList("C://HPE//FunctionalTesting//Images//WatchList_Arrow_Galaxy"+".png");
+                                   }else if(Device_Model.equals("iPhone-6S"))
+                                   {
+                                 	  ClickWatchList("C://HPE//FunctionalTesting//Images//WatchList_Arrow"+".png");
                                    }
 
                                             
@@ -3696,11 +3733,15 @@ public static void ClickApply() throws Exception
                    }else if(Device_Model.equals("iPhone-5S"))
                    {
                        ClickDeleteButton_iOS("C://HPE//FunctionalTesting//Images//RemoveButton_iPhone5S"+".png");
-                }  else             
-                
-             {
-                          ClickDeleteButton_AN("C://HPE//FunctionalTesting//Images//Delete"+".png");
+                   } else if(Device_Model.equals("iPhone-6S"))
+                   {
+                    ClickDeleteButton_iOS("C://HPE//FunctionalTesting//Images//RemoveButton"+".png");
                    }
+                   else             
+                
+                   {
+                          ClickDeleteButton_AN("C://HPE//FunctionalTesting//Images//Delete"+".png");
+                   } 
                              
                   }
 
@@ -3974,7 +4015,11 @@ public static void ClickApply() throws Exception
   	                     }else if(Device_Model.equals("iPhone-5S"))
   	                     {
   	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIcon_iPhone5S"+".png");
-  	                     }else
+  	                     }else if(Device_Model.equals("iPhone-6S"))
+  	                     {
+  	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIconiOS"+".png");
+  	                     }
+  	                     else
   	                     {
   	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIconAN"+".png");
   	                     }
@@ -4414,7 +4459,10 @@ public static void ClickApply() throws Exception
                     } else if(Device_Model.contains("Galaxy S7"))
                     {
                     	ClickHome("C://HPE//FunctionalTesting//Images//HomeButton_GalaxyS7" +".png");
-                    }
+                    } else if(Device_Model.equals("iPhone-6S"))
+                    { 
+                        ClickHome("C://HPE//FunctionalTesting//Images//HomeButton" +".png");
+                      }
              }    
                 
               //Method to verify to display Privacy Statment 
@@ -4795,7 +4843,10 @@ public static void ClickApply() throws Exception
                     }else if(Device_Model.contains("Galaxy"))
                     {
                     ClickSortButton("C://HPE//FunctionalTesting//Images//SortButton_Galaxy"+".png");
-                    }
+                    }else if(Device_Model.equals("iPhone-6S"))
+                        { 
+                        	ClickSortButton("C://HPE//FunctionalTesting//Images//SortButton_iphone7"+".png");
+                        }
 
                     
              } 
@@ -4837,7 +4888,10 @@ public static void ClickApply() throws Exception
     				    	}else if(Device_Model.contains("Galaxy"))
                             {
                                 ClickSaveButton("C://HPE//FunctionalTesting//Images//Alert_Save_Galaxy" +".png");
-                         }
+                         } else if(Device_Model.equals("iPhone-6S"))
+ 				    	{
+ 				    		ClickSaveButton("C://HPE//FunctionalTesting//Images//Alert_Save" +".png");
+ 				    	}
 
     				    	          
     				      }
@@ -5469,9 +5523,14 @@ public static void ClickApply() throws Exception
                     {
                     ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8_Pixel" +".png");
                     }else if(Device_Model.contains("Galaxy"))
+                    {
                     ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8_Galaxy" +".png");
                     
+                    }else if(Device_Model.equals("iPhone-6S"))
+                    {
+                    	ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8" +".png");
                     }
+             	}
 
        
              
@@ -6427,7 +6486,11 @@ public static void HPEProdcutNumber() throws Exception
                                                    }else if(Device_Model.contains("Galaxy"))
                                                    {
                                                        ClickOnSearchButtonAfter("C://HPE//FunctionalTesting//Images//SearchButtonAfter_Galaxy"+".png");
+                                                    }else if(Device_Model.equals("iPhone-6S"))
+                                                    {
+                                                  	  ClickOnSearchButtonAfter("C://HPE//FunctionalTesting//Images//SearchButtonAfter"+".png");
                                                     }
+                                      
 
                                                                                
                                }
@@ -6698,7 +6761,10 @@ public static void HPEProdcutNumber() throws Exception
                                                           }else
                                                              {
                                                                		VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search_Pixel" +".png");
-                                                             }
+                                                             }else if(Device_Model.equals("iPhone-6S"))
+                                                             {
+                                                             	VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search" +".png");
+                                                          }
                                                          }
 
                                                   
@@ -6715,7 +6781,10 @@ public static void HPEProdcutNumber() throws Exception
                                                             }else
                                                              {
                                                             	 VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist_Pixel" +".png");
-                                                             }
+                                                             }else if(Device_Model.equals("iPhone-6S"))
+                                                             {
+                                                           	VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist" +".png");
+                                                            }
                                                          }
                                                   
                                                   
@@ -6730,7 +6799,11 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                            	VerifyAlertsIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Alerts_iPhone5S" +".png");
-                                                            }else
+                                                            }else if(Device_Model.equals("iPhone-6S"))
+                                                            {
+                                                          	VerifyAlertsIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Alerts" +".png");
+                                                           }
+                                                             else
                                                              {
                                                             	 VerifyAlertsIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Alerts_Pixel" +".png");
                                                              }
@@ -6747,7 +6820,11 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                            	VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches_iPhone5S" +".png");
-                                                            }else
+                                                            }else if(Device_Model.equals("iPhone-6S"))
+                                                            {
+                                                          	VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches" +".png");
+                                                           }
+                                                             else
                                                              {
                                                             	 VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches_Pixel" +".png");
                                                              }
