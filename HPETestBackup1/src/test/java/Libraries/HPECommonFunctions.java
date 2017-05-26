@@ -480,6 +480,7 @@ public class HPECommonFunctions extends HPEOperations
                              KeypadGo.click();
                              testLog.info("\n Image found is : " + imagePath);
                              testLog.info("Clicked on Keypad Go button");
+                             Reporter.log("Clicked on Keypad Go button");
                        } catch (Exception e) {
                              testLog.info("\nImage not present : " + imagePath);    
                              testLog.info("Go button not present in the keypad");
@@ -1036,6 +1037,7 @@ public static void ClickMenuBar(String imagePath) throws Exception
 				MenuBar.click();
 				testLog.info("\n Image found is : " + imagePath);
 				testLog.info("Clicked on menu bar");
+				Reporter.log("Clicked on menu bar");
 				Thread.sleep(5000); 
 			} catch (Exception e) {
 				testLog.info("\nImage not present : " + imagePath);	
@@ -1063,6 +1065,7 @@ public static void ClickSignOut_iOS(String imagePath) throws Exception
 				SignOut.click();
 				testLog.info("\n Image found is : " + imagePath);
 				testLog.info("Clicked on Sign out");
+				Reporter.log("Clicked on Sign out");
 			} catch (Exception e) {
 				testLog.info("\nImage not present : " + imagePath);	
 				testLog.info("Sign out button is not found");
@@ -1214,8 +1217,10 @@ public static void ClickSignOut_AN(String imagePath) throws Exception
 		WebElement Cancel = visualdriver.findElement(ByMobile.image(imagePath));					
 		testLog.info("\n Image found is : " + imagePath);
 		testLog.info("Sign Out Menu option is Present");
+		Reporter.log("Sign Out Menu option is Present");
 		Cancel.click();
 		testLog.info("Clicked on Sign Out");
+		Reporter.log("Clicked on Sign Out");
 	} catch (Exception e) {
 		testLog.info("\nImage not present : " + imagePath);	
 		testLog.info("Sign Out Menu option is not Present"); 
@@ -1291,7 +1296,8 @@ public static void ClickSignOut1() throws Exception
                 PrefOption .click();
                 testLog.info("\n Image found is : " + imagePath);
                 testLog.info("Clicked on Preference Option");
-                                       } catch (Exception e) 
+                Reporter.log("Clicked on Preference Option");
+                       } catch (Exception e) 
                        {
                 testLog.info("\nImage not present : " + imagePath);    
                 testLog.info("Preference menu option not found");
@@ -1422,7 +1428,6 @@ public static void ClickSignOut1() throws Exception
                 public static void VerifyFlagIcon_AN(String imagePath) throws Exception
                 {
                 try
-
 
                       {
                 nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -4633,6 +4638,7 @@ public static void ClickApply() throws Exception
    	 						WatchListArrow.click();
    	 						testLog.info("\n Image found is : " + imagePath);
    	 						testLog.info("Clicked on WatchList Arrow");
+   	 						Reporter.log("Clicked on WatchList Arrow");
    	 						Thread.sleep(5000);
    	 						
    	 					} catch (Exception e) {
@@ -5247,6 +5253,7 @@ public static void ClickApply() throws Exception
                                              Thread.sleep(2000);
                                              testLog.info("\n Image found is : " + imagePath);
                                              testLog.info("User is unable to see a menu slide from the left");
+                                             Reporter.log("User is unable to see a menu slide from the left");
                                        } catch (Exception e) {
                                              testLog.info("\nImage not present : " + imagePath);    
                                              testLog.info("User is able to see a menu slide from the left");
@@ -5502,6 +5509,7 @@ public static void ClickApply() throws Exception
                 	   		Paragraph8.click();
                				testLog.info("\n Image found is : " + imagePath);
               				testLog.info("Clicked on Paragraph8");
+              				Reporter.log("Clicked on Paragraph8");
                			} catch (Exception e) 
                			{
                 	        testLog.info("\nImage not present : " + imagePath);	
@@ -6181,6 +6189,7 @@ public static void ClickApply() throws Exception
                                             SearchIconWatchAfter.click();
                                             testLog.info("\n Image found is : " + imagePath);
                                             testLog.info("Clicked on Search button");
+                                            Reporter.log("Clicked on Search button");
                                       } catch (Exception e) {
                                             testLog.info("\nImage not present : " + imagePath);    
                                             testLog.info("Search not present");
@@ -6446,6 +6455,7 @@ public static void HPEProdcutNumber() throws Exception
                                                           SearchIconWatchBefore.click();
                                                           testLog.info("\n Image found is : " + imagePath);
                                                           testLog.info("Clicked on Search, Search Icon Greyed out");
+                                                          Reporter.log("Clicked on Search, Search Icon Greyed out");
                                                           Thread.sleep(5000);
                                                     } catch (Exception e) {
                                                           testLog.info("\nImage not present : " + imagePath);    
@@ -6603,6 +6613,7 @@ public static void HPEProdcutNumber() throws Exception
                                                                             SearchIconWatchAfter.click();
                                                                             testLog.info("\n Image found is : " + imagePath);
                                                                             testLog.info("Clicked on Search");
+                                                                            Reporter.log("Clicked on Search");
                                                                       } catch (Exception e) {
                                                                             testLog.info("\nImage not present : " + imagePath);    
                                                                             testLog.info("Search not present");
@@ -6610,7 +6621,7 @@ public static void HPEProdcutNumber() throws Exception
                                                                             CaptureScreenshot("TC_Fail_");				
                                                                             //ClickSignOut();
                                                                             Close_App_HPE();
-                                           	                             Thread.sleep(2000);
+                                           	                             	Thread.sleep(2000);
                                                                             Assert.fail("Search Icon is not present");
 
                                                                       }
@@ -6734,6 +6745,7 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement MenuBar = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Search Icon is Highlighted");
+                                                  			Reporter.log("Search Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Search Icon is not Highlighted");
@@ -6843,6 +6855,7 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement Watchlist = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Watch List Icon is Highlighted");
+                                                  			Reporter.log("Watch List Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Watch List Icon is not Highlighted");
@@ -6862,6 +6875,7 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement Alerts = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Alerts Icon is Highlighted");
+                                                  			Reporter.log("Alerts Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Alerts Icon is not Highlighted");
@@ -6883,6 +6897,7 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement RecentSearch = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Recent Searches Icon is Highlighted");
+                                                  			Reporter.log("Recent Searches Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Recent Searches Icon is not Highlighted");
@@ -6909,6 +6924,7 @@ public static void HPEProdcutNumber() throws Exception
                                                                RecentSearch.click();
                                                                testLog.info("\n Image found is : " + imagePath);
                                                                testLog.info("Clicked Advanced Search");
+                                                               Reporter.log("Clicked Advanced Search");
                                                          } catch (Exception e) {
                                                                testLog.info("\nImage not present : " + imagePath);    
                                                                testLog.info("Advanced Searchnot present");
@@ -7022,6 +7038,7 @@ public static void HPEProdcutNumber() throws Exception
                               TermsAndCondition.click();
                               testLog.info("\n Image found is : " + imagePath);
                               testLog.info("Clicked on Terms And Conditions");
+                              Reporter.log("Clicked on Terms And Conditions");
                         } catch (Exception e) {
                               testLog.info("\nImage not present : " + imagePath);    
                               testLog.info("Terms And Condition Menu option is not found");
