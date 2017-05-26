@@ -61,10 +61,11 @@ public class HPETest extends BaseClassHPE
 	
 	
 	
-	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
+	@Test(priority=1,groups={"Primary","Secondary"},enabled=true, description="Test script validates if the device under test is connected to either Wifi or 4g")
 
 	public void TC_136_ValidateConnectivity()throws Exception
 	{    	   	
+		
 			Reporter.log("Application Name is: "+"HPE Go");
 			Reporter.log("Device ID is: "+Device_ID);
 			Reporter.log("Device Version is: "+Device_OS_Version);
@@ -86,7 +87,7 @@ public class HPETest extends BaseClassHPE
 	}
 	
 
-@Test(priority=2,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=2,groups={"Primary","Secondary"},enabled=false)
 public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
 {             
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -116,7 +117,7 @@ public void TC_134_ValidateErrorMessageForWrongUsername()throws Exception
 
 
 
-@Test(priority=3,groups={"Primary"},enabled=true)
+@Test(priority=3,groups={"Primary"},enabled=false)
 public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 {             
 	
@@ -233,7 +234,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
 
     
-    @Test(priority=7,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=7,groups={"Primary","Secondary"},enabled=false)
     public void TC_123_ValidateFlagIcon_Home()throws Exception
     {    	   	
     		Reporter.log("Application Name is: "+"HPE Go");
@@ -263,7 +264,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     
   
     
-    @Test(priority=8,groups={"Primary"},enabled=true)
+    @Test(priority=8,groups={"Primary"},enabled=false)
     public void TC_125_ValidateOrderDeletionFromWatchlist()throws Exception
     {    	   	
        	Reporter.log("Application Name is: "+"HPE Go");
@@ -289,7 +290,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     }
     
-    @Test(priority=9,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=9,groups={"Primary","Secondary"},enabled=false)
     public void TC_5_ValidateOrderDetailsPage()throws Exception
     {                
        
@@ -318,7 +319,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
   
-    @Test(priority=10,groups={"Primary"},enabled=true)
+    @Test(priority=10,groups={"Primary"},enabled=false)
     public void TC_115_Validate3LineMenu()throws Exception
     {    	   	
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -348,7 +349,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=11,groups={"Primary"},enabled=true)
+    @Test(priority=11,groups={"Primary"},enabled=false)
     public void TC_93_BackButtonFromWatchListPage()throws Exception
     {    	   	
        		Reporter.log("Application Name is: "+"HPE Go");
@@ -376,7 +377,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 		    
     }
     
-    @Test(priority=12,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=12,groups={"Primary","Secondary"},enabled=false)
     public void TC_96_VerifyVersionNumberOnMenuPage()throws Exception
     {                
        	Reporter.log("Application Name is: "+"HPE Go");
@@ -404,7 +405,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
                   
     }
     
-    @Test(priority=13,groups={"Primary"},enabled=true)
+    @Test(priority=13,groups={"Primary"},enabled=false)
     public void TC_105_VerifyGetSupportOption()throws Exception
     {                
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -433,7 +434,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
                   
     }
     
-    @Test(priority=14,groups={"Primary"},enabled=true)
+    @Test(priority=14,groups={"Primary"},enabled=false)
     public void TC_106_ClickGetSupportOption()throws Exception
     {                
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -464,7 +465,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=15,groups={"Primary"},enabled=true)
+    @Test(priority=15,groups={"Primary"},enabled=false)
     public void TC_91_BackButtonFromSearchResultsPage()throws Exception
     {    	   	
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -496,7 +497,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=16,groups={"Primary"},enabled=true)
+    @Test(priority=16,groups={"Primary"},enabled=false)
     public void TC_92_BackButtonFromAlertsPage()throws Exception
     {    	   	
     	
@@ -529,7 +530,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }    
 
 
-@Test(priority=17,groups={"Primary"},enabled=true)
+@Test(priority=17,groups={"Primary"},enabled=false)
 public void TC_94_BackButtonFromOrderDetailScreen()throws Exception
 {    	   	
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -558,7 +559,7 @@ public void TC_94_BackButtonFromOrderDetailScreen()throws Exception
 	    
 }
 
-@Test(priority=18,groups={"Primary"},enabled=true)
+@Test(priority=18,groups={"Primary"},enabled=false)
 public void TC_95_BackButtonFromRecentSearchesScreen()throws Exception
 {    	   	
 	
@@ -623,7 +624,7 @@ public void TC_32_ValidateDeletionOfSearchFromRecentSearchesScreen()throws Excep
 
 
 
-@Test(priority=20,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=20,groups={"Primary","Secondary"},enabled=false)
 public void TC_17_ValidateAdvanceSearchFunctionality()throws Exception
 {    	   	
 	
@@ -652,7 +653,7 @@ public void TC_17_ValidateAdvanceSearchFunctionality()throws Exception
 	    
 }
 
-@Test(priority=21,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=21,groups={"Primary","Secondary"},enabled=false)
 public void TC_19_ValidateFilterIconFunctionality()throws Exception
 {    	   	
 	
@@ -682,7 +683,7 @@ public void TC_19_ValidateFilterIconFunctionality()throws Exception
 	    
 }
 
-@Test(priority=22,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=22,groups={"Primary","Secondary"},enabled=false)
 public void TC_55_CommonPageLayoutForAlerts()throws Exception
 {    	   	
 	
@@ -710,7 +711,7 @@ public void TC_55_CommonPageLayoutForAlerts()throws Exception
 	    
 }
 
-@Test(priority=23,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=23,groups={"Primary","Secondary"},enabled=false)
 public void TC_16_ValidateBackArrowButton()throws Exception
 {                
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -740,7 +741,7 @@ public void TC_16_ValidateBackArrowButton()throws Exception
    
 }
 
-@Test(priority=24,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=24,groups={"Primary","Secondary"},enabled=false)
 public void TC_98_ValidateInvoiceAvailableDeliveredOrders()throws Exception
 {                
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -769,7 +770,7 @@ public void TC_98_ValidateInvoiceAvailableDeliveredOrders()throws Exception
    
 }
 
-@Test(priority=25,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=25,groups={"Primary","Secondary"},enabled=false)
 public void TC_18_ValidateSortIcon()throws Exception
 {                
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -799,7 +800,7 @@ public void TC_18_ValidateSortIcon()throws Exception
    
 }
 
-@Test(priority=26,groups={"Primary"},enabled=true)
+@Test(priority=26,groups={"Primary"},enabled=false)
 public void TC_99_ValidateInvoiceDoesnotAvailableCancelledOrders()throws Exception
 {                
    
@@ -832,7 +833,7 @@ public void TC_99_ValidateInvoiceDoesnotAvailableCancelledOrders()throws Excepti
 }
 
 
-@Test(priority=27,groups={"Primary"},enabled=true)
+@Test(priority=27,groups={"Primary"},enabled=false)
 public void TC_100_ValidateInvoiceDoesnotAvailableSubmittedOrders()throws Exception
 {                
 	
@@ -863,7 +864,7 @@ public void TC_100_ValidateInvoiceDoesnotAvailableSubmittedOrders()throws Except
    
 }
 
-@Test(priority=28,groups={"Primary"},enabled=true)
+@Test(priority=28,groups={"Primary"},enabled=false)
 public void TC_101_ValidateInvoiceDoesnotAvailableAcceptedOrders()throws Exception
 {                
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -969,7 +970,7 @@ public void TC_104_ValidateInvoiceAvailableIsNotClickable()throws Exception
 
 
 
-@Test(priority=32,groups={"Primary"},enabled=true)
+@Test(priority=32,groups={"Primary"},enabled=false)
 public void TC_116_ValidatetheMenuItems()throws Exception
 
 {
@@ -1010,7 +1011,7 @@ public void TC_116_ValidatetheMenuItems()throws Exception
 }
 
 
-@Test(priority=33,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=33,groups={"Primary","Secondary"},enabled=false)
 public void TC_117_MainMenuPages()throws Exception
 {                
    
@@ -1052,7 +1053,7 @@ public void TC_117_MainMenuPages()throws Exception
    
 }
 
-@Test(priority=34,groups={"Primary"},enabled=true)
+@Test(priority=34,groups={"Primary"},enabled=false)
 public void TC_108_ValidateContactUS()throws Exception
 {
 	
@@ -1114,7 +1115,7 @@ public void TC_1_ValidateSearchResultPageInformation()throws Exception
 
 
 
-@Test(priority=36,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=36,groups={"Primary","Secondary"},enabled=false)
 public void TC_107_ValidateFAQsection()throws Exception
 {
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -1152,7 +1153,7 @@ public void TC_107_ValidateFAQsection()throws Exception
     
     }
 
-@Test(priority=37,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=37,groups={"Primary","Secondary"},enabled=false)
 public void TC_65_ValidatePoweredByHPEOSS()throws Exception
 {
 	
@@ -1224,7 +1225,7 @@ public void TC_62_VerifyOrderDetailsfromWatchListpage()throws Exception{
 }
 
 
-@Test(priority=40,groups={"Primary"},enabled=true)
+@Test(priority=40,groups={"Primary"},enabled=false)
 public void TC_15_ValidateClearIconSearchPage()throws Exception
 {                
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -1253,7 +1254,7 @@ public void TC_15_ValidateClearIconSearchPage()throws Exception
    
 }
 
-@Test(priority=41,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=41,groups={"Primary","Secondary"},enabled=false)
 public void TC_14_ValidateSearchBarFunctionality()throws Exception
 {                
 	
@@ -1312,7 +1313,7 @@ public void TC_61_VerifyUIOrderDetailsPageFromWatchList()throws Exception
 }
 
 
-@Test(priority=43,groups={"Primary"},enabled=true)
+@Test(priority=43,groups={"Primary"},enabled=false)
 public void TC_8_ValidateSearchTips()throws Exception
 {      
 	
@@ -1344,7 +1345,7 @@ public void TC_8_ValidateSearchTips()throws Exception
 }
 
 
-@Test(priority=44,groups={"Primary"},enabled=true)
+@Test(priority=44,groups={"Primary"},enabled=false)
 public void TC_60_VerifyBasicInfoOrderDetailsfromSearchPage()throws Exception{
        
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -1380,7 +1381,7 @@ public void TC_60_VerifyBasicInfoOrderDetailsfromSearchPage()throws Exception{
 
 
 
-@Test(priority=45,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=45,groups={"Primary","Secondary"},enabled=false)
 public void TC_77_ValidateTermsAndConditionPageFromMenu()throws Exception
 {      
 	
@@ -1526,7 +1527,7 @@ public void TC_128_ValidateOrdersemovedReflectWatchList()throws Exception
 	
 }
 
-@Test(priority=50,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=50,groups={"Primary","Secondary"},enabled=false)
 public void TC_130_ValidateOrderElements()throws Exception{
         
         
@@ -1588,7 +1589,7 @@ public void TC_33_ValidateOrderSearchDateAndTimeinSavedSearches()throws Exceptio
 }
 
 
-@Test(priority=52,groups={"Primary"},enabled=true)
+@Test(priority=52,groups={"Primary"},enabled=false)
 public void TC_118_ValidateWatchListPopUpScreen()throws Exception{
 	
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -1614,7 +1615,7 @@ public void TC_118_ValidateWatchListPopUpScreen()throws Exception{
 
 }
 
-@Test(priority=53,groups={"Primary"},enabled=true)
+@Test(priority=53,groups={"Primary"},enabled=false)
 public void TC_23_ValidateDateOrdered()throws Exception
 {
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -1650,7 +1651,7 @@ public void TC_23_ValidateDateOrdered()throws Exception
 
 }
 
-@Test(priority=54,groups={"Primary"},enabled=true)
+@Test(priority=54,groups={"Primary"},enabled=false)
 public void TC_24_ValidateEstimatedShipCompleteDate()throws Exception
 {
 	
@@ -1687,7 +1688,7 @@ public void TC_24_ValidateEstimatedShipCompleteDate()throws Exception
 }
 
 
-@Test(priority=55,groups={"Primary"},enabled=true)
+@Test(priority=55,groups={"Primary"},enabled=false)
 public void TC_22_ValidateHPEProductNumber()throws Exception
 {
 	
@@ -1721,7 +1722,7 @@ public void TC_22_ValidateHPEProductNumber()throws Exception
 }
 
 
-@Test(priority=56,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=56,groups={"Primary","Secondary"},enabled=false)
 public void TC_21_AdvanceSearchShipAddress()throws Exception
 {
 	
@@ -1786,7 +1787,7 @@ public void TC_26_AdvanceSearchMultipleConditions()throws Exception
 }
 
 
-@Test(priority=58,groups={"Primary"},enabled=true)
+@Test(priority=58,groups={"Primary"},enabled=false)
 public void TC_20_AdvanceSearchEndCustomer()throws Exception
 {
 	
@@ -1848,7 +1849,7 @@ public void TC_51_CheckWatchListPageAfterOrdersFlgged()throws Exception
 	    	HPECommonFunctions.screen();
 }
 
-@Test(priority=60,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=60,groups={"Primary","Secondary"},enabled=false)
 public void TC_35_ValidateUserPreferencesPage()throws Exception
 {    	   	
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -1970,7 +1971,7 @@ public void TC_27_ValidateCalendarArrows()throws Exception
 
 }
 
-@Test(priority=63,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=63,groups={"Primary","Secondary"},enabled=false)
 public void TC_129_ValidateOrderDetails()throws Exception
 {                
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -1998,7 +1999,7 @@ public void TC_129_ValidateOrderDetails()throws Exception
 }
 
 
-@Test(priority=64,groups={"Primary"},enabled=true)
+@Test(priority=64,groups={"Primary"},enabled=false)
 public void TC_57_VerifyLayoutCommonPageForSearch()throws Exception
 {                
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -2026,7 +2027,7 @@ public void TC_57_VerifyLayoutCommonPageForSearch()throws Exception
 
 }
 
-@Test(priority=65,groups={"Primary"},enabled=true)
+@Test(priority=65,groups={"Primary"},enabled=false)
 public void TC_58_VerifyLayoutCommonPageForWatchList()throws Exception
 {        
 	
@@ -2057,7 +2058,7 @@ public void TC_58_VerifyLayoutCommonPageForWatchList()throws Exception
 
 }
 
-@Test(priority=66,groups={"Primary"},enabled=true)
+@Test(priority=66,groups={"Primary"},enabled=false)
 public void TC_59_VerifyLayoutCommonPageForOrderDetailsPage()throws Exception
 {                
 	
@@ -2198,7 +2199,7 @@ public void TC_56_ValidateLayoutofCommonPageSavedSearches()throws Exception{
 }
 
 
-@Test(priority=71,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=71,groups={"Primary","Secondary"},enabled=false)
 public void TC_54_ValidateCommonPageFooterFunctionality()throws Exception{
 	
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -2301,7 +2302,7 @@ public void TC_34_ValidateSearchUsingSavedSearches()throws Exception{
 
 
 
-@Test(priority=75,groups={"Primary"},enabled=true)
+@Test(priority=75,groups={"Primary"},enabled=false)
 public void TC_28_Validate90daysinCalendar()throws Exception
 {
 	
@@ -2336,7 +2337,7 @@ public void TC_28_Validate90daysinCalendar()throws Exception
 }
 
 
-@Test(priority=76,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=76,groups={"Primary","Secondary"},enabled=false)
 public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -2367,7 +2368,7 @@ public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	HPECommonFunctions.screen();
 } 
 
-@Test(priority=77,groups={"Primary"},enabled=true)
+@Test(priority=77,groups={"Primary"},enabled=false)
 public void TC_29_ValidateAutoPopulateOfDateinAdvancedSearch()throws Exception{
 	
    	Reporter.log("Application Name is: "+"HPE Go");
