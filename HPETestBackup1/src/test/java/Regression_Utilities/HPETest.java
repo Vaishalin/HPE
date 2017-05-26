@@ -60,7 +60,7 @@ public class HPETest extends BaseClassHPE
 	public static String date=null;
 	
 	
-	
+	/*
 	@Test(priority=1,groups={"Primary","Secondary"},enabled=true)
 
 	public void TC_136_ValidateConnectivity()throws Exception
@@ -474,7 +474,7 @@ public void TC_94_BackButtonFromOrderDetailScreen()throws Exception
 	    HPECommonFunctions.screen();
 	    
 }
-
+*/
 @Test(priority=18,groups={"Primary"},enabled=true)
 public void TC_95_BackButtonFromRecentSearchesScreen()throws Exception
 {    	   	
