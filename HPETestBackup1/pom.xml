@@ -40,6 +40,8 @@
         <version>2.18.1</version>
           <configuration>
           
+    
+          
           <properties>
                         <!-- Setting ReportNG listeners -->
                         <property>
