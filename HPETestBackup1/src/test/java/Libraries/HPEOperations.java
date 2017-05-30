@@ -1,34 +1,89 @@
+
 package Libraries;
 
-import java.io.File;
-import java.text.ParseException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+import java.io.File;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ScreenOrientation;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.SkipException;
+import org.testng.annotations.Test;
 
+import Libraries.HPECommonFunctions;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.*;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.touch.TouchActions;
+
+import com.perfectomobile.selenium.options.visual.*;
+import com.perfectomobile.selenium.options.visual.image.*;
+import com.perfectomobile.selenium.options.visual.text.*;
+import com.perfectomobile.selenium.options.rotate.MobileDeviceRotateOptions;
+import com.perfectomobile.selenium.options.rotate.MobileDeviceRotateState;
+import com.perfectomobile.selenium.options.touch.*;
+import com.perfectomobile.httpclient.utils.FileUtils;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Map;
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Service.State;
+import com.perfectomobile.httpclient.MediaType;
+import com.perfectomobile.httpclient.utils.FileUtils;
 import com.perfectomobile.selenium.MobileCoordinates;
+import com.perfectomobile.selenium.MobileDriver;
 import com.perfectomobile.selenium.MobilePoint;
+
 import com.perfectomobile.selenium.api.IMobileDriver;
 import com.perfectomobile.selenium.api.IMobileWebDriver;
 import com.perfectomobile.selenium.by.ByMobile;
-//import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-//import org.apache.fop.fonts.cff.CFFDataReader.DICTEntry;
-//import org.apache.poi.xssf.usermodel.XSSFCell;
-//import org.junit.Assert;
-import Regression_Utilities.BaseClassHPE;
-//import com.gargoylesoftware.htmlunit.javascript.host.Map;
-//import com.perfectomobile.httpclient.MediaType;
-//import Regression_Utilities.BaseClass_HPE;
-//import Regression_Utilities.XLS_Reader;
-//import org.openqa.selenium.TakesScreenshot;
-//import java.io.IOException;
 
+import javax.activation.*;
+import javax.imageio.ImageIO;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+
+//import com.perfectomobile.httpclient.MediaType;
+
+import Regression_Utilities.BaseClassHPE;
+
+//import Regression_Utilities.XLS_Reader;
+
+
+import com.perfectomobile.selenium.options.MobileAutomationFramework;
+import com.perfectomobile.selenium.options.MobileDeviceVital;
+import com.perfectomobile.selenium.options.MobileReportAttachmentType;
+import com.perfectomobile.selenium.options.visual.text.MobileTextFindTarget;
+import com.perfectomobile.selenium.options.visual.text.MobileTextMatchMode;
+
+import org.openqa.selenium.OutputType;
+//import org.openqa.selenium.TakesScreenshot;
+import java.util.Properties;
+//import java.io.IOException;
+import java.util.concurrent.TimeUnit ;
 
 public class HPEOperations extends BaseClassHPE
 {
@@ -56,7 +111,7 @@ public class HPEOperations extends BaseClassHPE
     	 	
     	 	if((Device_Model.contains("iPhone")) && (Device_Model.contains("iPad")))
         	{
-            //HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
+            HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
             }else
     	    {
     		HPECommonFunctions.EnterPassword_AN("Password123");    		
@@ -82,7 +137,17 @@ public class HPEOperations extends BaseClassHPE
     		HPECommonFunctions.EnterUserName(config.getProperty("UserName"));    	 	   	 	
             HPECommonFunctions.EnterPassword_iOS(config.getProperty("Password"));
             HPECommonFunctions.ClickSignIn();
-    	} else
+    	} else if (Device_Model.contains("Galaxy S7"))
+        {
+    		HPECommonFunctions.EnterUserName(config.getProperty("UserName")); 
+    		Thread.sleep(2000);
+    		HPECommonFunctions.EnterPassword_AN(config.getProperty("Password"));
+    		Thread.sleep(2000);
+ 
+    		HPECommonFunctions.ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_GalaxyS7"+".png");
+        }
+
+    	else
     	{
     		//HPECommonFunctions.EnterUserName_AN(); 
     		HPECommonFunctions.EnterUserName(config.getProperty("UserName")); 
@@ -100,7 +165,6 @@ public class HPEOperations extends BaseClassHPE
     public static void Login_App_iOS() throws Exception
       {
     	try
-    	
     	  {
     	 	             	
     		FirstLogin_App();
@@ -124,6 +188,10 @@ public class HPEOperations extends BaseClassHPE
 			catch(Exception e)
 			{
 				//System.out.println("Login into application was not successful");
+				//HPECommonFunctions.VerifyTutorialPage();
+	    		//HPECommonFunctions.ClickAllowButton(); 
+	    		System.out.println("User is logged in into application");
+				Thread.sleep(5000);
 			}
             
     	          
@@ -137,10 +205,13 @@ public class HPEOperations extends BaseClassHPE
     	  {
     	 	            
     		FirstLogin_App();
+    		Thread.sleep(5000);
 			WebElement TermsCondition = nativedriver.findElement(By.xpath(Android_Objects.getProperty("T&C")));
 			if(TermsCondition.isDisplayed())
 			{
-				HPECommonFunctions.SwipeUp_AN();	    		   		
+				HPECommonFunctions.SwipeUp_AN();
+				Thread.sleep(1000);
+				HPECommonFunctions.SwipeUp_AN();
 	    		HPECommonFunctions.ClickAccept_AN();
 	    		HPECommonFunctions.VerifyTutorialPage();
 	    		HPECommonFunctions.ClickAllowButton(); 
@@ -189,10 +260,10 @@ public class HPEOperations extends BaseClassHPE
     public static void Open_Browser_iOS() throws Exception
 	{
 		 
-       	  device.getNativeDriver(config.getProperty("BrowserName")).open();
-       	  nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-       	  //Thread.sleep(20000);
-       	  System.out.println("Opened Safari Browser ");
+    	nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);  
+    	device.getNativeDriver(config.getProperty("BrowserName")).open();
+       	System.out.println("Opened Safari Browser ");
+        Thread.sleep(8000);
        	  
          }
     
@@ -210,15 +281,15 @@ public class HPEOperations extends BaseClassHPE
     	    
     	}catch (Exception e)
     	{
-    		nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-    		
+    		//nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+    		Thread.sleep(5000);
     		device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("352,74")));
     		System.out.println("Clicked on existing URL");
     	    Thread.sleep(5000);
     	    device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("552,74")));
     		System.out.println("Clicked on Remove button");
-    	    Thread.sleep(2000);	    
-    	    	    
+    	    //Thread.sleep(5000);	    
+    	    nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	    WebElement EnterURL = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Address")));
     	    Thread.sleep(5000);
     	    EnterURL.click();
@@ -507,6 +578,41 @@ public class HPEOperations extends BaseClassHPE
                    
             }
             
+          //Method to click on HPEGo
+		    public static void ClickHPEGoApp() throws Exception
+		      {
+		    	if(Device_Model.equals("iPhone-7"))
+		    	{
+		    		//ClickOnSearchIcon_iOS();
+		    		HPEOperations.ClickHPEGoApp("C://HPE//FunctionalTesting//Images//HPEGO"+".png");
+		    	}else if(Device_Model.contains("iPad"))
+		    	{
+		    		//ClickOnSearchIcon_iOS();
+		    		HPEOperations.ClickHPEGoApp("C://HPE//FunctionalTesting//Images//HPEGO"+".png");
+		    	}else
+		    	{
+		    		HPEOperations.ClickHPEGoApp("C://HPE//FunctionalTesting//Images//HPEGO_iPhone5S"+".png");
+		    	}
+		    	          
+		      } 
+		    
+		  //Method to click on Apple image
+		    public static void ClickAppleIcon() throws Exception
+		      {
+		    	if(Device_Model.equals("iPhone-7"))
+		    	{
+		    		//ClickOnSearchIcon_iOS();
+		    		HPEOperations.ClickAppleIcon("C://HPE//FunctionalTesting//Images//AppleImage"+".png");
+		    	}else if(Device_Model.contains("iPad"))
+		    	{
+		    		//ClickOnSearchIcon_iOS();
+		    		HPEOperations.ClickAppleIcon("C://HPE//FunctionalTesting//Images//AppleImage"+".png");
+		    	}else
+		    	{
+		    		HPEOperations.ClickAppleIcon("C://HPE//FunctionalTesting//Images//AppleImage_iPhone5S"+".png");
+		    	}
+		    	          
+		      } 
             
           //Method to click General App Questions
             public static void ClickGeneralApp_iOS() throws Exception
@@ -616,7 +722,7 @@ public class HPEOperations extends BaseClassHPE
             	
             	nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     			WebElement PoweredByOSS = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("PoweredByOSS")));
-    			if (PoweredByOSS.isDisplayed()) {
+    			if (!PoweredByOSS.isDisplayed()) {
     				WatchlistCount = PoweredByOSS.getAttribute("name");
     				System.out.println("End Customer Name is Present & below is the name");
     				System.out.println(WatchlistCount);
@@ -649,13 +755,20 @@ public class HPEOperations extends BaseClassHPE
             
             public static void ValidatePoweredByHPEOSS() throws Exception
                            {
-                            if(Device_Model.contains("iPhone"))
+                            if(Device_Model.equals("iPhone-7"))
                             {
                                    ValidatePoweredByHPEOSS_iOS();
                             }else if(Device_Model.contains("iPad"))
                             {
                                    ValidatePoweredByHPEOSS_iOS();
-                            }else
+                            }else if(Device_Model.equals("iPhone-5S"))
+                            {
+                                   ValidatePoweredByHPEOSS_iOS();
+                            }else if(Device_Model.equals("iPhone-6S"))
+                            {
+                                ValidatePoweredByHPEOSS_iOS();
+                            }
+                            else
                             {
                                    ValidatePoweredByHPEOSS_AN();
                             }
@@ -789,7 +902,7 @@ public class HPEOperations extends BaseClassHPE
             		try {
             			nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             			WebElement WatchlistCount1 = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchlistCount")));
-            			if (WatchlistCount1.isDisplayed()) {
+            			if (!WatchlistCount1.isDisplayed()) {
             				WatchlistCount = WatchlistCount1.getAttribute("name");
             				System.out.println("End Customer Name is Present & below is the name");
             				System.out.println(WatchlistCount);
@@ -828,12 +941,45 @@ public class HPEOperations extends BaseClassHPE
             		
                     public static void firstOrderClick_AN() throws Exception
                     {
-                                             
+                                       try {
+                                    	                                          
                          device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
                                System.out.println("Clicked on  order in Search Page");
                                Thread.sleep(10000); 
+                                       } catch (Exception e) {
+                                    	   System.out.println("Order Details page is not displayed");
+                               			e.printStackTrace();
+                               			HPECommonFunctions.CaptureScreenshot("TC_Fail_");                         
+                              	         	HPECommonFunctions.ClickSignOut();
+                              	         	HPECommonFunctions.Close_App_HPE();
+                              	         	Thread.sleep(2000);
+                               			Assert.fail("Order Details page is not displayed");
+                               			
+                                    	   
+                                       }
                                                                                                                         
                                }
+                    
+                    public static void SecondOrderClick_AN() throws Exception {
+                		
+  	                  try {
+                      	                                          
+           device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("249,1120")));
+                 System.out.println("Clicked on second order in Search Page");
+                 Thread.sleep(10000); 
+                         } catch (Exception e) {
+                      	   System.out.println("Order Details page is not displayed");
+                 			e.printStackTrace();
+                 			HPECommonFunctions.CaptureScreenshot("TC_Fail_");                         
+                	         	HPECommonFunctions.ClickSignOut();
+                	         	HPECommonFunctions.Close_App_HPE();
+                	         	Thread.sleep(2000);
+                 			Assert.fail("Order Details page is not displayed");
+                 			
+                      	   
+                         }
+                                                                                                          
+                 }
             	
                   
 
@@ -847,10 +993,9 @@ public class HPEOperations extends BaseClassHPE
                                  firstOrderClick_AN();
                            }
                     }
+                    
 
-
-            		
-            	
+                    
             	
             	public static void odPageHeader_iOS()throws Exception  {
             		try {
@@ -1159,7 +1304,7 @@ public class HPEOperations extends BaseClassHPE
             	try {
             		visualdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             		WebElement WhiteFlag = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WhiteFLag")));
-            		if (WhiteFlag.isDisplayed()) {
+            		if (!WhiteFlag.isDisplayed()) {
             			
             			System.out.println("Order is Removed from the WatchList");
             			Thread.sleep(2000);
@@ -1177,17 +1322,12 @@ public class HPEOperations extends BaseClassHPE
             }
 
             public static void ValidateAutoPopulateOrderDateRange() throws Exception{
-            	HPECommonFunctions.ClickOnOrderStartDate();
-        		HPECommonFunctions.ClickonOrderDateStartToday();
-        		Thread.sleep(2000);
-        		System.out.println("The Order Date Range is Auto Populated from the date chosen");
-        		Thread.sleep(2000);
             	
-            /*	try {
+            	try {
             		
             		
-            		HPECommonFunctions.ClickOnOrderStartDate();
-            		HPECommonFunctions.ClickonOrderDateStartToday();
+            		HPECommonFunctions.ClickOnDateOrdered();
+            		HPECommonFunctions.ClickonDateOrderedStartDate();
             		Thread.sleep(2000);
             		System.out.println("The Order Date Range is Auto Populated from the date chosen");
             		Thread.sleep(2000);
@@ -1201,9 +1341,9 @@ public class HPEOperations extends BaseClassHPE
                     HPECommonFunctions.Close_App_HPE();
                     Thread.sleep(2000);
                     Assert.fail("The Order Date Range is not Auto Populated from the date chosen");
-
+            	
             	}
-*/
+
             }
             
 
@@ -1231,22 +1371,12 @@ public class HPEOperations extends BaseClassHPE
 
             
             public static void ValidateAutoPopulateDeliveryDateRange() throws Exception{
-           	 //HPECommonFunctions.ClickOnDeliveryStartDateCalendar();
-    		 //HPECommonFunctions.ClickonShippingStartDate();
-
-    		
-    		//HPECommonFunctions.ClickOnDeliveryStartDateCalendar();
-           // HPECommonFunctions.ClickonDeliveryDate();
-    		Thread.sleep(2000);
-    		System.out.println("The Ship Date Range is Auto Populated from the date chosen");
-    		Thread.sleep(2000);
-
-            	/*
+            	
             	try {
             		
 
-            		 HPECommonFunctions.ClickOnDeliveryStartDateCalendar();
-            		 HPECommonFunctions.ClickonShippingStartDate();
+            	//	 HPECommonFunctions.ClickOnDeliveryStartDateCalendar();
+            //		 HPECommonFunctions.ClickonShippingStartDate();
 
             		
             		//HPECommonFunctions.ClickOnDeliveryStartDateCalendar();
@@ -1266,7 +1396,7 @@ public class HPEOperations extends BaseClassHPE
                     Assert.fail("The Order Does not have Multiple Shipments");
 
             	}
-*/
+
 
             
             }

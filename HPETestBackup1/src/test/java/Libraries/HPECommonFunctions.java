@@ -1,44 +1,56 @@
 package Libraries;
 
-
+import java.awt.List;
 import java.io.File;
-
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-
-//import org.junit.Assert;
-
-import org.testng.Assert;
-import org.testng.Reporter;
-
+//import org.apache.poi.hwpf.usermodel.DateAndTime;
+import org.junit.Assert;
+import org.junit.runners.AllTests;
 import org.openqa.selenium.By;
-
-
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
-
-
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 //import org.seleniumhq.jetty7.util.log.Log;
+import org.testng.SkipException;
+import org.testng.log4testng.Logger;
 
 import bsh.ParseException;
 
-
+import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
+import com.google.common.base.Function;
+//import com.perfectomobile.PerfectoLabUtils;
 import com.perfectomobile.httpclient.utils.FileUtils;
 import com.perfectomobile.selenium.MobileCoordinates;
 import com.perfectomobile.selenium.MobileDriver;
 import com.perfectomobile.selenium.MobilePoint;
-import com.perfectomobile.selenium.api.IMobileDriver;
 import com.perfectomobile.selenium.api.IMobileWebDriver;
 import com.perfectomobile.selenium.by.ByMobile;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+import com.perfectomobile.selenium.options.MobileDeviceVital;
+import com.perfectomobile.selenium.options.rotate.MobileDeviceRotateOptions;
+import com.perfectomobile.selenium.options.rotate.MobileDeviceRotateState;
 
-
+import java.util.Calendar;
+import Regression_Utilities.BaseClassHPE;
 //import Regression_Utilities.XLS_Reader;
 
 
@@ -46,12 +58,10 @@ public class HPECommonFunctions extends HPEOperations
 
 {
 
-	//public static IMobileWebDriver visualdriver = device.getVisualDriver();
 	public static IMobileWebDriver visualdriver = device.getVisualDriver();
 	public static IMobileWebDriver nativedriver = device.getNativeDriver();
 	public static IMobileWebDriver domdriver = device.getDOMDriver();
 	//public static WebDriver driver =null;
-	public static IMobileDriver driver1 = null;   
 	public static String VersionNo=null;
 	public static MobileDriver driver = null; //Interface for getting device,provides methods for uploading and downloading items to/from the media repository, downloading the execution report
 	public static String Device_Model=device.getProperty("Model");
@@ -60,13 +70,17 @@ public class HPECommonFunctions extends HPEOperations
 	public static String WatchListResult1=null;
 	public static Date parsedDate = null;
 	public static Assert softAssert = null;
-
+	private static final MobileDeviceRotateOptions Landscape = null;
+	private static final MobileDeviceRotateOptions Portrait = null; 
+	
+	private static ScreenOrientation LANDSCAPE = null;
+	private static ScreenOrientation PORTRAIT = null;
 	
 	
     //start of screen
     public static void screen() throws Exception
     {
-    	Reporter.log("****************************************************************************");
+    	System.out.println("****************************************************************************");
         
     }
     
@@ -77,38 +91,104 @@ public class HPECommonFunctions extends HPEOperations
 		       {
 		           driver = new MobileDriver();
 		           device=driver.getDevice(config.getProperty("device_iOS"));
-		           Reporter.log("Taking Screenshot of failed Test Case");
+		           System.out.println("Taking Screenshot of failed Test Case");
 		           //File scrFile = driver.getDevice((config.getProperty("device_iOS").getScreenshotAs(OutputType.FILE);
 		           File scrFile = device.getScreenshotAs(OutputType.FILE);
 		           
 		           try 
 		           {
-		                 Reporter.log("Entered TRY of Screenshot ");
+		                 System.out.println("Entered TRY of Screenshot ");
 		                 FileUtils.copyFile(scrFile, new File("C:\\HPE\\FunctionalTesting\\FailedScreenshots\\"+ TCNo +" " + System.currentTimeMillis() +".jpg"));
-		                 Reporter.log("Screenshot captured sucessfully");
+		                 System.out.println("Screenshot captured sucessfully");
 		           } catch (IOException e) {
-		                 Reporter.log(e.getMessage());
+		                 System.out.println(e.getMessage());
 		           }
 		       }
 			else
 			{
 	           driver = new MobileDriver();
 	           device=driver.getDevice(config.getProperty("device_AN"));
-	           Reporter.log("Taking Screenshot of failed Test Case");
+	           System.out.println("Taking Screenshot of failed Test Case");
 	           //File scrFile = driver.getDevice((config.getProperty("device_iOS").getScreenshotAs(OutputType.FILE);
 	           File scrFile = device.getScreenshotAs(OutputType.FILE);
 	           
 	           try 
 	           {
-	                 Reporter.log("Entered TRY of Screenshot ");
+	                 System.out.println("Entered TRY of Screenshot ");
 	                 FileUtils.copyFile(scrFile, new File("C:\\HPE\\FunctionalTesting\\FailedScreenshots\\"+ TCNo +" " + System.currentTimeMillis() +".jpg"));
-	                 Reporter.log("Screenshot captured sucessfully");
+	                 System.out.println("Screenshot captured sucessfully");
 	           } catch (IOException e) {
-	                 Reporter.log(e.getMessage());
+	                 System.out.println(e.getMessage());
 	           }
 			}
 	    }
 		
+		/*
+		//change orientation to landscape from portrait
+				public static void Rotate_Device_Portrait() throws Exception
+				{
+					Thread.sleep(5000);		
+								try{
+						
+						Orient=device.getOrientation();
+						System.out.println("Device Orientation is in  ");
+						System.out.println(Orient); 
+										
+						  if (Orient.value().equals(ScreenOrientation.PORTRAIT.value()))
+									
+					{
+						Thread.sleep(5000);
+						System.out.println("Device is already in Portrait mode");
+									
+					}
+						else
+						{
+							System.out.println("Device Orientation will be changed to Portrait mode1");
+							device.rotate(Portrait);
+						}
+					}
+					catch(Exception e)
+					{
+						System.out.println("Device Orientation will be changed to Portrait mode");
+						device.rotate(Portrait);
+					
+					}
+				}
+				*/
+				
+				/*
+				//change orientation to landscape from portrait
+				public static void Rotate_Device_Landscape() throws Exception
+				{
+					Thread.sleep(5000);		
+								try{
+						
+						Orient=device.getOrientation();
+						System.out.println("Device Orientation is in  ");
+						System.out.println(Orient); 
+										
+						  if (Orient.value().equals(ScreenOrientation.LANDSCAPE.value()))
+									
+					{
+						Thread.sleep(5000);
+						System.out.println("Device is already in Landscape mode");
+									
+					}
+						else
+						{
+							System.out.println("Device Orientation will be changed to Landscape mode1");
+							device.rotate(Landscape);
+						}
+					}
+					catch(Exception e)
+					{
+						System.out.println("Device Orientation will be changed to Landscape mode");
+						device.rotate(Landscape);
+					
+					}
+				}
+				
+				*/
 		//Method to open to HPE application
 	    public static void Open_App_HPE() throws Exception
 			      {
@@ -142,12 +222,12 @@ public class HPECommonFunctions extends HPEOperations
 	    	
 	    	try
           {
-	    		Thread.sleep(2000);
+	    	  Thread.sleep(5000);
         	  //nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
     	  	  Thread.sleep(2000);
-    	  	  Reporter.log("Opened HPE-Go application");  
-    	  	  Thread.sleep(2000);
+    	  	  System.out.println("Opened HPE-Go application");  	  
+    	  	  Thread.sleep(5000);
         	  
           }catch (Exception e)
           {
@@ -156,7 +236,7 @@ public class HPECommonFunctions extends HPEOperations
         	  nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
         	  nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    	  	  Reporter.log("Opened HPE-Go application");  	  
+    	  	  System.out.println("Opened HPE-Go application");  	  
     	  	
           }
           /*
@@ -165,7 +245,7 @@ public class HPECommonFunctions extends HPEOperations
 	    	nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
       	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
   	  	  Thread.sleep(2000);
-  	  	  Reporter.log("Opened HPE-Go application");  	  
+  	  	  System.out.println("Opened HPE-Go application");  	  
   	  	  Thread.sleep(2000);
   	  	  
   	  	  */
@@ -183,7 +263,7 @@ public class HPECommonFunctions extends HPEOperations
         	  //nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
     	  	  Thread.sleep(2000);
-    	  	  Reporter.log("Opened HPE-Go application");  	  
+    	  	  System.out.println("Opened HPE-Go application");  	  
     	  	  Thread.sleep(2000);
         	  
           }catch (Exception e)
@@ -193,7 +273,7 @@ public class HPECommonFunctions extends HPEOperations
         	  nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
         	  nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    	  	  Reporter.log("Opened HPE-Go application");  	  
+    	  	  System.out.println("Opened HPE-Go application");  	  
     	  	
           }
           /*
@@ -202,7 +282,7 @@ public class HPECommonFunctions extends HPEOperations
 	    	nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
       	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
   	  	  Thread.sleep(2000);
-  	  	  Reporter.log("Opened HPE-Go application");  	  
+  	  	  System.out.println("Opened HPE-Go application");  	  
   	  	  Thread.sleep(2000);
   	  	  
   	  	  */
@@ -214,7 +294,7 @@ public class HPECommonFunctions extends HPEOperations
 	    {
 	       	  device.getNativeDriver(config.getProperty("AppName")).close();  	  
 	      	  Thread.sleep(2000);
-	      	  Reporter.log("Closed HPE-Go application");  	  
+	      	  System.out.println("Closed HPE-Go application");  	  
 	      	  Thread.sleep(2000);
 	      	  
 	      }
@@ -229,7 +309,7 @@ public class HPECommonFunctions extends HPEOperations
     	  Thread.sleep(2000);
     	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
       	  Thread.sleep(2000);
-      	  Reporter.log("Opened HPE-Go application");  	  
+      	  System.out.println("Opened HPE-Go application");  	  
       	  Thread.sleep(2000);
       	  
       }catch(Exception e)
@@ -240,7 +320,7 @@ public class HPECommonFunctions extends HPEOperations
     	  Thread.sleep(2000);
     	  device.getNativeDriver(config.getProperty("AppName")).open();  	  
       	  Thread.sleep(2000);
-      	  Reporter.log("Opened HPE-Go application");  	  
+      	  System.out.println("Opened HPE-Go application");  	  
       	  Thread.sleep(2000);
     	  
   	  }
@@ -252,8 +332,7 @@ public class HPECommonFunctions extends HPEOperations
 
   	  device.getNativeDriver(config.getProperty("AppName")).close();  	  
   	  Thread.sleep(2000);
-  	  Reporter.log("Closed HPE-Go application"); 
-  	  //logger.log(LogStatus.PASS, "PASS :" +"" + "Closed HPE-Go application" ); 
+  	  System.out.println("Closed HPE-Go application");  	  
   	  Thread.sleep(20000);
      }
 	
@@ -268,7 +347,7 @@ public class HPECommonFunctions extends HPEOperations
 		UNElement.click();
 		Thread.sleep(2000);
 		UNElement.sendKeys(Username);
-		Reporter.log("Entered Username");
+		System.out.println("Entered Username");
 		Thread.sleep(3000);
 		
 		//Actions action=new Actions(nativedriver);
@@ -288,7 +367,7 @@ public class HPECommonFunctions extends HPEOperations
 		//action.sendKeys("Some text");
 		 
 		UNElement.sendKeys(Username);
-		Reporter.log("Entered Username");
+		System.out.println("Entered Username");
 		Thread.sleep(3000);
 		
 		
@@ -307,7 +386,7 @@ public class HPECommonFunctions extends HPEOperations
 	UNElement.click();
 	Thread.sleep(5000);	
 	UNElement.sendKeys(Username);	
-	Reporter.log("Entered Username");
+	System.out.println("Entered Username");
 	Thread.sleep(5000);	
 	/*
 	nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -329,7 +408,7 @@ public class HPECommonFunctions extends HPEOperations
 					Thread.sleep(1000);
 					//PWDElement.clear();
 					PWDElement.sendKeys(Password);
-					Reporter.log("Entered Password");
+					System.out.println("Entered Password");
 					Thread.sleep(5000);
 				
 				
@@ -346,14 +425,12 @@ public class HPECommonFunctions extends HPEOperations
 					Thread.sleep(1000);
 					//PWDElement.clear();
 					PWDElement.sendKeys(Password);
-					Reporter.log("Entered Password");
-					//logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Password" );
+					System.out.println("Entered Password");
 					nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				
 					
 				
 				}
-				
 					
 			// Method to Enter wrong password
             
@@ -361,7 +438,7 @@ public class HPECommonFunctions extends HPEOperations
             {
                    if(Device_Model.contains("iPhone"))
                    {
-                          //EnterPassword_iOS(config.getProperty("Password"), logger);
+                          EnterPassword_iOS(config.getProperty("Password"));
                    } else
                    {
                 	   EnterPassword_AN(config.getProperty("Password"));
@@ -372,7 +449,7 @@ public class HPECommonFunctions extends HPEOperations
 		//Method to Click on Sign In Button for iOS
 		public static void ClickSignIn_iOS() throws Exception
 		{
-		WebElement SignInElement = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignIn")));
+		WebElement SignInElement = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignInIpad")));
 		Thread.sleep(2000);
 		SignInElement.click();
 		try
@@ -388,7 +465,7 @@ public class HPECommonFunctions extends HPEOperations
 			}catch(Exception e1)
 			{
 				Thread.sleep(5000);
-				Reporter.log("Clicked on SignIn without any error");
+				System.out.println("Clicked on SignIn without any error");
 			}
 		}
 }
@@ -417,7 +494,7 @@ public class HPECommonFunctions extends HPEOperations
 			}catch(Exception e1)
 			{
 				Thread.sleep(5000);
-				Reporter.log("Clicked on SignIn without any error");
+				System.out.println("Clicked on SignIn without any error");
 			}
 		}
 }
@@ -447,7 +524,7 @@ public class HPECommonFunctions extends HPEOperations
                     {
                                   Thread.sleep(2000);
                                   
-                                  //HPECommonFunctions.ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_GalaxyS7"+".png");
+                                  HPECommonFunctions.ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_GalaxyS7"+".png");
 
                     }
 
@@ -464,12 +541,11 @@ public class HPECommonFunctions extends HPEOperations
 					}catch(Exception e1)
 					{
 						Thread.sleep(5000);
-						Reporter.log("Clicked on SignIn without any error");
+						System.out.println("Clicked on SignIn without any error");
 					}
 				}
 		}
-
-				
+		
 				
 				public static void ClickOnKeypadGoButton_AN(String imagePath) throws Exception
                 
@@ -480,7 +556,6 @@ public class HPECommonFunctions extends HPEOperations
                              KeypadGo.click();
                              testLog.info("\n Image found is : " + imagePath);
                              testLog.info("Clicked on Keypad Go button");
-                             Reporter.log("Clicked on Keypad Go button");
                        } catch (Exception e) {
                              testLog.info("\nImage not present : " + imagePath);    
                              testLog.info("Go button not present in the keypad");
@@ -518,8 +593,7 @@ public class HPECommonFunctions extends HPEOperations
 					}catch(Exception e1)
 					{
 						Thread.sleep(5000);
-						Reporter.log("Clicked on SignIn without any error");
-						//logger.log(LogStatus.PASS, "PASS :" +"" + "Clicked on SignIn without any error" );
+						System.out.println("Clicked on SignIn without any error");
 					}
 				}
 		}
@@ -536,7 +610,7 @@ public class HPECommonFunctions extends HPEOperations
 		Thread.sleep(2000);
 		SignInElementAN.click();
 		Thread.sleep(20000);
-		Reporter.log("Successfully Logged In");
+		System.out.println("Successfully Logged In");
 		} 
 
 		*/
@@ -550,19 +624,19 @@ public class HPECommonFunctions extends HPEOperations
 							{
 								nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 								WebElement Skip = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Skip")));
-								if(Skip.isDisplayed())
+								if(!Skip.isDisplayed())
 							{
 								
-									Reporter.log("Tutorial page is displayed");
+									System.out.println("Tutorial page is displayed");
 									Skip.click();
-									Reporter.log("Clicked on Skip");
+									System.out.println("Clicked on Skip");
 									Thread.sleep(2000);
 								
 							}
 							}
 							catch(Exception e)
 							{
-								Reporter.log("Tutorial page is not displayed");				
+								System.out.println("Tutorial page is not displayed");				
 								
 							}
 						}
@@ -580,16 +654,16 @@ public class HPECommonFunctions extends HPEOperations
 		                                if(Skip.isDisplayed())
 		                          {
 		                                
-		                                	  Reporter.log("Tutorial page is displayed");
+		                                	  System.out.println("Tutorial page is displayed");
 		                                      Skip.click();
-		                                      Reporter.log("Clicked on Skip");
+		                                      System.out.println("Clicked on Skip");
 		                                      Thread.sleep(2000);
 		                                
 		                          }
 		                          }
 		                          catch(Exception e)
 		                          {
-		                                Reporter.log("Tutorial page is not displayed");                        
+		                                System.out.println("Tutorial page is not displayed");                        
 		                                
 		                          }
 		                    }
@@ -656,7 +730,7 @@ public class HPECommonFunctions extends HPEOperations
 					WebElement TandC = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
 					if(!TandC.isDisplayed())
 					{
-						Reporter.log("Terms & Condition page is displayed");
+						System.out.println("Terms & Condition page is displayed");
 						Thread.sleep(2000);
 						SwipeUp();
 						ClickDecline();
@@ -665,7 +739,7 @@ public class HPECommonFunctions extends HPEOperations
 					}
 					catch(Exception e)
 					{
-						Reporter.log("Terms & Condition page is not displayed");				
+						System.out.println("Terms & Condition page is not displayed");				
 						CaptureScreenshot("TC_Fail_");				
 						//ClickSignout();
 						Close_App_HPE();
@@ -679,7 +753,7 @@ public class HPECommonFunctions extends HPEOperations
 		public static void SwipeUp_iOS() throws Exception
 		{
 		
-		Reporter.log("Swiping up on the screen");
+		System.out.println("Swiping up on the screen");
 		device.getMobileTouchScreen().swipe(new MobileCoordinates(new MobilePoint("353,1142")), new MobileCoordinates(new MobilePoint("373,359")), 1);
 				
 		Thread.sleep(5000);		
@@ -690,7 +764,7 @@ public class HPECommonFunctions extends HPEOperations
 		public static void SwipeUp_iOS_iPhone5S() throws Exception
 		{
 		
-		Reporter.log("Swiping up on the screen");
+		System.out.println("Swiping up on the screen");
 		device.getMobileTouchScreen().swipe(new MobileCoordinates(new MobilePoint("313,1058")), new MobileCoordinates(new MobilePoint("300,119")), 1);
 				
 		Thread.sleep(5000);		
@@ -701,7 +775,7 @@ public class HPECommonFunctions extends HPEOperations
 				public static void SwipeUp_AN() throws Exception
 				{
 				
-				Reporter.log("Swiping up on the screen");
+				System.out.println("Swiping up on the screen");
 				device.getMobileTouchScreen().swipe(new MobileCoordinates(new MobilePoint("506,1580")), new MobileCoordinates(new MobilePoint("525,210")), 1);
 				Thread.sleep(5000);		
 				
@@ -709,17 +783,13 @@ public class HPECommonFunctions extends HPEOperations
 				
                 public static void SwipeUp() throws Exception
                 {
-                       if(Device_Model.equals("iPhone-7"))
+                       if(Device_Model.contains("iPhone"))
                        {
                     	   SwipeUp_iOS();
-                       }else if(Device_Model.equals("iPhone-5S"))
+                       }if(Device_Model.equals("iPhone-5S"))
                        {
                     	   SwipeUp_iOS_iPhone5S();
-                       }else if(Device_Model.equals("iPhone-6S"))
-                       {
-                    	   SwipeUp_iOS();
-                       }
-                       else
+                       }else
                        {
                     	   SwipeUp_AN();
                        }
@@ -735,14 +805,14 @@ public class HPECommonFunctions extends HPEOperations
 			WebElement Decline = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Decline")));
 			if(!Decline.isDisplayed())
 			{
-				Reporter.log("Decline button is Present");
+				System.out.println("Decline button is Present");
 				Thread.sleep(2000);
 				
 			}
 			}
 			catch(Exception e)
 			{
-				Reporter.log("Decline button is not Present");				
+				System.out.println("Decline button is not Present");				
 				CaptureScreenshot("TC_Fail_");				
 				//ClickSignOut();
 				Close_App_HPE();
@@ -760,14 +830,14 @@ public class HPECommonFunctions extends HPEOperations
                WebElement Decline = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Decline")));
                if(Decline.isDisplayed())
                {
-                      Reporter.log("Decline button is Present");
+                      System.out.println("Decline button is Present");
                       Thread.sleep(2000);
                       
                }
                }
                catch(Exception e)
                {
-                      Reporter.log("Decline button is not Present");                        
+                      System.out.println("Decline button is not Present");                        
                       CaptureScreenshot("TC_Fail_");                         
                       //ClickSignOut();
                       Close_App_HPE();
@@ -785,8 +855,8 @@ public class HPECommonFunctions extends HPEOperations
                       VerifyDeclineButton_iOS();
                }else if(Device_Model.contains("iPad"))
                { 
-                   	 VerifyDeclineButton_iOS();
-               }else
+                   VerifyDeclineButton_iOS();
+            }else
                {
                       VerifyDeclineButton_AN();
                }
@@ -803,14 +873,14 @@ public class HPECommonFunctions extends HPEOperations
 			WebElement Accept = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
 			if(!Accept.isDisplayed())
 			{
-				Reporter.log("Accept button is Present");
+				System.out.println("Accept button is Present");
 				Thread.sleep(2000);
 				
 			}
 			}
 			catch(Exception e)
 			{
-				Reporter.log("Accept button is not Present");				
+				System.out.println("Accept button is not Present");				
 				CaptureScreenshot("TC_Fail_");				
 				//ClickSignOut();
 				Close_App_HPE();
@@ -828,14 +898,14 @@ public class HPECommonFunctions extends HPEOperations
               WebElement Accept = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Accept")));
               if(Accept.isDisplayed())
               {
-                     Reporter.log("Accept button is Present");
+                     System.out.println("Accept button is Present");
                      Thread.sleep(2000);
                      
               }
               }
               catch(Exception e)
               {
-                     Reporter.log("Accept button is not Present");                         
+                     System.out.println("Accept button is not Present");                         
                      CaptureScreenshot("TC_Fail_");                         
                      //ClickSignOut();
                      Close_App_HPE();
@@ -873,18 +943,18 @@ public class HPECommonFunctions extends HPEOperations
 					nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			//Thread.sleep(10000);
 			WebElement Allow = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Allow")));
-			if(Allow.isDisplayed())
+			if(!Allow.isDisplayed())
 			{
-				Reporter.log("Allow button is Present");
+				System.out.println("Allow button is Present");
 				Thread.sleep(5000);
 				Allow.click();
-				Reporter.log("Allow button is Clicked");
+				System.out.println("Allow button is Clicked");
 				Thread.sleep(10000);
 			}
 			}
 			catch(Exception e1)
 			{
-				Reporter.log("User has already allowed the Location");				
+				System.out.println("User has already allowed the Location");				
 				Thread.sleep(5000);
 			}
 			}
@@ -895,7 +965,7 @@ public class HPECommonFunctions extends HPEOperations
 		WebElement Decline = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Decline")));
 		Thread.sleep(5000);
 		Decline.click();
-		Reporter.log("Clicked on Decline button");
+		System.out.println("Clicked on Decline button");
 		Thread.sleep(10000);		
 		
 		}
@@ -906,7 +976,7 @@ public class HPECommonFunctions extends HPEOperations
         WebElement Decline = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Decline")));
         Thread.sleep(5000);
         Decline.click();
-        Reporter.log("Clicked on Decline button");
+        System.out.println("Clicked on Decline button");
         Thread.sleep(10000);       
         
         }
@@ -932,28 +1002,16 @@ public class HPECommonFunctions extends HPEOperations
 		  //Method to click on Accept option
 	    public static void ClickAccept() throws Exception
 	      {
-	    	
-	    	
-	    	
-	    	if(Device_Model.equals("iPhone-7"))
+	    	if(Device_Model.contains("iPhone"))
 	    	{
 	    		ClickAccept_iOS();
 	    	}else if(Device_Model.contains("iPad"))
 	    	{
 	    		ClickAccept_iOS();
-	    	}else if(Device_Model.equals("iPhone-5S"))
-	    	{
-	    		ClickAccept_iOS();
-	    	}
-	    		else if(Device_Model.equals("iPhone-6S"))
-		    	{
-		    		ClickAccept_iOS();
-		    	}else
+	    	}else
 	    	{
 	    		ClickAccept_AN();
 	    	}
-	    	
-	    	
 	    	          
 	      }
 	    
@@ -977,12 +1035,12 @@ public class HPECommonFunctions extends HPEOperations
           {
           Accept.click();
           Thread.sleep(10000);              
-          Reporter.log("Clicked on Accept button");
+          System.out.println("Clicked on Accept button");
           }
             }catch (Exception e)
 
         {
-               Reporter.log("User has already accepted the Terms & Conditions");
+               System.out.println("User has already accepted the Terms & Conditions");
         }   
        
 
@@ -992,31 +1050,31 @@ public class HPECommonFunctions extends HPEOperations
 		
 		public static void ClickAccept_iOS() throws Exception
 		{
-			
-			
 		   try
 		   {
-       
-			   
+			   /*
+		     WebElement Accept; 
+	         WebDriverWait wait = new WebDriverWait(nativedriver, 20);
+	         //SearchResultiphone= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(iOS_Objects.getProperty("SearchResultiPhone"))));
+	         Accept= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Android_Objects.getProperty("Accept"))));
+	         Accept.click();
+	         Thread.sleep(10000);	         
+	         System.out.println("Clicked on Accept button");
+	         */
+	         
 			 Thread.sleep(5000);
 	         WebElement Accept = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
 	         Thread.sleep(2000);
-	         if(Accept.isDisplayed())
+	         if (!Accept.isDisplayed())
 	         {
 	         Accept.click();
 	         Thread.sleep(5000);	         
-	         Reporter.log("Clicked on Accept button");
+	         System.out.println("Clicked on Accept button");
 	         }
 		    }catch (Exception e)
 		{
-			Reporter.log("User has already accepted the Terms & Conditions");
+			System.out.println("User has already accepted the Terms & Conditions");
 		}   
-		
-			/*
-			device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("538,1228")));
-			Reporter.log("Clicked on Accept");
-		    Thread.sleep(10000); 
-			*/
 		
 		}	
 	
@@ -1027,7 +1085,7 @@ public static void ClickMenuBar(String imagePath) throws Exception
 {
 	/*
 	device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("51,87")));
-	Reporter.log("Clicked on Menu bar");
+	System.out.println("Clicked on Menu bar");
     Thread.sleep(10000); 
     */
 	try
@@ -1037,7 +1095,6 @@ public static void ClickMenuBar(String imagePath) throws Exception
 				MenuBar.click();
 				testLog.info("\n Image found is : " + imagePath);
 				testLog.info("Clicked on menu bar");
-				Reporter.log("Clicked on menu bar");
 				Thread.sleep(5000); 
 			} catch (Exception e) {
 				testLog.info("\nImage not present : " + imagePath);	
@@ -1055,7 +1112,7 @@ public static void ClickSignOut_iOS(String imagePath) throws Exception
 {
 	/*
 	device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("51,87")));
-	Reporter.log("Clicked on Menu bar");
+	System.out.println("Clicked on Menu bar");
   Thread.sleep(10000); 
   */
 	try
@@ -1065,7 +1122,6 @@ public static void ClickSignOut_iOS(String imagePath) throws Exception
 				SignOut.click();
 				testLog.info("\n Image found is : " + imagePath);
 				testLog.info("Clicked on Sign out");
-				Reporter.log("Clicked on Sign out");
 			} catch (Exception e) {
 				testLog.info("\nImage not present : " + imagePath);	
 				testLog.info("Sign out button is not found");
@@ -1085,12 +1141,12 @@ public static void ClickSignOut_iOS() throws Exception
 			WebElement Signout = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignOut")));
 			Thread.sleep(5000);
 			Signout.click();
-			Reporter.log("Clicked on Signout button");
+			System.out.println("Clicked on Signout button");
 			
 		}catch (Exception e1)
 		{
 			
-			Reporter.log("Sign Out button is not Present");				
+			System.out.println("Sign Out button is not Present");				
 			CaptureScreenshot("TC_Fail_");	
 			Close_App_HPE();
             Thread.sleep(2000);
@@ -1112,7 +1168,7 @@ public static void ClickSignOut2_iOS() throws Exception
 catch (Exception e1)
 {
 	
-	Reporter.log("Sign Out button is not Present");				
+	System.out.println("Sign Out button is not Present");				
 	CaptureScreenshot("TC_Fail_");	
 	Close_App_HPE();
 	Thread.sleep(2000);
@@ -1136,7 +1192,7 @@ public static void ClickSignOut2_AN() throws Exception
                   ClickSignOut_AN("C://HPE//FunctionalTesting//Images//SignOut_Galaxy"+".png");
            } else if (Device_Model.contains("Galaxy S7"))
            {
-                  ClickSignOut_AN("C://HPE//FunctionalTesting//Images//SignOut_Galaxy"+".png");
+                  ClickSignOut_AN("C://HPE//FunctionalTesting//Images//SignOut_GalaxyS7"+".png");
            }
            
     
@@ -1145,7 +1201,7 @@ public static void ClickSignOut2_AN() throws Exception
 catch (Exception e1)
 {
 	
-	Reporter.log("Sign Out button is not Present");				
+	System.out.println("Sign Out button is not Present");				
 	CaptureScreenshot("TC_Fail_");	
 	Close_App_HPE();
 	Thread.sleep(2000);
@@ -1167,7 +1223,7 @@ public static void ClickSignOut1_iOS() throws Exception
 catch (Exception e1)
 {
 	
-	Reporter.log("Sign Out button is not Present");				
+	System.out.println("Sign Out button is not Present");				
 	CaptureScreenshot("TC_Fail_");	
 	Close_App_HPE();
 	Thread.sleep(2000);
@@ -1196,7 +1252,7 @@ public static void ClickSignOut1_AN() throws Exception
 catch (Exception e1)
 {
 	
-	Reporter.log("Sign Out button is not Present");				
+	System.out.println("Sign Out button is not Present");				
 	CaptureScreenshot("TC_Fail_");	
 	Close_App_HPE();
 	Thread.sleep(2000);
@@ -1217,10 +1273,8 @@ public static void ClickSignOut_AN(String imagePath) throws Exception
 		WebElement Cancel = visualdriver.findElement(ByMobile.image(imagePath));					
 		testLog.info("\n Image found is : " + imagePath);
 		testLog.info("Sign Out Menu option is Present");
-		Reporter.log("Sign Out Menu option is Present");
 		Cancel.click();
 		testLog.info("Clicked on Sign Out");
-		Reporter.log("Clicked on Sign Out");
 	} catch (Exception e) {
 		testLog.info("\nImage not present : " + imagePath);	
 		testLog.info("Sign Out Menu option is not Present"); 
@@ -1272,13 +1326,13 @@ public static void ClickSignOut1() throws Exception
 					{
 						
 						Preferences.click();
-						Reporter.log("CLicked on Preferences");
+						System.out.println("CLicked on Preferences");
 						Thread.sleep(10000);
 					}
 					}
 					catch(Exception e)
 					{
-						Reporter.log("Preferences tab is not Present");				
+						System.out.println("Preferences tab is not Present");				
 						CaptureScreenshot("TC_Fail_");				
 						ClickSignOut1();
 						Close_App_HPE();
@@ -1290,14 +1344,18 @@ public static void ClickSignOut1() throws Exception
 				// Method to click on Preference menu option in Android
                 public static void ClickPreference_AN(String imagePath) throws Exception
                 {
+                	Thread.sleep(3000);
                 try
                        {
                 WebElement PrefOption = visualdriver.findElement(ByMobile.image(imagePath));
+                if(PrefOption.isDisplayed());           
+                {
                 PrefOption .click();
                 testLog.info("\n Image found is : " + imagePath);
                 testLog.info("Clicked on Preference Option");
-                Reporter.log("Clicked on Preference Option");
-                       } catch (Exception e) 
+                Thread.sleep(3000);
+                 } 
+                     }catch (Exception e) 
                        {
                 testLog.info("\nImage not present : " + imagePath);    
                 testLog.info("Preference menu option not found");
@@ -1359,9 +1417,12 @@ public static void ClickSignOut1() throws Exception
                  {
                           ClickPreference_AN("C://HPE//FunctionalTesting//Images//Preferences"+".png");
                  
-                }else if(Device_Model.contains("Galaxy"))
+                }else if(Device_Model.contains("Galaxy S6"))
                 {
                     ClickPreference_AN("C://HPE//FunctionalTesting//Images//Preferences_Galaxy"+".png");
+                }else if(Device_Model.contains("Galaxy S7"))
+                {
+                	 ClickPreference_AN("C://HPE//FunctionalTesting//Images//Preferences_GalaxyS7"+".png");
                 }
 			}
 
@@ -1402,7 +1463,7 @@ public static void ClickSignOut1() throws Exception
 
                        {
 
-                              Reporter.log("FlagIcon is Present");
+                              System.out.println("FlagIcon is Present");
                               Thread.sleep(2000);                      
 
                        }
@@ -1411,7 +1472,7 @@ public static void ClickSignOut1() throws Exception
 
                        {
 
-                              Reporter.log("FlagIcon is not Present");                    
+                              System.out.println("FlagIcon is not Present");                    
                               CaptureScreenshot("TC_Fail_");                       
                               //ClickSignOut();
                               Close_App_HPE();
@@ -1428,6 +1489,7 @@ public static void ClickSignOut1() throws Exception
                 public static void VerifyFlagIcon_AN(String imagePath) throws Exception
                 {
                 try
+
 
                       {
                 nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -1454,13 +1516,13 @@ public static void ClickSignOut1() throws Exception
 			WebElement FlagIcon = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("FlagIcon")));
 			if(!FlagIcon.isDisplayed())
 			{
-				Reporter.log("FlagIcon is Present");
+				System.out.println("FlagIcon is Present");
 				Thread.sleep(2000);				
 			}
 			}
 			catch(Exception e)
 			{
-				Reporter.log("FlagIcon is not Present");				
+				System.out.println("FlagIcon is not Present");				
 				CaptureScreenshot("TC_Fail_");				
 				//ClickSignOut();
 				Close_App_HPE();
@@ -1475,7 +1537,7 @@ public static void ClickSignOut1() throws Exception
 			
 			
 			device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("424,855")));
-			Reporter.log("Clicked on Watch List Arrow");
+			System.out.println("Clicked on Watch List Arrow");
 		    Thread.sleep(10000); 
 		    
 		    /*
@@ -1486,14 +1548,14 @@ public static void ClickSignOut1() throws Exception
 			{	
 				Thread.sleep(2000);	
 				WatchList.click();
-				Reporter.log("Clicked on Watchlist");
+				System.out.println("Clicked on Watchlist");
 				Thread.sleep(5000);		
 				//nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			}
 			}
 			catch(Exception e)
 			{
-				Reporter.log("WatchlistArrow is not Present");				
+				System.out.println("WatchlistArrow is not Present");				
 				CaptureScreenshot("TC_Fail_");				
 				//ClickSignOut();
 				Close_App_HPE();
@@ -1511,7 +1573,7 @@ public static void ClickSignOut1() throws Exception
         	
         	//device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("521,1132")));
         	device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("631,1017")));
-        	Reporter.log("Clicked on Watch List Arrow");
+        	System.out.println("Clicked on Watch List Arrow");
 		    Thread.sleep(10000); 
 		    
         	
@@ -1524,14 +1586,14 @@ public static void ClickSignOut1() throws Exception
                {      
                      Thread.sleep(2000);  
                      WatchList.click();
-                     Reporter.log("Clicked on Watchlist");
+                     System.out.println("Clicked on Watchlist");
                      Thread.sleep(5000);        
                     
                }
                }
                catch(Exception e)
                {
-                     Reporter.log("WatchlistArrow is not Present");                        
+                     System.out.println("WatchlistArrow is not Present");                        
                      CaptureScreenshot("TC_Fail_");                         
                      //ClickSignOut();
                      Close_App_HPE();
@@ -1558,7 +1620,7 @@ public static void ClickSignOut1() throws Exception
 		
 		catch (Exception e)
 		{
-			Reporter.log("All the orders are removed");
+			System.out.println("All the orders are removed");
 			break;
 		}
 							
@@ -1580,7 +1642,7 @@ public static void ClickSignOut1() throws Exception
 			    	}else if(Device_Model.contains("Galaxy"))
                     {
                         ClickGreenFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_Green_Galaxy" +".png");
-                 } else if(Device_Model.equals("iPhone-6S"))
+                 }else if(Device_Model.equals("iPhone-7s"))
 			    	{
 			    		ClickGreenFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_Green" +".png");
 			    	}
@@ -1593,7 +1655,7 @@ public static void ClickSignOut1() throws Exception
         {
                                  
              device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("319,1038")));
-                   Reporter.log("Clicked on  order in Search Page");
+                   System.out.println("Clicked on  order in Search Page");
                    Thread.sleep(10000); 
                                                                                                             
                    }
@@ -1608,13 +1670,14 @@ public static void ClickSignOut1() throws Exception
 			    	}else if(Device_Model.contains("Pixel"))
 			    	{
 			    		ClickGreenFlag1("C://HPE//FunctionalTesting//Images//Flag_Icon_Green_AN" +".png");
-			    	}else if(Device_Model.contains("Galaxy"))
-                        
+			    	}else if(Device_Model.contains("Galaxy S6"))
+			    	{                        
                         ClickGreenFlag1("C://HPE//FunctionalTesting//Images//Flag_Icon_Green_Galaxy" +".png");
+			      	} else if(Device_Model.contains("Galaxy S7"))
+			      	{
+			      	  ClickGreenFlag1("C://HPE//FunctionalTesting//Images//Flag_Icon_Green_GalaxyS7" +".png");
 			      	}
-
-			    	          
-			      
+			      }
 	    
 	    
 	  //Method to click on cancel button 
@@ -1669,7 +1732,7 @@ public static void ClickSignOut1() throws Exception
 					}
 					}catch(Exception e1)
 					{
-						Reporter.log("No orders are flagged in Watchlist ");
+						System.out.println("No orders are flagged in Watchlist ");
 					}
 				
 				}
@@ -1677,7 +1740,7 @@ public static void ClickSignOut1() throws Exception
 				//Method to click on white flag icon 
 			    public static void ClickWhiteFlag() throws Exception
 					      {
-					    	if(Device_Model.equals("iPhone-7"))
+					    	if(Device_Model.contains("iPhone"))
 					    	{
 					    		ClickWhiteFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_White" +".png");
 					    	}else if(Device_Model.equals("iPhone-5S"))
@@ -1686,13 +1749,13 @@ public static void ClickSignOut1() throws Exception
 					    	}else if(Device_Model.contains("Pixel"))
 					    	{
 					    		ClickWhiteFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_White_AN" +".png");
-					    	}else if(Device_Model.contains("Galaxy"))
+					    	}else if(Device_Model.contains("Galaxy S6"))
                             {
                                 ClickWhiteFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_White_Galaxy" +".png");
-                         } else if(Device_Model.equals("iPhone-6S"))
-					    	{
-					    		ClickWhiteFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_White" +".png");
-					    	}
+                         } else if(Device_Model.contains("Galaxy S7"))
+                         {
+                             ClickWhiteFlag("C://HPE//FunctionalTesting//Images//Flag_Icon_White_GalaxyS7" +".png");
+                      }
 
 					    	          
 					      }
@@ -1709,13 +1772,16 @@ public static void ClickSignOut1() throws Exception
 					    	}else if(Device_Model.contains("Pixel"))
 					    	{
 					    		ClickFilterIcon("C://HPE//FunctionalTesting//Images//FilterIcon_AN" +".png");
-					    	}else if(Device_Model.contains("Galaxy"))
+					    	}else if(Device_Model.contains("Galaxy S6"))
                             {
                                 ClickFilterIcon("C://HPE//FunctionalTesting//Images//FilterIcon_Galaxy" +".png");
-                         } else if(Device_Model.equals("iPhone-6S"))
-					    	{
-					    		ClickFilterIcon("C://HPE//FunctionalTesting//Images//FilterIcon" +".png");
-					    	}
+                         } else if(Device_Model.contains("Galaxy S7"))
+                         {
+                             ClickFilterIcon("C://HPE//FunctionalTesting//Images//FilterIcon_GalaxyS7" +".png");
+                      }else if(Device_Model.equals("iPhone-6S"))
+				    	{
+				    		ClickFilterIcon("C://HPE//FunctionalTesting//Images//FilterIcon" +".png");
+				    	}
 
 					    	          
 					      }
@@ -1740,19 +1806,19 @@ public static void ClickSignOut1() throws Exception
 			{
 			
 			WebElement WatchFlagIcon = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchFlagIcon")));
-			if(WatchFlagIcon.isDisplayed())
+			if(!WatchFlagIcon.isDisplayed())
 			{
-				Reporter.log("Watchlist FlagIcon is Present");
+				System.out.println("Watchlist FlagIcon is Present");
 				Thread.sleep(2000);
 				WatchFlagIcon.click();
-				Reporter.log("Clicked on Watchlist Flag Icon");
+				System.out.println("Clicked on Watchlist Flag Icon");
 				Thread.sleep(10000);
 				
 			}
 			}
 			catch(Exception e)
 			{
-				Reporter.log("WatchFlagIcon is not Present");				
+				System.out.println("WatchFlagIcon is not Present");				
 				CaptureScreenshot("TC_Fail_");				
 				//ClickSignOut();
 				Close_App_HPE();
@@ -1767,7 +1833,7 @@ public static void ClickSignOut1() throws Exception
 		{	
 		
 			device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("482,910")));
-			Reporter.log("Clicked on Remove button");
+			System.out.println("Clicked on Remove button");
 		    Thread.sleep(10000); 
 		
 		} 
@@ -1777,7 +1843,7 @@ public static void ClickSignOut1() throws Exception
 		{	
 		
 			device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("719,1206")));
-			Reporter.log("Clicked on Remove button");
+			System.out.println("Clicked on Remove button");
 		    Thread.sleep(10000); 		    
 			
 		
@@ -1803,7 +1869,7 @@ public static void ClickSignOut1() throws Exception
 		{	
 		/*
 			device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("482,910")));
-			Reporter.log("Clicked on Remove button");
+			System.out.println("Clicked on Remove button");
 		    Thread.sleep(10000); 		    
 			*/
 			
@@ -1904,7 +1970,7 @@ public static void ClickSignOut1() throws Exception
 
                 {
                 	ClickMenuBar("C://HPE//FunctionalTesting//Images//MenuBar_Pixel"+".png");
-                } else if(Device_Model.equals("iPhone-6S"))
+                }else if(Device_Model.equals("iPhone-6S"))
                 { 
                 	ClickMenuBar("C://HPE//FunctionalTesting//Images//MenuBar"+".png");
                 }
@@ -1917,16 +1983,15 @@ public static void ClickSignOut1() throws Exception
 				try
 				{
 				WebElement MenuSlide = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Home")));
-				if(MenuSlide.isDisplayed())
+				if(!MenuSlide.isDisplayed())
 				{				
-					Reporter.log("User is able to see a menu slide from the left");
-					Reporter.log("User is able to see a menu slide from the left");
+					System.out.println("User is able to see a menu slide from the left");
 					Thread.sleep(5000);				
 				}
 				}
 				catch(Exception e)
 				{
-					Reporter.log("User is not able to see a menu slide from the left");				
+					System.out.println("User is not able to see a menu slide from the left");				
 					CaptureScreenshot("TC_Fail_");				
 					//ClickSignOut();
 					Close_App_HPE();
@@ -1941,9 +2006,9 @@ public static void ClickSignOut1() throws Exception
 	                     Thread.sleep(3000);
 	                  if(nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignIn"))).isDisplayed())
 	                     {
-	                           Reporter.log("App is connected to 4g or wifi");
+	                           System.out.println("App is connected to 4g or wifi");
 	                     }else {
-	                           Reporter.log("App is not connected to 4g or wifi");
+	                           System.out.println("App is not connected to 4g or wifi");
 	                     }
      
 			
@@ -1984,13 +2049,13 @@ public static void ClickSignOut1() throws Exception
                            Thread.sleep(1000);
                            if (NoSearchAlert.isDisplayed())
                            { 
-                                 Reporter.log(" No Search results found alert is displayed");
+                                 System.out.println(" No Search results found alert is displayed");
                                  Thread.sleep(1000);
                                                              }
                     }
                     catch(Exception e)
                          {
-                               Reporter.log("No Search results found alert is displayed");                         
+                               System.out.println("No Search results found alert is displayed");                         
                                CaptureScreenshot("TC_Fail_");           
                                ClickSignOut();
                                Close_App_HPE();
@@ -2013,7 +2078,6 @@ public static void ClickSignOut1() throws Exception
                   	} catch (Exception e) {
                   		testLog.info("\nElement not found : " + linktext);
                   		testLog.info("\nSearch results found");
-                  		Reporter.log("No Search results found");
                   		
                   	}
                   }
@@ -2026,7 +2090,6 @@ public static void ClickSignOut1() throws Exception
                   		Text.findElement(By.linkText(linktext));
                   		testLog.info("\n Element found is : " + linktext);
                   		testLog.info("No Search results found");
-                  		Reporter.log("No Search results found");
                   		Close_App_HPE();
                   		//softAssert.assertTrue(false);                  		
                   		status1 = 1;
@@ -2041,25 +2104,23 @@ public static void ClickSignOut1() throws Exception
                   		IMobileWebDriver Text = device.getVisualDriver();
                   		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
                   		Text.findElement(By.linkText(linktext));
-                  		testLog.info("\nElement not found : " + linktext);
-                  		testLog.info("\n'Invoice(s) Available from OSS' icon did not appear as expected");
-                  		Reporter.log("\n'Invoice(s) Available from OSS' icon did not appear as expected");
-                  		/*ClickSignOut();
+                  		testLog.info("\nElement found : " + linktext);
                   		Close_App_HPE();
-                  		Assert.fail("'Invoice(s) Available from OSS' icon appeared");*/
+                  		Assert.fail("'Invoice(s) Available from OSS' icon appeared");
+                  		status1 = 0;          
+                  		
                   	} catch (Exception e) {
                   		
-                  		testLog.info("\n Element found is : " + linktext);
-                  		CaptureScreenshot("TC_Fail_"); 
+                  		testLog.info("\n Element not found is : " + linktext);                  		
                   		//ClickSignOut();
-                  		Close_App_HPE();
+                  		//Close_App_HPE();
                   		Thread.sleep(2000);
-                  		//testLog.info("\n'Invoice(s) Available from OSS' icon did not appear as expected");
-                  		Assert.fail("'Invoice(s) Available from OSS' icon appeared");
+                  		testLog.info("\n'Invoice(s) Available from OSS' icon did not appear as expected");
                   		status1 = 1;
                   		
                   	}
                   }
+        
                   
                   //Method to verify the text not found on any page (Checkpoint)
                   public static void Find_No_Text_Date(String linktext) throws Exception {
@@ -2079,7 +2140,6 @@ public static void ClickSignOut1() throws Exception
                   		//Close_App_HPE();
                   		Thread.sleep(2000);
                   		testLog.info("\n Shipping date did not appear as expected");
-                  		Reporter.log("\n Shipping date did not appear as expected");
                   		status1 = 1;
                   		
                   	}
@@ -2099,14 +2159,14 @@ public static void ClickSignOut1() throws Exception
 	                    		 Thread.sleep(1000);
 	                    		 if (SearchPage.isDisplayed())
 	                    		 {
-	                    			 Reporter.log("Search Page is displayed");
+	                    			 System.out.println("Search Page is displayed");
 	                    			 Thread.sleep(5000);
 	                    		 }
 	                           }
 	                     
 	                     catch(Exception e)
 	                     {
-	                           Reporter.log("Search Page is not displayed");                         
+	                           System.out.println("Search Page is not displayed");                         
 	                           CaptureScreenshot("TC_Fail_");           
 	                           Close_App_HPE();
 	                           Thread.sleep(2000);
@@ -2124,16 +2184,16 @@ public static void ClickSignOut1() throws Exception
 	                                                              
 	                    		 WebElement SearchPage = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SearchPageTitle")));
 	                    		 Thread.sleep(1000);
-	                    		 if (SearchPage.isDisplayed())
+	                    		 if (!SearchPage.isDisplayed())
 	                    		 {
-	                    			 Reporter.log("Search Page is displayed");
+	                    			 System.out.println("Search Page is displayed");
 	                    			 Thread.sleep(5000);
 	                    		 }
 	                           }
 	                     
 	                     catch(Exception e)
 	                     {
-	                           Reporter.log("Search Page is not displayed");                         
+	                           System.out.println("Search Page is not displayed");                         
 	                           CaptureScreenshot("TC_Fail_");           
 	                           Close_App_HPE();
 	                           Thread.sleep(2000);
@@ -2154,11 +2214,11 @@ public static void ClickSignOut1() throws Exception
 	                       WebElement  Search_Result= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Android_Objects.getProperty("SearchResult"))));
 	                       Search_Result.click();
 	                       Thread.sleep(10000);              
-	                       Reporter.log("Clicked on Search Result");
+	                       System.out.println("Clicked on Search Result");
 	                       
 	                         }catch (Exception e)
 	                     {
-	                           Reporter.log("Search Result not clicked");
+	                           System.out.println("Search Result not clicked");
 	                           CaptureScreenshot("TC_Fail_");           
 	                           ClickSignOut();
 	                           Assert.fail("Search Result not clicked");
@@ -2179,13 +2239,13 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     try{
                							CheckServiceError("C://HPE//FunctionalTesting//Images//ServiceErrorOK" +".png");
                							}catch (Exception e1)
                						{
-               							Reporter.log("Service Error did not appear");
+               							System.out.println("Service Error did not appear");
                						}
                                        
                                        HPECommonFunctions.Find_Text(config.getProperty("OrderDetails_PageTitle"));
@@ -2197,7 +2257,35 @@ public static void ClickSignOut1() throws Exception
                                    
                                       }
                                                                                                                            
-                               
+    // Method to click on search result in Galaxy S7
+                         
+                         public static void ClickOnSearchResult_GalaxyS7() throws Exception
+                         {
+                                      try{ 
+                                    	  
+                        	 		Find_Text_NoResults(config.getProperty("NoResults"));
+                        	 		                      	 		
+                                      }
+                                      catch(Exception e)
+                                      {
+                                    device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("568,1150")));
+                                    System.out.println("Clicked on any order in Search Page");
+                                    Thread.sleep(10000); 
+                                    try{
+               							CheckServiceError("C://HPE//FunctionalTesting//Images//ServiceErrorOK" +".png");
+               							}catch (Exception e1)
+               						{
+               							System.out.println("Service Error did not appear");
+               						}
+                                       
+                                       HPECommonFunctions.Find_Text(config.getProperty("OrderDetails_PageTitle"));
+                                       HPECommonFunctions.VerifyBackButton();
+                                       HPECommonFunctions.ClickSignOut();
+                                       HPECommonFunctions.Close_App_HPE();
+                                      
+                                         }
+                                   
+                                      }
 
 	                     // Method to click on search result
                          
@@ -2211,7 +2299,7 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     HPECommonFunctions.Find_No_Text(config.getProperty("Invoice"));                    
                                     HPECommonFunctions.ClickSignOut();
@@ -2234,7 +2322,7 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     HPECommonFunctions.VerifyDeliveredStatus("C://HPE//FunctionalTesting//Images//Delivered_symbol"+".png");
                                     HPECommonFunctions.Find_Text(config.getProperty("Invoice"));          
@@ -2260,7 +2348,7 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     HPECommonFunctions.VerifyDeliveredStatus("C://HPE//FunctionalTesting//Images//Delivered_symbol"+".png");
                                     HPECommonFunctions.Find_Text(config.getProperty("Invoice"));          
@@ -2287,7 +2375,7 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     HPECommonFunctions.Find_No_Text(config.getProperty("DateShipped"));                    
                               	  	HPECommonFunctions.ClickSignOut();
@@ -2310,7 +2398,7 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     HPECommonFunctions.Find_No_Text_Date(config.getProperty("DateShipped"));                    
                               	  	HPECommonFunctions.ClickSignOut();
@@ -2334,7 +2422,7 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     HPECommonFunctions.Find_Text(config.getProperty("Invoice"));                    
                               	  	HPECommonFunctions.ClickSignOut();
@@ -2357,7 +2445,7 @@ public static void ClickSignOut1() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     HPECommonFunctions.Find_Text(config.getProperty("Invoice"));                    
                               	    //HPECommonFunctions.ClickSignOut();
@@ -2375,15 +2463,15 @@ public static void ClickSignOut1() throws Exception
 
                                  Thread.sleep(5000);
                                  WebElement Invoice = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Invoice Available")));
-                                 if(Invoice.isDisplayed())
+                                 if(!Invoice.isDisplayed())
                                  {
-                                	 Reporter.log("Invoice is available from OSS");
+                                	 System.out.println("Invoice is available from OSS");
                             
                                  }
                                        }
                                        catch(Exception e)
                                        {
-                                              Reporter.log("Invoice is not available from OSS");                        
+                                              System.out.println("Invoice is not available from OSS");                        
                                               CaptureScreenshot("TC_Fail_");                         
                                               ClickSignOut1();
                                               Close_App_HPE();
@@ -2402,13 +2490,13 @@ public static void ClickSignOut1() throws Exception
                                                                   
                          WebElement UNElement = nativedriver.findElement(By.xpath(Android_Objects.getProperty("OrderDetailTitle")));
                          Thread.sleep(3000);
-                         Reporter.log("Order Details Page displayed");
+                         System.out.println("Order Details Page displayed");
                          Thread.sleep(5000);
                          }
                          
                          catch(Exception e)
                          {
-                               Reporter.log("Order Details Page not displayed");                         
+                               System.out.println("Order Details Page not displayed");                         
                                CaptureScreenshot("TC_Fail_");           
                                //ClickSignOut();
                                Close_App_HPE();
@@ -2441,15 +2529,15 @@ public static void ClickSignOut1() throws Exception
                                  if(VersionNumber.isDisplayed())
                              {
                                  VersionNo = VersionNumber.getAttribute("name");
-                                Reporter.log("Version Number is Present & below is the Version Number");
-                                Reporter.log(VersionNo);
+                                System.out.println("Version Number is Present & below is the Version Number");
+                                System.out.println(VersionNo);
                                 Thread.sleep(2000); 
                                 
                              }
                                            }
                                            catch(Exception e)
                                            {
-                                                  Reporter.log("Version Number is not Present");                        
+                                                  System.out.println("Version Number is not Present");                        
                                                   CaptureScreenshot("TC_Fail_");                         
                                                   Close_App_HPE();
                                                   Thread.sleep(2000);
@@ -2468,11 +2556,11 @@ public static void ClickSignOut1() throws Exception
                  {
                          Thread.sleep(5000);
                          WebElement VersionNumber = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("VersionNumber")));
-                         if(VersionNumber.isDisplayed())
+                         if(!VersionNumber.isDisplayed())
                          {
                         	 VersionNo = VersionNumber.getAttribute("name");
-                        	 Reporter.log("Version Number is Present & below is the Version Number");
-                        	 Reporter.log(VersionNo);
+                        	 System.out.println("Version Number is Present & below is the Version Number");
+                        	 System.out.println(VersionNo);
                         	 Thread.sleep(2000); 
                         	 
                     
@@ -2480,7 +2568,7 @@ public static void ClickSignOut1() throws Exception
                                }
                                catch(Exception e)
                                {
-                                      Reporter.log("Version Number is not Present");                        
+                                      System.out.println("Version Number is not Present");                        
                                       CaptureScreenshot("TC_Fail_");                         
                                       //ClickSignOut1();
                                       Close_App_HPE();
@@ -2501,13 +2589,13 @@ public static void ClickSignOut1() throws Exception
                                WebElement Get_Support = nativedriver.findElement(By.xpath(Android_Objects.getProperty("GetSupportMenuOption")));
                                if(Get_Support.isDisplayed())
                                {
-                                      Reporter.log("Get Support menu option displayed");
+                                      System.out.println("Get Support menu option displayed");
                                       Thread.sleep(10000);
                                }
                                }
                                catch(Exception e)
                                {
-                                      Reporter.log("Get Support Menu option is not Present");                        
+                                      System.out.println("Get Support Menu option is not Present");                        
                                       CaptureScreenshot("TC_Fail_");                         
                                       //ClickSignOut();
                                       Close_App_HPE();
@@ -2525,17 +2613,17 @@ public static void ClickSignOut1() throws Exception
                                {
                                Thread.sleep(5000);
                                WebElement GetSupport = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("GetSupport")));
-                               if(GetSupport.isDisplayed())
+                               if(!GetSupport.isDisplayed())
                                {
                                       
                                       GetSupport.click();
-                                      Reporter.log("CLicked on Get Support");
+                                      System.out.println("CLicked on Get Support");
                                       Thread.sleep(10000);
                                }
                                }
                                catch(Exception e)
                                {
-                                      Reporter.log("Unbale to click on Get Support Menu option");                         
+                                      System.out.println("Unbale to click on Get Support Menu option");                         
                                       CaptureScreenshot("TC_Fail_");                         
                                       //ClickSignOut1();
                                       Close_App_HPE();
@@ -2555,13 +2643,13 @@ public static void ClickSignOut1() throws Exception
              //WebElement GetSupport = nativedriver.findElement(By.xpath(Android_Objects.getProperty("GetSupportPage")));
              //Thread.sleep(3000);
              Find_Text(config.getProperty("GetSupport_Button"));
-             Reporter.log("Get Support Page displayed");
+             System.out.println("Get Support Page displayed");
              Thread.sleep(5000);
              }
              
              catch(Exception e)
              {
-                   Reporter.log("Get Support Page not displayed");                         
+                   System.out.println("Get Support Page not displayed");                         
                    CaptureScreenshot("TC_Fail_");           
                    //ClickSignOut();
                    Close_App_HPE();
@@ -2607,19 +2695,25 @@ public static void ClickSignOut1() throws Exception
  			    	}else if(Device_Model.equals("iPhone-5S"))
  			    	{
  			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_iPhone5S" +".png");
+ 			    	}else if(Device_Model.equals("iPhone-5S"))
+ 			    	{
+ 			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_Tab" +".png");
  			    	}else if(Device_Model.contains("Pixel"))
                     {
  			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_AN"+".png");
-                    }else if(Device_Model.contains("Galaxy"))
+                    }else if(Device_Model.contains("Galaxy S6"))
                     {
                     	VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_Galaxy" +".png");
+                    } else if(Device_Model.contains("Galaxy S7"))
+
+                    {
+                    	VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton_GalaxyS7" +".png");
                     }else if(Device_Model.equals("iPhone-6S"))
  			    	{
  			    		VerifyBackButton("C://HPE//FunctionalTesting//Images//BackButton" +".png");
  			    	}
-
- 			    				    	          
  			      }
+ 	    
         //Method to click on Terms and Conditions  button
         public static void ClickTnC() throws Exception
      {
@@ -2680,7 +2774,7 @@ public static void ClickSignOut1() throws Exception
                  } else if(Device_Model.contains("Galaxy S7"))
                  {
                         ClickBackButton("C://HPE//FunctionalTesting//Images//BackButton_Galaxy" +".png");
-                 } else if(Device_Model.equals("iPhone-6S"))
+                 }else if(Device_Model.equals("iPhone-6S"))
 			    	{
 			    		ClickBackButton("C://HPE//FunctionalTesting//Images//BackButton" +".png");
 			    	}
@@ -2742,7 +2836,7 @@ public static void ClickSignOut1() throws Exception
 
 		    	{
 		    		ClickOnSearchIcon_AN("C://HPE//FunctionalTesting//Images//SearchIcon"+".png");
-		    	} else if(Device_Model.equals("iPhone-6S"))
+		    	}else if(Device_Model.equals("iPhone-6S"))
 		    	{
 		    		//ClickOnSearchIcon_iOS();
 		    		ClickSearchIcon_iOS("C://HPE//FunctionalTesting//Images//SearchIcon_iOS" +".png");
@@ -2811,19 +2905,25 @@ public static void ClickApply() throws Exception
                  if(Device_Model.contains("iPhone"))
                  {
                       ClickApply_iOS();
-                 }else
+                 }else if(Device_Model.contains("Pixel"))
              
            		 {	
         	   		   ClickApply_AN("C://HPE//FunctionalTesting//Images//ApplyFilter"+".png");
-           		 }
-         }
+           		 } else if(Device_Model.contains("Galaxy S7"))
+                 {
+           			ClickApply_AN("C://HPE//FunctionalTesting//Images//ApplyFilter_GalaxyS7" +".png");
+                 }if(Device_Model.contains("Galaxy S6"))
+                 {
+                	 ClickApply_AN("C://HPE//FunctionalTesting//Images//ApplyFilter_Galaxy" +".png");
+                 }
+          			}
 
 			//Method to Click on Search icon 
 			public static void ClickOnSearchIcon_iOS() throws Exception
 			{	
 			
 				device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("702,428")));
-				Reporter.log("Clicked on Search icon");
+				System.out.println("Clicked on Search icon");
 			    Thread.sleep(10000); 
 			    
 			
@@ -2835,16 +2935,16 @@ public static void ClickApply() throws Exception
 				try
 				{			
 				WebElement Alerts = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Alerts")));
-				if(Alerts.isDisplayed())
+				if(!Alerts.isDisplayed())
 				{				
 					Alerts.click();
-					Reporter.log("Clicked on Alerts");
+					System.out.println("Clicked on Alerts");
 					Thread.sleep(5000);				
 				}
 				}
 				catch(Exception e)
 				{
-					Reporter.log("Alerts is not Present");				
+					System.out.println("Alerts is not Present");				
 					CaptureScreenshot("TC_Fail_");				
 					//ClickSignOut();
 					Close_App_HPE();
@@ -2893,7 +2993,11 @@ public static void ClickApply() throws Exception
                                         
                                   {
                                      ClickAlerts_AN("C://HPE//FunctionalTesting//Images//Alerts_Galaxy" +".png");
-                                  }
+                                  } else if(Device_Model.contains("Galaxy S7"))
+                                      
+                                {
+                                   ClickAlerts_AN("C://HPE//FunctionalTesting//Images//Alerts_GalaxyS7" +".png");
+                                }
                                       
                            }
                          
@@ -2910,13 +3014,13 @@ public static void ClickApply() throws Exception
                                       catch(Exception e)
                                       {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("319,1038")));
-                                    Reporter.log("Clicked on any order in Search Page");
+                                    System.out.println("Clicked on any order in Search Page");
                                     Thread.sleep(10000); 
                                     try{
                                                               CheckServiceError("C://HPE//FunctionalTesting//Images//ServiceErrorOK" +".png");
                                                               }catch (Exception e1)
                                                        {
-                                                              Reporter.log("Service Error did not appear");
+                                                              System.out.println("Service Error did not appear");
                                                        }
                                        
                                        HPECommonFunctions.Find_Text(config.getProperty("OrderDetails_PageTitle"));
@@ -2928,7 +3032,6 @@ public static void ClickApply() throws Exception
                                   
                                       }
 
-
                        //Method to click on Recent Search in Watchlist
                          public static void ClickRecentSearches() throws Exception
                            {
@@ -2939,10 +3042,13 @@ public static void ClickApply() throws Exception
                                 
                             	{
                                          ClickRecentSearches_AN("C://HPE//FunctionalTesting//Images//Recent_Pixel1"+".png");
-                                  } else if(Device_Model.contains("Galaxy"))  
+                                  } else if(Device_Model.contains("Galaxy S6"))  
                                   {
                                          ClickRecentSearches_AN("C://HPE//FunctionalTesting//Images//Recent_Galaxy"+".png");
-                                  }
+                                  } else if(Device_Model.contains("Galaxy S7"))  
+                                  {
+                                      ClickRecentSearches_AN("C://HPE//FunctionalTesting//Images//Recent_GalaxyS7"+".png");
+                               }
                                             
                                  }
 
@@ -2954,16 +3060,16 @@ public static void ClickApply() throws Exception
 				try
 				{			
 				WebElement WatchList = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchList1")));
-				if(WatchList.isDisplayed())
+				if(!WatchList.isDisplayed())
 				{				
 					WatchList.click();
-					Reporter.log("Clicked on WatchList");
+					System.out.println("Clicked on WatchList");
 					Thread.sleep(5000);				
 				}
 				}
 				catch(Exception e)
 				{
-					Reporter.log("WatchList is not Present");				
+					System.out.println("WatchList is not Present");				
 					CaptureScreenshot("TC_Fail_");				
 					//ClickSignOut();
 					Close_App_HPE();
@@ -2984,14 +3090,19 @@ public static void ClickApply() throws Exception
                 { 
                 	//ClickWatchListOnToolbar_iOS();
                 	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar_iPhone5S"+".png");
+                }else if(Device_Model.equals("Pixel"))
+                {
+                	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar_Pixel"+".png");
+                } else if(Device_Model.equals("Galaxy S6"))
+                {
+                	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar_Galaxy"+".png");
+                }else if(Device_Model.equals("Galaxy S7"))
+                {
+                	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar_GalaxyS7"+".png");
                 }else if(Device_Model.equals("iPhone-6S"))
                 { 
                 	//ClickWatchListOnToolbar_iOS();
                 	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar"+".png");
-                }
-                else
-                {
-                	ClickWatchListonToolbar("C://HPE//FunctionalTesting//Images//WatchList_Toolbar_Pixel"+".png");
                 }
                 
          } 
@@ -3006,9 +3117,9 @@ public static void ClickApply() throws Exception
                		WebElement AlertsPage = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("AlertsPageTitle")));
                		 
                		Thread.sleep(1000);
-               		 if (AlertsPage.isDisplayed())
+               		 if (!AlertsPage.isDisplayed())
                		 {
-               			 Reporter.log("Alerts Page is displayed");
+               			 System.out.println("Alerts Page is displayed");
                			 //Thread.sleep(5000);
                			 nativedriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
                		 }
@@ -3016,7 +3127,7 @@ public static void ClickApply() throws Exception
                 
                 catch(Exception e)
                 {
-                      Reporter.log("Alerts Page is not displayed");                         
+                      System.out.println("Alerts Page is not displayed");                         
                       CaptureScreenshot("TC_Fail_");           
                       //ClickSignOut();
                       Close_App_HPE();
@@ -3030,33 +3141,11 @@ public static void ClickApply() throws Exception
                 //Method to verify the text on any page (Checkpoint)
                 public static void Find_Text(String linktext) throws Exception {
                 	try {
-                		Reporter.log("entering inside method");
-                		
-                		//visualdriver = device.getVisualDriver();
-                		
                 		IMobileWebDriver Text = device.getVisualDriver();
-                		//Reporter.log("entering inside method1");
-                		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                		//Reporter.log("entering inside method2");
+                		Thread.sleep(3000);               		
                 		Text.findElement(By.linkText(linktext));
-                		//Reporter.log("entering inside method3");
                 		testLog.info("\n Element found is : " + linktext);
-                		Reporter.log("Element found is : " + linktext);
-                		//Reporter.log("entering inside method4");
-                		
-                		/*
-                		visualdriver = device.getVisualDriver();
-                		Reporter.log("entering inside method1");
-                		visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-                		Reporter.log("entering inside method2");
-                		WebElement Text = visualdriver.findElement(By.linkText(linktext));
-                		Reporter.log("entering inside method3");
-                		if (Text.isDisplayed())
-                		{
-                			Reporter.log("entering inside is");
-                			testLog.info("\n Element found is : " + );
-                		}
-                		*/
+                		Thread.sleep(2000);
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
                 		CaptureScreenshot("TC_Fail_");	
@@ -3076,7 +3165,7 @@ public static void ClickApply() throws Exception
                 		Text.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                		
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);
-                		Reporter.log("\n Element found is : " + linktext);
+                		Thread.sleep(5000);
                 	
                 }
                 
@@ -3088,7 +3177,6 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);
                 		testLog.info("There are no orders tagged to Watchlist");
-                		Reporter.log("There are no orders tagged to Watchlist");
                 		Close_App_HPE();
                 	
                 }
@@ -3099,11 +3187,8 @@ public static void ClickApply() throws Exception
                     		VerifyConnectivity.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                     		// device.getVisualDriver().findElementByLinkText(xpath).toString().contains(object_name);
                     		VerifyConnectivity.findElement(By.linkText(linktext));
-                    		
                     		testLog.info("\n Element found is : " + linktext);
                     		testLog.info("\n User is connected to 4g or wifi");
-                    		Reporter.log("\n User is connected to 4g or wifi");
-                    		
                     	} catch (Exception e) {
                     		testLog.info("\nElement not found : " + linktext);
                     		testLog.info("\n User is not connected to 4g or wifi");
@@ -3142,17 +3227,17 @@ public static void ClickApply() throws Exception
      				try
      				{			
      				WebElement Search = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Search")));
-     				if(Search.isDisplayed())
+     				if(!Search.isDisplayed())
      				{				
      					Thread.sleep(5000);
      					Search.click();
-     					Reporter.log("Clicked on Search");
+     					System.out.println("Clicked on Search");
      					Thread.sleep(10000);				
      				}
      				}
      				catch(Exception e)
      				{
-     					Reporter.log("Search is not Present");				
+     					System.out.println("Search is not Present");				
      					CaptureScreenshot("TC_Fail_");				
      					//ClickSignOut();
      					Close_App_HPE();
@@ -3174,7 +3259,7 @@ public static void ClickApply() throws Exception
                              SearchIconWatch.click();
                              testLog.info("\n Image found is : " + imagePath);
                              testLog.info("Clicked on Search");
-                             Thread.sleep(2000);
+                             Thread.sleep(10000);
                        } catch (Exception e) {
                              testLog.info("\nImage not present : " + imagePath);    
                              testLog.info("Search not present");
@@ -3202,10 +3287,13 @@ public static void ClickApply() throws Exception
                                 
                                   {
                                           ClickSearch_AN("C://HPE//FunctionalTesting//Images//SearcWatchListPage_Pixel"+".png");
-                                  } else if(Device_Model.contains("Galaxy"))  
+                                  } else if(Device_Model.contains("Galaxy S6"))  
                                   {
                                      ClickSearch_AN("C://HPE//FunctionalTesting//Images//SearcWatchListPage_Galaxy"+".png");   
-                                   } else if(Device_Model.equals("iPhone-6S"))
+                                   } else if(Device_Model.contains("Galaxy S7"))  
+                                   {
+                                	   ClickSearch_AN("C://HPE//FunctionalTesting//Images//SearcWatchListPage_GalaxyS7"+".png");
+                                   }else if(Device_Model.equals("iPhone-6S"))
                                    {
                            	  		ClickSearch_AN("C://HPE//FunctionalTesting//Images//Footer_Search"+".png");
                              }
@@ -3250,18 +3338,18 @@ public static void ClickApply() throws Exception
      				{	
 						nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 						WebElement RecentSearch = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("RecentSearches")));
-						if(RecentSearch.isDisplayed())
+						if(!RecentSearch.isDisplayed())
      				{				
      					Thread.sleep(5000);
      					RecentSearch.click();
-     					Reporter.log("Clicked on Recent Searches");
+     					System.out.println("Clicked on Recent Searches");
      					Thread.sleep(10000);
      					//nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
      				}
      				}
      				catch(Exception e)
      				{
-     					Reporter.log("Recent Searches is not Present");				
+     					System.out.println("Recent Searches is not Present");				
      					CaptureScreenshot("TC_Fail_");				
      					//ClickSignOut();
      					Close_App_HPE();
@@ -3311,15 +3399,16 @@ public static void ClickApply() throws Exception
                                   {
                                       //  ClickWatchList_AN();
                                         ClickWatchList("C://HPE//FunctionalTesting//Images//WatchList_Arrow_AN"+".png");
-                                  } else if(Device_Model.contains("Galaxy"))
+                                  } else if(Device_Model.contains("Galaxy S6"))
                                   {
                                           ClickWatchList("C://HPE//FunctionalTesting//Images//WatchList_Arrow_Galaxy"+".png");
+                                   } else if(Device_Model.contains("Galaxy S7"))
+                                   {
+                                	   ClickWatchList("C://HPE//FunctionalTesting//Images//WatchList_Arrow_GalaxyS7"+".png");
                                    }else if(Device_Model.equals("iPhone-6S"))
                                    {
                                  	  ClickWatchList("C://HPE//FunctionalTesting//Images//WatchList_Arrow"+".png");
-                                   }
-
-                                            
+                                   }   
                                  }
 
 			
@@ -3332,7 +3421,7 @@ public static void ClickApply() throws Exception
             	}catch(Exception e)
             	{
                        device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("311,543")));
-                       Reporter.log("Clicked on any order on Page");
+                       System.out.println("Clicked on any order on Page");
                        Thread.sleep(10000); 
                        
                        	HPECommonFunctions.Find_Text(config.getProperty("OrderDetail_PageTitle"));    
@@ -3342,7 +3431,7 @@ public static void ClickApply() throws Exception
                     	HPECommonFunctions.Find_Text(config.getProperty("WatchList_PageTitle"));
                     	//HPECommonFunctions.ClickWatchListResult1();
                     	device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("311,543")));
-                        Reporter.log("Clicked on any order on Page");
+                        System.out.println("Clicked on any order on Page");
                         Thread.sleep(10000); 
                     	HPECommonFunctions.Find_Text(config.getProperty("OrderDetail_PageTitle")); 
                     	HPECommonFunctions.VerifyMenuBar();
@@ -3362,7 +3451,7 @@ public static void ClickApply() throws Exception
             	}catch(Exception e)
             	{
                        device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("243,545")));
-                       Reporter.log("Clicked on any order on Page");
+                       System.out.println("Clicked on any order on Page");
                        Thread.sleep(10000); 
                        
                        	HPECommonFunctions.Find_Text(config.getProperty("OrderDetail_PageTitle"));    
@@ -3370,7 +3459,11 @@ public static void ClickApply() throws Exception
                     	HPECommonFunctions.VerifyBackButton();
                     	HPECommonFunctions.ClickBackButton();
                     	HPECommonFunctions.Find_Text(config.getProperty("WatchList_PageTitle"));
-                    	
+                    	HPECommonFunctions.ClickWatchListResult1();     
+                    	HPECommonFunctions.Find_Text(config.getProperty("OrderDetail_PageTitle")); 
+                    	HPECommonFunctions.VerifyMenuBar();
+                    	HPECommonFunctions.ClickMenuBar();
+                    	HPECommonFunctions.VerifyMenuSlide();     
                     	HPECommonFunctions.ClickSignOut();
                     	HPECommonFunctions.Close_App_HPE();
             	}
@@ -3393,42 +3486,43 @@ public static void ClickApply() throws Exception
             
             
           //Method to click on the order in WatchList page	
-			public static void ClickWatchListResult2_iOS() throws Exception {
-					
-				try{
-					Find_Text_WatchListTips(config.getProperty("WatchListTips"));
-					
-				} catch (Exception e)
-							
-				{
-							device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("311,543")));
-							Reporter.log("Clicked on any order on iphone");
-							Thread.sleep(10000); 
-							
-								HPECommonFunctions.VerifyEndCustomerName();
-		                       HPECommonFunctions.Find_Text(config.getProperty("HPEOrderNumber"));
-		                       HPECommonFunctions.Find_Text(config.getProperty("PONumber"));
-		                       HPECommonFunctions.Find_Text(config.getProperty("OrderStatus"));
-		                       HPECommonFunctions.Find_Text_DateShipped(config.getProperty("DateShipped"));
-		                       HPECommonFunctions.Find_Text_Previously(config.getProperty("Previously"));
-		                       HPECommonFunctions.ClickBackButton();
-		                       Thread.sleep(5000); 
-		                       	device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("372,638")));
-								Reporter.log("Clicked on another order on iphone");
-								Thread.sleep(10000); 
-		                       //HPECommonFunctions.ClickWatchListResult2();
-		                       HPECommonFunctions.VerifyEndCustomerName();
-		                       HPECommonFunctions.Find_Text(config.getProperty("HPEOrderNumber"));
-		                       HPECommonFunctions.Find_Text(config.getProperty("PONumber"));
-		                       HPECommonFunctions.Find_Text(config.getProperty("OrderStatus"));
-		                       HPECommonFunctions.Find_Text_DateShipped(config.getProperty("DateShipped"));
-		                       HPECommonFunctions.Find_Text_Previously(config.getProperty("Previously")); 
-		                       HPECommonFunctions.ClickSignOut();
-		                       HPECommonFunctions.Close_App_HPE();
-									    				
-				}
-				
-			}
+            public static void ClickWatchListResult2_iOS() throws Exception {
+                
+                try{
+                      Find_Text_WatchListTips(config.getProperty("WatchListTips"));
+                      
+                } catch (Exception e)
+                                  
+                {
+                            device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("311,543")));
+                            System.out.println("Clicked on any order on iphone");
+                            Thread.sleep(10000); 
+                                  
+                            HPECommonFunctions.VerifyEndCustomerName();
+                           HPECommonFunctions.Find_Text(config.getProperty("HPEOrderNumber"));
+                           HPECommonFunctions.Find_Text(config.getProperty("PONumber"));
+                           HPECommonFunctions.Find_Text(config.getProperty("OrderStatus"));
+                           HPECommonFunctions.Find_Text_DateShipped(config.getProperty("DateShipped"));
+                           HPECommonFunctions.Find_Text_Previously(config.getProperty("Previously"));
+                           HPECommonFunctions.ClickBackButton();
+                           Thread.sleep(5000); 
+                            device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("372,638")));
+                            System.out.println("Clicked on another order on iphone");
+                            Thread.sleep(10000); 
+                           //HPECommonFunctions.ClickWatchListResult2();
+                           HPECommonFunctions.VerifyEndCustomerName();
+                           HPECommonFunctions.Find_Text(config.getProperty("HPEOrderNumber"));
+                           HPECommonFunctions.Find_Text(config.getProperty("PONumber"));
+                           HPECommonFunctions.Find_Text(config.getProperty("OrderStatus"));
+                           HPECommonFunctions.Find_Text_DateShipped(config.getProperty("DateShipped"));
+                           HPECommonFunctions.Find_Text_Previously(config.getProperty("Previously")); 
+                           HPECommonFunctions.ClickSignOut();
+                           HPECommonFunctions.Close_App_HPE();
+                                                                      
+                }
+                
+          }
+
 			
 			//Method to click on the order in WatchList page in Android
             public static void ClickWatchListResult2_AN() throws Exception 
@@ -3438,7 +3532,7 @@ public static void ClickApply() throws Exception
             	}catch(Exception e)
             	{
                        device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("243,545")));
-                       Reporter.log("Clicked on any order on Page");
+                       System.out.println("Clicked on any order on Page");
                        Thread.sleep(10000); 
                        
                        HPECommonFunctions.VerifyEndCustomerName();
@@ -3488,7 +3582,7 @@ public static void ClickApply() throws Exception
                       catch(Exception e)
                                  {
                                device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("514,865")));
-                               Reporter.log("Clicked on any order in Search Page");
+                               System.out.println("Clicked on any order in Search Page");
                                Thread.sleep(10000); 
                                
                                try{
@@ -3497,7 +3591,7 @@ public static void ClickApply() throws Exception
        							
        							}catch (Exception e1)
        						{
-       							Reporter.log("Service Error did not appear");
+       							System.out.println("Service Error did not appear");
        						}
                                
                                HPECommonFunctions.Find_Text(config.getProperty("OrderDetails_PageTitle"));
@@ -3518,17 +3612,17 @@ public static void ClickApply() throws Exception
                 {
                              try{ 
                            	  
-               	 		Find_Text_NoResults(config.getProperty("NoResults"));
+                            	 Find_Text_NoResults(config.getProperty("NoResults"));
                	 		                      	 		
                              }
                              catch(Exception e)
                              {
-                           device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("514,865")));
-                           Reporter.log("Clicked on any order in Search Page");
-                           Thread.sleep(10000); 
-                           HPECommonFunctions.Find_No_Text(config.getProperty("Invoice"));                    
-                          HPECommonFunctions.ClickSignOut();
-                          HPECommonFunctions.Close_App_HPE();
+                            	 device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("514,865")));
+                            	 System.out.println("Clicked on any order in Search Page");
+                            	 Thread.sleep(10000); 
+                            	 HPECommonFunctions.Find_No_Text(config.getProperty("Invoice"));                    
+                            	 HPECommonFunctions.ClickSignOut();
+                            	 HPECommonFunctions.Close_App_HPE();
                            
                              }
                                                                                                                   
@@ -3548,9 +3642,12 @@ public static void ClickApply() throws Exception
 			    	}else if(Device_Model.contains("iPad"))
 			    	{
 			    		ClickOnSearchResult_iOS();
-			    	}else
+			    	}else if(Device_Model.contains("Pixel"))
 			    	{
 			    		ClickOnSearchResult_AN();
+			    	} else if(Device_Model.contains("Galaxy S7"))
+			    	{
+			    		ClickOnSearchResult_GalaxyS7();
 			    	}
 			    	          
 			      }
@@ -3581,16 +3678,10 @@ public static void ClickApply() throws Exception
 			    	}else if(Device_Model.contains("Pixel"))
 			    	{
 			    		ClickOnSearchResult3_AN();
-			    	}else if(Device_Model.contains("Galaxy"))
-                    {
-                        ClickOnSearchResult3_Galaxy();
-                 }
-
+			    	}
 			    	          
 			      }
 			    
-			    
-			 
 			    
 			  //Method to click on search icon
 			    public static void ClickOnSearchResult5() throws Exception
@@ -3620,7 +3711,7 @@ public static void ClickApply() throws Exception
                              catch(Exception e)
                              {
                            device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("672,1023")));
-                           Reporter.log("Clicked on any order in Search Page");
+                           System.out.println("Clicked on any order in Search Page");
                            Thread.sleep(10000); 
                            HPECommonFunctions.Find_Text(config.getProperty("Invoice"));                                           
                            HPECommonFunctions.ClickSignOut();
@@ -3642,7 +3733,7 @@ public static void ClickApply() throws Exception
                              catch(Exception e)
                              {
                            device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                           Reporter.log("Clicked on any order in Search Page");
+                           System.out.println("Clicked on any order in Search Page");
                            Thread.sleep(10000); 
                            HPECommonFunctions.Find_No_Text(config.getProperty("Invoice"));                    
                            HPECommonFunctions.ClickSignOut();
@@ -3684,7 +3775,7 @@ public static void ClickApply() throws Exception
                              catch(Exception e)
                              {
                            device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("672,1023")));
-                           Reporter.log("Clicked on any order in Search Page");
+                           System.out.println("Clicked on any order in Search Page");
                            Thread.sleep(10000); 
                    //        HPECommonFunctions.VerifyDeliveredStatus("C://HPE//FunctionalTesting//Images//Delivered_symbol"+".png");
                            HPECommonFunctions.Find_Text(config.getProperty("Invoice"));          
@@ -3704,7 +3795,7 @@ public static void ClickApply() throws Exception
 				
 			    	try {
 			    		 		Thread.sleep(5000);
-			    				Reporter.log("Swiping left on the screen");
+			    				System.out.println("Swiping left on the screen");
 			    				device.getMobileTouchScreen().swipe(new MobileCoordinates(new MobilePoint("583,684")), new MobileCoordinates(new MobilePoint("23,704")), 1);
 			    			    Thread.sleep(10000);
 			    		        
@@ -3738,15 +3829,18 @@ public static void ClickApply() throws Exception
                    }else if(Device_Model.equals("iPhone-5S"))
                    {
                        ClickDeleteButton_iOS("C://HPE//FunctionalTesting//Images//RemoveButton_iPhone5S"+".png");
-                   } else if(Device_Model.equals("iPhone-6S"))
-                   {
-                    ClickDeleteButton_iOS("C://HPE//FunctionalTesting//Images//RemoveButton"+".png");
-                   }
-                   else             
+                   }  else if (Device_Model.equals("Galaxy S6"))    
                 
-                   {
-                          ClickDeleteButton_AN("C://HPE//FunctionalTesting//Images//Delete"+".png");
-                   } 
+                	{
+                          ClickDeleteButton_AN("C://HPE//FunctionalTesting//Images//RemoveButton_Pixel"+".png");
+                   }else if (Device_Model.equals("Galaxy S7"))    
+                       
+                   			{
+                                ClickDeleteButton_AN("C://HPE//FunctionalTesting//Images//RemoveButton_GalaxyS7"+".png");
+                         } else if(Device_Model.equals("iPhone-6S"))
+                         {
+                             ClickDeleteButton_iOS("C://HPE//FunctionalTesting//Images//RemoveButton"+".png");
+                      }
                              
                   }
 
@@ -3757,7 +3851,7 @@ public static void ClickApply() throws Exception
                 
                  try {
                                       Thread.sleep(5000);
-                                     Reporter.log("Swiping left on the screen");
+                                     System.out.println("Swiping left on the screen");
                                      device.getMobileTouchScreen().swipe(new MobileCoordinates(new MobilePoint("699,412")), new MobileCoordinates(new MobilePoint("106,430")), 1);
                                    Thread.sleep(10000);
                                 
@@ -3791,18 +3885,18 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement AdvancedSearch = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("AdvancedSearch")));
-	                     if(AdvancedSearch.isDisplayed())
+	                     if(!AdvancedSearch.isDisplayed())
 	                 {
 	    	            
 	                    	 AdvancedSearch.click();
-	                    	 Reporter.log("Clicked Advanced Search");
+	                    	 System.out.println("Clicked Advanced Search");
 	                    	 Thread.sleep(2000); 
 	                    
 	                 }
 	                               }
 	                               catch(Exception e)
 	                               {
-	                                      Reporter.log("Advanced Search is not Present");                        
+	                                      System.out.println("Advanced Search is not Present");                        
 	                                      CaptureScreenshot("TC_Fail_");                         
 	                                      //ClickSignOut();
 	                                      Close_App_HPE();
@@ -3911,7 +4005,7 @@ public static void ClickApply() throws Exception
 					VerifyErrorMessage.findElement(By.linkText(linktext));
             		testLog.info("\n Element found is : " + linktext);
             		testLog.info("\n Invalid user or password");            		                  
-            		Reporter.log("\n Invalid user or password");        		
+                               		
 			
             	}
 				
@@ -3924,7 +4018,7 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement Close = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Close")));
-	                         if(Close.isDisplayed())
+	                         if(!Close.isDisplayed())
 	                 {
 	    	            
 	                        	 CaptureScreenshot("TC_Fail_");                         
@@ -3937,7 +4031,7 @@ public static void ClickApply() throws Exception
 	                         }
 	                         catch(Exception e)
 	                               {
-	                                      Reporter.log("Close button is not Present");                        
+	                                      System.out.println("Close button is not Present");                        
 
 	                               }
 	                 			                 			
@@ -3955,14 +4049,14 @@ public static void ClickApply() throws Exception
 	                 {
 	    	            
 	                        	 Close.click();
-	                        	 Reporter.log("Clicked on Close button");
+	                        	 System.out.println("Clicked on Close button");
 	                        	 Thread.sleep(2000); 
 	                    
 	                 }
 	                         }
 	                         catch(Exception e)
 	                               {
-	                                      Reporter.log("Close button is not Present");                        
+	                                      System.out.println("Close button is not Present");                        
 	                                      CaptureScreenshot("TC_Fail_");                         
 	                                      //ClickSignOut();
 	                                      Close_App_HPE();
@@ -4013,23 +4107,31 @@ public static void ClickApply() throws Exception
 
                     
   	              public static void ClickOnClearIcon() throws Exception
-  	              {
-  	                     if(Device_Model.equals("iPhone-7"))
-  	                     {
+
+  	             {
+  	                    if(Device_Model.equals("iPhone-7"))
+  	                    { 
   	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIconiOS"+".png");
-  	                     }else if(Device_Model.equals("iPhone-5S"))
-  	                     {
+  	                    }else if(Device_Model.equals("iPhone-5S"))
+  	                    { 
   	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIcon_iPhone5S"+".png");
-  	                     }else if(Device_Model.equals("iPhone-6S"))
-  	                     {
+  	                      }else if(Device_Model.contains("Tab"))
+  	                      { 
+  	                          ClickHome("C://HPE//FunctionalTesting//Images//HomeButton_Tab" +".png");
+  	                        }else if(Device_Model.contains("Pixel"))
+  	                    {
+  	                        	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIconAN"+".png");
+  	                    } else if(Device_Model.contains("Galaxy S6"))
+  	                    {
+  	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIcon_Galaxy"+".png");
+  	                    } else if(Device_Model.contains("Galaxy S7"))
+  	                    {
+  	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIcon_GalaxyS7"+".png");
+  	                    }else if(Device_Model.equals("iPhone-6S"))
+  	                    { 
   	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIconiOS"+".png");
-  	                     }
-  	                     else
-  	                     {
-  	                    	ClickOnClearIcon("C://HPE//FunctionalTesting//Images//ClearIconAN"+".png");
-  	                     }
-  	              }
-  	              
+  	                    }
+  	             } 
                  // Method to uncheck all the check boxes on filter options for iOS
    	             public static void UncheckAllCheckboxes_iOS() throws Exception
    	                 {
@@ -4037,32 +4139,32 @@ public static void ClickApply() throws Exception
    	            	 		 nativedriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
    	                         WebElement Submitted = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Submitted")));
    	                         Submitted.click();  
-   	                         Reporter.log("Submitted is unchecked");
+   	                         System.out.println("Submitted is unchecked");
    	                         
    	                         nativedriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
    	                         WebElement Accepted = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accepted")));
    	                         Accepted.click(); 
-   	                         Reporter.log("Accepted is unchecked");
+   	                         System.out.println("Accepted is unchecked");
 	                        
    	                         nativedriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 	                         WebElement InProduction = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("InProduction")));
 	                         InProduction.click();
-	                         Reporter.log("In Production is unchecked");
+	                         System.out.println("In Production is unchecked");
 	                         
 	                         nativedriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
    	                         WebElement Shipped = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Shipped")));
    	                         Shipped.click();
-   	                         Reporter.log("Shipped is unchecked");
+   	                         System.out.println("Shipped is unchecked");
    	                         
    	                         nativedriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 	                         WebElement Delivered = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Delivered")));
 	                         Delivered.click();
-	                         Reporter.log("Delivered is unchecked");
+	                         System.out.println("Delivered is unchecked");
 	                         
 	                         nativedriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
    	                         WebElement Cancelled = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Cancelled")));
    	                         Cancelled.click(); 
-   	                         Reporter.log("Cancelled is unchecked");
+   	                         System.out.println("Cancelled is unchecked");
 	                         
 	                         
    	                         }
@@ -4075,7 +4177,7 @@ public static void ClickApply() throws Exception
    	                         nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	                         WebElement Delivered = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Delivered")));
 	                         Delivered.click();   
-	                         Reporter.log("Delivered is checked");
+	                         System.out.println("Delivered is checked");
 	                         
 	                         
    	                }
@@ -4088,7 +4190,7 @@ public static void ClickApply() throws Exception
    	                         nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	                         WebElement Cancelled = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Cancelled")));
 	                         Cancelled.click();   
-	                         Reporter.log("Cancelled is checked");
+	                         System.out.println("Cancelled is checked");
 	                         
 	                         
    	                }
@@ -4101,7 +4203,7 @@ public static void ClickApply() throws Exception
    	                         nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	                         WebElement Submitted = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Submitted")));
 	                         Submitted.click();   
-	                         Reporter.log("Submitted is checked");
+	                         System.out.println("Submitted is checked");
 	                         
 	                         
    	                }
@@ -4114,7 +4216,7 @@ public static void ClickApply() throws Exception
    	                         nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	                         WebElement Accepted = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accepted")));
 	                         Accepted.click();   
-	                         Reporter.log("Accepted is checked");
+	                         System.out.println("Accepted is checked");
 	                         
 	                         
    	                }
@@ -4127,7 +4229,7 @@ public static void ClickApply() throws Exception
    	                         nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	                         WebElement InProduction = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("InProduction")));
 	                         InProduction.click();   
-	                         Reporter.log("InProduction is checked");
+	                         System.out.println("InProduction is checked");
 	                         
 	                         
    	                }
@@ -4140,7 +4242,7 @@ public static void ClickApply() throws Exception
    	                         nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	                         WebElement Shipped = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Shipped")));
 	                         Shipped.click();   
-	                         Reporter.log("Shipped is checked");
+	                         System.out.println("Shipped is checked");
 	                         
 	                         
    	                }
@@ -4152,7 +4254,7 @@ public static void ClickApply() throws Exception
 	                 {
 	            	 /*
 	            	 	device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("520,1193")));
-	            	 	Reporter.log("Clicked on Apply button");
+	            	 	System.out.println("Clicked on Apply button");
 	            	 	Thread.sleep(5000); 
 	            	 	
 	            	 	*/
@@ -4162,18 +4264,18 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement Apply = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Apply")));
-	                         if(Apply.isDisplayed())
+	                         if(!Apply.isDisplayed())
 	                 {
 	    	            
 	                        	 Apply.click();
-	                        	 Reporter.log("Clicked on Apply button");
+	                        	 System.out.println("Clicked on Apply button");
 	                        	 Thread.sleep(10000); 
 	                    
 	                 }
 	                         }
 	                         catch(Exception e)
 	                               {
-	                                      Reporter.log("Apply button is not Present");                        
+	                                      System.out.println("Apply button is not Present");                        
 	                                      CaptureScreenshot("TC_Fail_"); 
 	                                      
 	                                      //ClickSignOut();
@@ -4229,9 +4331,9 @@ public static void ClickApply() throws Exception
 	                 {
 	                         Thread.sleep(5000);
 	                         WebElement Invoice = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Invoice")));
-	                         if(Invoice.isEnabled())
+	                         if(!Invoice.isEnabled())
 	                 {
-	    	                   	 Reporter.log("Invoice Available icon is Clickable");
+	    	                   	 System.out.println("Invoice Available icon is Clickable");
 	                        	 CaptureScreenshot("TC_Fail_");
 	                        	 //ClickSignOut();
 	                        	 Close_App_HPE();
@@ -4243,7 +4345,7 @@ public static void ClickApply() throws Exception
 	                         }
 	                         catch(Exception e)
 	                               {
-	                        	 		  Reporter.log("Invoice Available icon is not Clickable");                       
+	                        	 		  System.out.println("Invoice Available icon is not Clickable");                       
 	                                      
 	                               }
 	                 			                 			
@@ -4257,15 +4359,15 @@ public static void ClickApply() throws Exception
 	                     try
 	                     {
 	                     WebElement LoginPage = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignIn")));
-	                     if(LoginPage.isDisplayed())
+	                     if(!LoginPage.isDisplayed())
 	                     {                          
-	                           Reporter.log("User is on the login page");
+	                           System.out.println("User is on the login page");
 	                           Thread.sleep(5000);                      
 	                     }
 	                     }
 	                     catch(Exception e)
 	                     {
-	                           Reporter.log("User is not on the login page");                        
+	                           System.out.println("User is not on the login page");                        
 	                           CaptureScreenshot("TC_Fail_");                         
 	                           //ClickSignOut();
 	                           Close_App_HPE();
@@ -4283,13 +4385,13 @@ public static void ClickApply() throws Exception
 	                     WebElement LoginPage = nativedriver.findElement(By.xpath(Android_Objects.getProperty("SignIn")));
 	                     if(LoginPage.isDisplayed())
 	                     {                          
-	                           Reporter.log("User is on the login page");
+	                           System.out.println("User is on the login page");
 	                           Thread.sleep(5000);                      
 	                     }
 	                     }
 	                     catch(Exception e)
 	                     {
-	                           Reporter.log("User is not on the login page");                        
+	                           System.out.println("User is not on the login page");                        
 	                           CaptureScreenshot("TC_Fail_");                         
 	                           //ClickSignOut();
 	                           Close_App_HPE();
@@ -4319,12 +4421,12 @@ public static void ClickApply() throws Exception
 	            		  		Thread.sleep(5000);
 	            		  		WebElement GetSupport_Button = visualdriver.findElement(ByMobile.image(imagePath));
 	                            GetSupport_Button.click();
-	                            Reporter.log("CLicked on Get Support");
+	                            System.out.println("CLicked on Get Support");
 	                            Thread.sleep(10000);
 	                                             
 	                         }catch(Exception e)
 	                         {
-	                        	 Reporter.log("Unbale to click on Get Support Menu option");                         
+	                        	 System.out.println("Unbale to click on Get Support Menu option");                         
 	                             CaptureScreenshot("TC_Fail_");                         
 	                             //ClickSignOut();
 	                             Close_App_HPE();
@@ -4339,16 +4441,16 @@ public static void ClickApply() throws Exception
 	                                 try
 	                                 {                    
 	                                 WebElement SignOut1 = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("PreSignOut")));
-	                                 if(SignOut1.isDisplayed())
+	                                 if(!SignOut1.isDisplayed())
 	                                 {                          
 	                                       SignOut1.click();
-	                                       Reporter.log("Clicked on SignOut");
+	                                       System.out.println("Clicked on SignOut");
 	                                       Thread.sleep(5000);                      
 	                                 }
 	                                 }
 	                                 catch(Exception e)
 	                                 {
-	                                       Reporter.log("SignOut is not Present");                        
+	                                       System.out.println("SignOut is not Present");                        
 	                                       CaptureScreenshot("TC_Fail_");                         
 	                                       //ClickSignOut();
 	                                       Close_App_HPE();
@@ -4399,16 +4501,16 @@ public static void ClickApply() throws Exception
 	            	nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	           
 	            WebElement Home = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Home")));
-	            if(Home.isDisplayed())
+	            if(!Home.isDisplayed())
 	            {      
 	            Home.click();
-	            Reporter.log("Clicked on Home");
+	            System.out.println("Clicked on Home");
 	            Thread.sleep(10000);
 	            }
 	            }
 	            catch(Exception e)
 	            {
-	            Reporter.log("Home button is not Present");                          
+	            System.out.println("Home button is not Present");                          
 	            CaptureScreenshot("TC_Fail_");                         
 	            ClickSignOut();
 	            //Close_App();
@@ -4428,13 +4530,13 @@ public static void ClickApply() throws Exception
 	            if(Home.isDisplayed())
 	                                 {
 	            Home.click();
-	            Reporter.log("Clicked on Home");
+	            System.out.println("Clicked on Home");
 	            Thread.sleep(10000);
 	                   }
 	                   }
 	            catch(Exception e)
 	                   {
-	            Reporter.log("Home button is not Present");                          
+	            System.out.println("Home button is not Present");                          
 	            CaptureScreenshot("TC_Fail_");                         
 	            //ClickSignOut();
 	            Close_App_HPE();
@@ -4464,10 +4566,11 @@ public static void ClickApply() throws Exception
                     } else if(Device_Model.contains("Galaxy S7"))
                     {
                     	ClickHome("C://HPE//FunctionalTesting//Images//HomeButton_GalaxyS7" +".png");
-                    } else if(Device_Model.equals("iPhone-6S"))
+                    }else if(Device_Model.equals("iPhone-6S"))
                     { 
                         ClickHome("C://HPE//FunctionalTesting//Images//HomeButton" +".png");
                       }
+                    
              }    
                 
               //Method to verify to display Privacy Statment 
@@ -4479,12 +4582,12 @@ public static void ClickApply() throws Exception
                          WebElement PrivacyStatment = visualdriver.findElement(ByMobile.image(imagePath));
                          if(PrivacyStatment .isDisplayed())                         
                          {
-                        	 Reporter.log("Privacy Statment menu option displayed");
+                        	 System.out.println("Privacy Statment menu option displayed");
                         	 Thread.sleep(10000);
                          }
                      }catch(Exception e)
                          {
-                    	 	Reporter.log("Privacy Statment Menu option is not Present");                        
+                    	 	System.out.println("Privacy Statment Menu option is not Present");                        
                             CaptureScreenshot("TC_Fail_");                         
                             //ClickSignOut();
                             Close_App_HPE();
@@ -4521,7 +4624,7 @@ public static void ClickApply() throws Exception
                           {
                    
                    WebElement PrivacyStatementOption = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Home")));
-                   if(PrivacyStatementOption.isDisplayed())
+                   if(!PrivacyStatementOption.isDisplayed())
                    {
                           PrivacyStatementOption.click();
                           
@@ -4546,11 +4649,13 @@ public static void ClickApply() throws Exception
                        }else if(Device_Model.contains("Pixel"))
                        {
                        ClickPrivacyStatement_AN("C://HPE//FunctionalTesting//Images//PrivacyStatement"+".png");
-                       } else if(Device_Model.contains("Galaxy"))
+                       } else if(Device_Model.contains("Galaxy S6"))
                        {
                        ClickPrivacyStatement_AN("C://HPE//FunctionalTesting//Images//PrivacyStatement_Galaxy"+".png");
+                       }  else if(Device_Model.contains("Galaxy S7"))
+                       {
+                       ClickPrivacyStatement_AN("C://HPE//FunctionalTesting//Images//PrivacyStatement_GalaxyS7"+".png");
                        }
-
                        
                 } 
 
@@ -4631,14 +4736,13 @@ public static void ClickApply() throws Exception
    	 		//Method to click on Watch list arrow on home page
    	 			public static void ClickWatchList(String imagePath) throws Exception
    	 			{	try {
-   	 						Thread.sleep(2000);
+   	 						Thread.sleep(5000);
    	 						//visualdriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
    	 						//WebElement Remove = visualdriver.findElement(ByMobile.image(imagePath));
    	 						WebElement WatchListArrow = visualdriver.findElement(ByMobile.image(imagePath));					
    	 						WatchListArrow.click();
    	 						testLog.info("\n Image found is : " + imagePath);
    	 						testLog.info("Clicked on WatchList Arrow");
-   	 						Reporter.log("Clicked on WatchList Arrow");
    	 						Thread.sleep(5000);
    	 						
    	 					} catch (Exception e) {
@@ -4689,7 +4793,7 @@ public static void ClickApply() throws Exception
                 
                 {
                   device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("310,488")));
-                    Reporter.log("Clicked on General App Questions");
+                    System.out.println("Clicked on General App Questions");
                     Thread.sleep(10000); 
 
                 }
@@ -4716,13 +4820,11 @@ public static void ClickApply() throws Exception
                     {
                             Thread.sleep(5000);
                             WebElement CustomerName = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("EndCustomerName")));
-                            
-                            
-                            if(CustomerName.isDisplayed())
+                            if(!CustomerName.isDisplayed())
                             {
                              EndCustomerName = CustomerName.getAttribute("name");
-                             Reporter.log("End Customer Name is Present & below is the name");
-                           	 Reporter.log(EndCustomerName);
+                             System.out.println("End Customer Name is Present & below is the name");
+                           	 System.out.println(EndCustomerName);
                            	 Thread.sleep(2000); 
                            	 
                        
@@ -4730,7 +4832,7 @@ public static void ClickApply() throws Exception
                                   }
                                   catch(Exception e)
                                   {
-                                         Reporter.log("End Customer Name is not Present");                        
+                                         System.out.println("End Customer Name is not Present");                        
                                          CaptureScreenshot("TC_Fail_");                         
                                          //ClickSignOut();
                                          Close_App_HPE();
@@ -4764,8 +4866,8 @@ public static void ClickApply() throws Exception
                             if(CustomerName.isDisplayed())
                             {
                              EndCustomerName = CustomerName.getAttribute("contDesc");
-                             Reporter.log("End Customer Name is Present & below is the name");
-                           	 Reporter.log(EndCustomerName);
+                             System.out.println("End Customer Name is Present & below is the name");
+                           	 System.out.println(EndCustomerName);
                            	 Thread.sleep(2000); 
                            	 
                        
@@ -4773,7 +4875,7 @@ public static void ClickApply() throws Exception
                                   }
                                   catch(Exception e)
                                   {
-                                         Reporter.log("End Customer Name is not Present");                        
+                                         System.out.println("End Customer Name is not Present");                        
                                          CaptureScreenshot("TC_Fail_");                         
                                          //ClickSignOut();
                                          Close_App_HPE();
@@ -4790,11 +4892,10 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);               		               		
                 		testLog.info("\nPrevious delivered date is found for the order displayed");
-                		Reporter.log("\nPrevious delivered date is found for the order displayed");
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
                 		testLog.info("\nPrevious delivered date is not found for the order displayed");
-                		Reporter.log("\nPrevious delivered date is not found for the order displayed");
+                		
                 	}
                 }
                 
@@ -4806,11 +4907,10 @@ public static void ClickApply() throws Exception
                 		Text.findElement(By.linkText(linktext));
                 		testLog.info("\n Element found is : " + linktext);               		               		
                 		testLog.info("\nShip Complete / Date Shipped  is found for the order displayed");
-                		Reporter.log("\nShip Complete / Date Shipped  is found for the order displayed");
                 	} catch (Exception e) {
                 		testLog.info("\nElement not found : " + linktext);
                 		testLog.info("\nShip Complete / Date Shipped  is not found for the order displayed");
-                		Reporter.log("\nShip Complete / Date Shipped  is not found for the order displayed");
+                		
                 	}
                 }
                 
@@ -4846,14 +4946,16 @@ public static void ClickApply() throws Exception
                     }else if(Device_Model.contains("Pixel"))
                     {
                     	ClickSortButton("C://HPE//FunctionalTesting//Images//SortButton_Pixel"+".png");
-                    }else if(Device_Model.contains("Galaxy"))
+                    }else if(Device_Model.contains("Galaxy S6"))
                     {
                     ClickSortButton("C://HPE//FunctionalTesting//Images//SortButton_Galaxy"+".png");
-                    }else if(Device_Model.equals("iPhone-6S"))
-                        { 
-                        	ClickSortButton("C://HPE//FunctionalTesting//Images//SortButton_iphone7"+".png");
-                        }
-
+                    } else if(Device_Model.contains("Galaxy S7"))
+                    {
+                    ClickSortButton("C://HPE//FunctionalTesting//Images//SortButton_GalaxyS7"+".png");
+                    } else if(Device_Model.equals("iPhone-6S"))
+                    { 
+                    	ClickSortButton("C://HPE//FunctionalTesting//Images//SortButton_iphone7"+".png");
+                    }
                     
              } 
                 
@@ -4894,7 +4996,7 @@ public static void ClickApply() throws Exception
     				    	}else if(Device_Model.contains("Galaxy"))
                             {
                                 ClickSaveButton("C://HPE//FunctionalTesting//Images//Alert_Save_Galaxy" +".png");
-                         } else if(Device_Model.equals("iPhone-6S"))
+                         }else if(Device_Model.equals("iPhone-6S"))
  				    	{
  				    		ClickSaveButton("C://HPE//FunctionalTesting//Images//Alert_Save" +".png");
  				    	}
@@ -4930,14 +5032,14 @@ public static void ClickApply() throws Exception
 	                    	 /*
 	                    	 WebElement Search; 
 	                    	 WebDriverWait wait = new WebDriverWait(nativedriver, 40);
-	                    	 //Reporter.log("Searching for the field 1");
+	                    	 //System.out.println("Searching for the field 1");
 	                    	 Search= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Android_Objects.getProperty("SearchTextfield"))));
 	                    	 //Search= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Android_Objects.getProperty("SearchTextfield"))));
-	                    	 //Reporter.log("Searching for the field 2");
+	                    	 //System.out.println("Searching for the field 2");
 	                    	 Search.click();
 	                    	 */
 	                    	 
-	                    	 Thread.sleep(5000);
+	                    	 Thread.sleep(7000);
 	                    	 //nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);                          
 	                    	 WebElement Search = nativedriver.findElement(By.xpath(Android_Objects.getProperty("SearchTextfield")));
 	                    	 Thread.sleep(5000);
@@ -4945,13 +5047,13 @@ public static void ClickApply() throws Exception
 	                    	 
 	                    	 //Thread.sleep(5000);
 	                    	 Search.sendKeys(SearchKeyword);
-	                    	 Reporter.log("Entered Search Keyword");
+	                    	 System.out.println("Entered Search Keyword");
 	                    	 Thread.sleep(5000);
 	                           }
 	              
 	              catch(Exception e)
 	              {
-	                     Reporter.log("Search Box not found");                          
+	                     System.out.println("Search Box not found");                          
 	                     CaptureScreenshot("TC_Fail_");           
 	                     //ClickSignOut();
 	                     Close_App_HPE();
@@ -4980,13 +5082,13 @@ public static void ClickApply() throws Exception
                            Thread.sleep(1000);
                            if (SearchTips.isDisplayed())
                            { 
-                                 Reporter.log(" Tips to Search is displayed");
+                                 System.out.println(" Tips to Search is displayed");
                                  Thread.sleep(1000);
                                                              }
                     }
                     catch(Exception e)
                          {
-                               Reporter.log("Tips to Search not displayed");                         
+                               System.out.println("Tips to Search not displayed");                         
                                CaptureScreenshot("TC_Fail_");           
                                //ClickSignOut();
                                Close_App_HPE();
@@ -5004,32 +5106,32 @@ public static void ClickApply() throws Exception
                               nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                               WebElement Submitted = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Submitted")));
                               Submitted.click();  
-                              Reporter.log("Submitted is unchecked");
+                              System.out.println("Submitted is unchecked");
                               
                               nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                               WebElement Accepted = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Accepted")));
                               Accepted.click(); 
-                              Reporter.log("Accepted is unchecked");
+                              System.out.println("Accepted is unchecked");
                              
                               nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                               WebElement InProduction = nativedriver.findElement(By.xpath(Android_Objects.getProperty("InProduction")));
                               InProduction.click();
-                              Reporter.log("In Production is unchecked");
+                              System.out.println("In Production is unchecked");
                               
                               nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                               WebElement Shipped = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Shipped")));
                               Shipped.click();
-                              Reporter.log("Shipped is unchecked");
+                              System.out.println("Shipped is unchecked");
                               
                               nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                               WebElement Delivered = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Delivered")));
                               Delivered.click();
-                              Reporter.log("Delivered is unchecked");
+                              System.out.println("Delivered is unchecked");
                               
                               nativedriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
                               WebElement Cancelled = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Cancelled")));
                               Cancelled.click(); 
-                              Reporter.log("Cancelled is unchecked");
+                              System.out.println("Cancelled is unchecked");
                               
                                                                 }
 
@@ -5056,7 +5158,7 @@ public static void ClickApply() throws Exception
                                    nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                                    WebElement Cancelled_AN = nativedriver.findElement(By.xpath(Android_Objects.getProperty("Cancelled")));
                                    Cancelled_AN.click();   
-                                   Reporter.log("Cancelled is checked");
+                                   System.out.println("Cancelled is checked");
                                    
                                    
                           }
@@ -5084,7 +5186,7 @@ public static void ClickApply() throws Exception
                                       nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                                       WebElement DeliveredButton = nativedriver.findElement(By.xpath(Android_Objects.getProperty("DeliveredUnChecked")));
                                       DeliveredButton.click();   
-                                      Reporter.log("Delivered is checked");
+                                      System.out.println("Delivered is checked");
                                       
                                                           
                              }
@@ -5114,7 +5216,7 @@ public static void ClickApply() throws Exception
                              nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                              WebElement Submitted = nativedriver.findElement(By.xpath(Android_Objects.getProperty("SubmittedUnChecked")));
                              Submitted.click();   
-                             Reporter.log("Submitted is checked");
+                             System.out.println("Submitted is checked");
                         
                         
                           }
@@ -5140,7 +5242,7 @@ public static void ClickApply() throws Exception
                               nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                            WebElement Accepted = nativedriver.findElement(By.xpath(Android_Objects.getProperty("AcceptedUnChecked")));
                            Accepted.click();   
-                           Reporter.log("Accepted is checked");
+                           System.out.println("Accepted is checked");
                           }
                           
                           // Method to check only Accepted check box
@@ -5165,7 +5267,7 @@ public static void ClickApply() throws Exception
                           nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                           WebElement InProduction = nativedriver.findElement(By.xpath(Android_Objects.getProperty("InProductionUnChecked")));
                           InProduction.click();   
-                          Reporter.log("InProduction is checked");
+                          System.out.println("InProduction is checked");
                           }
                           
                           // Method to check on InProduction check box
@@ -5189,7 +5291,7 @@ public static void ClickApply() throws Exception
                                nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                             WebElement Shipped = nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShippedUnChecked")));
                             Shipped.click();   
-                            Reporter.log("Shipped is checked");
+                            System.out.println("Shipped is checked");
                          
                                        }
                        
@@ -5212,7 +5314,7 @@ public static void ClickApply() throws Exception
                                    nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                              WebElement DeliveryStatus = nativedriver.findElement(By.xpath(Android_Objects.getProperty("DeliveryStatus")));
                              DeliveryStatus.click();  
-                             Reporter.log("Submitted is unchecked");
+                             System.out.println("Submitted is unchecked");
                                  }
                                  
                                   // Method to click on Delivered Status on order detail page
@@ -5253,7 +5355,6 @@ public static void ClickApply() throws Exception
                                              Thread.sleep(2000);
                                              testLog.info("\n Image found is : " + imagePath);
                                              testLog.info("User is unable to see a menu slide from the left");
-                                             Reporter.log("User is unable to see a menu slide from the left");
                                        } catch (Exception e) {
                                              testLog.info("\nImage not present : " + imagePath);    
                                              testLog.info("User is able to see a menu slide from the left");
@@ -5269,7 +5370,7 @@ public static void ClickApply() throws Exception
                       		Find_Text_NoResults(config.getProperty("NoResults"));
 
                       		device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("320,575")));
-                      		Reporter.log("Clicked on any order on iphone");
+                      		System.out.println("Clicked on any order on iphone");
                       		Thread.sleep(10000); 
                       						
                       			    				    				
@@ -5277,18 +5378,19 @@ public static void ClickApply() throws Exception
                       	
                      // Method to click on search result
                         
+                        
                         public static void ClickSearchResult1_iOS() throws Exception
                         {
                                      try{ 
-                                   	  
-                       	 		Find_Text_NoResults(config.getProperty("NoResults"));
-                       	 		                      	 		
+                                      
+                                    Find_Text_NoResults(config.getProperty("NoResults"));
+                                                                       
                                      }
                                      catch(Exception e)
                                      {
-                                    	 /*
+                                           /*
                                    device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
-                                   Reporter.log("Clicked on any order in Search Page");
+                                   System.out.println("Clicked on any order in Search Page");
                                    Thread.sleep(10000); 
                                    */
                                    // HPECommonFunctions.CheckServiceError("C://HPE//FunctionalTesting//Images//ServiceErrorOK" +".png");
@@ -5319,6 +5421,7 @@ public static void ClickApply() throws Exception
                                      }
                                                                                                                           
                               }
+
                       	
                         //Method to click on the order in Search list page	
                       	public static void ClickSearchResult1_AN() throws Exception 
@@ -5327,7 +5430,7 @@ public static void ClickApply() throws Exception
                       		Find_Text_NoResults(config.getProperty("NoResults"));
 
                       		device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("511,1071")));
-                      		Reporter.log("Clicked on any order on Google Pixel");
+                      		System.out.println("Clicked on any order on Google Pixel");
                       		Thread.sleep(10000); 
                       		
                       		
@@ -5369,7 +5472,7 @@ public static void ClickApply() throws Exception
                                                     
 /*
                                device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("511,1071")));
-                               Reporter.log("Clicked on any order on Google Pixel");
+                               System.out.println("Clicked on any order on Google Pixel");
                                Thread.sleep(10000); 
                                */
                                
@@ -5413,7 +5516,7 @@ public static void ClickApply() throws Exception
                       				device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("306,791")));
                       				Thread.sleep(2000);
                       				//HPECommonFunctions.CheckServiceError("C://HPE//FunctionalTesting//Images//ServiceErrorOK" +".png");
-                      				Reporter.log("Clicked on another order on iphone");
+                      				System.out.println("Clicked on another order on iphone");
                       				Thread.sleep(10000); 
                       					
                           				    				
@@ -5428,7 +5531,7 @@ public static void ClickApply() throws Exception
                               		Find_Text_NoResults(config.getProperty("NoResults"));
 
                               		device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("533,1328")));
-                              		Reporter.log("Clicked on any order on Google Pixel");
+                              		System.out.println("Clicked on any order on Google Pixel");
                               		Thread.sleep(10000); 
                               						
                               			    				    				
@@ -5463,7 +5566,7 @@ public static void ClickApply() throws Exception
                                               {
 
                                        device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("533,1328")));
-                                       Reporter.log("Clicked on any order");
+                                       System.out.println("Clicked on any order");
                                        Thread.sleep(10000); 
                                                                    
                                               }                                               
@@ -5481,16 +5584,16 @@ public static void ClickApply() throws Exception
                 	            if(Paragraph8.isDisplayed())
                 	            {      
                 	            	Paragraph8.click();
-                	            Reporter.log("Clicked on Paragraph 8");
+                	            System.out.println("Clicked on Paragraph 8");
                 	            Thread.sleep(10000);
                 	            }
                 	            	
                 	            }
                 	            catch(Exception e)
                 	            {
-                	            Reporter.log("Paragraph 8 button is not Present");                          
+                	            System.out.println("Paragraph 8 button is not Present");                          
                 	            CaptureScreenshot("TC_Fail_"); 
-                	            //Open_App_HPE();
+                	            Open_App_HPE();
                 	            //ClickSignOut();
                 	            Close_App_HPE();
 	                             Thread.sleep(2000);
@@ -5509,7 +5612,6 @@ public static void ClickApply() throws Exception
                 	   		Paragraph8.click();
                				testLog.info("\n Image found is : " + imagePath);
               				testLog.info("Clicked on Paragraph8");
-              				Reporter.log("Clicked on Paragraph8");
                			} catch (Exception e) 
                			{
                 	        testLog.info("\nImage not present : " + imagePath);	
@@ -5530,11 +5632,15 @@ public static void ClickApply() throws Exception
                     }else if(Device_Model.contains("Pixel"))
                     {
                     ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8_Pixel" +".png");
-                    }else if(Device_Model.contains("Galaxy"))
+                    }else if(Device_Model.contains("Galaxy S6"))
                     {
-                    ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8_Galaxy" +".png");
+                    	ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8_Galaxy" +".png");
                     
-                    }else if(Device_Model.equals("iPhone-6S"))
+                    } else if(Device_Model.contains("Galaxy S7"))
+                    {
+                    	ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8_GalaxyS7" +".png");
+                    
+                    } else if(Device_Model.equals("iPhone-6S"))
                     {
                     	ClickParagraph8("C://HPE//FunctionalTesting//Images//Paragraph8" +".png");
                     }
@@ -5550,11 +5656,11 @@ public static void ClickApply() throws Exception
                      {
                              Thread.sleep(5000);
                              WebElement DateTime = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Date")));
-                             if(DateTime.isDisplayed())
+                             if(!DateTime.isDisplayed())
                              {
                             	 String DateTime1 = DateTime.getAttribute("name");
-                            	 Reporter.log("Date & Time is Present & below is the Date & Time");
-                            	 Reporter.log(DateTime1);
+                            	 System.out.println("Date & Time is Present & below is the Date & Time");
+                            	 System.out.println(DateTime1);
                             	 Thread.sleep(2000); 
                             	 
                         
@@ -5562,7 +5668,7 @@ public static void ClickApply() throws Exception
                                    }
                                    catch(Exception e)
                                    {
-                                          Reporter.log("Date & Time is not Present");                        
+                                          System.out.println("Date & Time is not Present");                        
                                           CaptureScreenshot("TC_Fail_");                         
                                           //ClickSignOut();
                                           Close_App_HPE();
@@ -5580,14 +5686,14 @@ public static void ClickApply() throws Exception
                              Thread.sleep(5000);
                              WebElement WatchListNumber = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchListNumber")));
                              WatchListNumber1 = WatchListNumber.getAttribute("text");
-                             Reporter.log("Below is the Watch List Number");
-                        	 Reporter.log(WatchListNumber1);                          
+                             System.out.println("Below is the Watch List Number");
+                        	 System.out.println(WatchListNumber1);                          
                            	 Thread.sleep(2000); 
                      }
                            	 
                            	catch(Exception e)
                             {
-                                   Reporter.log("Watch List Number is not Present");                        
+                                   System.out.println("Watch List Number is not Present");                        
                                    CaptureScreenshot("TC_Fail_");                         
                                    //ClickSignOut();
                                    Close_App_HPE();
@@ -5606,14 +5712,14 @@ public static void ClickApply() throws Exception
                              Thread.sleep(5000);
                              WebElement WatchListNumber = nativedriver.findElement(By.xpath(Android_Objects.getProperty("WatchList")));
                              WatchListNumber1 = WatchListNumber.getAttribute("name");
-                             Reporter.log("Below is the Watch List Number");
-                        	 Reporter.log(WatchListNumber1);                          
+                             System.out.println("Below is the Watch List Number");
+                        	 System.out.println(WatchListNumber1);                          
                            	 Thread.sleep(2000); 
                      }
                            	 
                            	catch(Exception e)
                             {
-                                   Reporter.log("Watch List Number is not Present");                        
+                                   System.out.println("Watch List Number is not Present");                        
                                    CaptureScreenshot("TC_Fail_");                         
                                    //ClickSignOut();
                                    Close_App_HPE();
@@ -5649,13 +5755,12 @@ public static void ClickApply() throws Exception
                  Thread.sleep(5000);
                  
                  UNElement.sendKeys(WrongUserName);
-                 Reporter.log("Entered Username");
-                 //logger.log(LogStatus.PASS, "PASS :" +"" + "Entered Username" );
+                 System.out.println("Entered Username");
                  Thread.sleep(5000);
                       }
                  catch(Exception e)
              	{
-             		Reporter.log("Unable to find Username field");				
+             		System.out.println("Unable to find password field");				
              		CaptureScreenshot("TC_Fail_");				
              		//ClickSignout();
              		Close_App_HPE();
@@ -5675,12 +5780,12 @@ public static void ClickApply() throws Exception
                         Thread.sleep(1000);
                         //PWDElement.clear();
                         PWDElement.sendKeys(WrongPassword);
-                        Reporter.log("Entered Password");
+                        System.out.println("Entered Password");
                         Thread.sleep(5000);
                  }
              	catch(Exception e)
             	{
-            		Reporter.log("Unable to find password field");				
+            		System.out.println("Unable to find password field");				
             		CaptureScreenshot("TC_Fail_");				
             		//ClickSignout();
             		Close_App_HPE();
@@ -5696,7 +5801,7 @@ public static void ClickApply() throws Exception
                  {
                         if(Device_Model.contains("iPhone"))
                         {
-                              EnterPassword_iOS(config.getProperty("WrongPassword"));
+                               EnterPassword_iOS(config.getProperty("WrongPassword"));
                          } else
                          {
                         	 EnterPassword_AN(config.getProperty("WrongPassword"));
@@ -5711,7 +5816,7 @@ public static void ClickApply() throws Exception
                                     {      
                                     
                                           device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("484,744")));
-                                          Reporter.log("Clicked on Calendar");
+                                          System.out.println("Clicked on Calendar");
                                         Thread.sleep(10000);              
                                                         
                                     }
@@ -5719,7 +5824,7 @@ public static void ClickApply() throws Exception
                                public static void ClickOnOrderStartDate_iOS() throws Exception
                                { 
                                     nativedriver.findElement(By.xpath(iOS_Objects.getProperty("OrderStartCalender"))).click();
-                                    Reporter.log("Clicked on Calendar");
+                                    System.out.println("Clicked on Calendar");
                                    Thread.sleep(2000);
                                     
                                     
@@ -5746,7 +5851,7 @@ public static void ClickApply() throws Exception
                                     
                                          // device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("410,1342")));
                             	 nativedriver.findElement(By.xpath(iOS_Objects.getProperty("OrderStartDate"))).click();
-                                          Reporter.log("Clicked on start date in Calendar");
+                                          System.out.println("Clicked on start date in Calendar");
                                         Thread.sleep(10000); 
                                     }
                              
@@ -5756,7 +5861,7 @@ public static void ClickApply() throws Exception
                              
                                   // device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("410,1342")));
                      	 nativedriver.findElement(By.xpath(iOS_Objects.getProperty("OrderStartDateToday"))).click();
-                                   Reporter.log("Clicked on today in Calendar and its Auto Populated");
+                                   System.out.println("Clicked on today in Calendar and its Auto Populated");
                                  Thread.sleep(10000); 
                              }
                                                  
@@ -5765,7 +5870,7 @@ public static void ClickApply() throws Exception
                                     {      
                                     
                                           device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("1038,740")));
-                                          Reporter.log("Clicked on Calendar button");
+                                          System.out.println("Clicked on Calendar button");
                                         Thread.sleep(10000);              
                                                         
                                     }
@@ -5773,7 +5878,7 @@ public static void ClickApply() throws Exception
                              public static void ClickOnOrderEndDate_iOS() throws Exception
                              { 
                                     nativedriver.findElement(By.xpath(iOS_Objects.getProperty("OrderEndCalender"))).click();
-                                    Reporter.log("Clicked on Calendar button");
+                                    System.out.println("Clicked on Calendar button");
                                    Thread.sleep(2000);
                                     
                                     
@@ -5799,7 +5904,7 @@ public static void ClickApply() throws Exception
 
                                {
                                     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("797,1347")));
-                                          Reporter.log("Clicked on end date in Calendar");
+                                          System.out.println("Clicked on end date in Calendar");
                                         Thread.sleep(10000); 
                                }
 
@@ -5808,7 +5913,7 @@ public static void ClickApply() throws Exception
                                public static void ClickonOrderDate_iOS() throws Exception
                                { 
                                     nativedriver.findElement(By.xpath(iOS_Objects.getProperty("OrderEndDate"))).click();
-                                    Reporter.log("Clicked on end date in Calendar");
+                                    System.out.println("Clicked on end date in Calendar");
                                    Thread.sleep(2000);
                                     
                                     
@@ -5828,12 +5933,13 @@ public static void ClickApply() throws Exception
 
 
                                
+
                                
-                            // Method to click on Order start Date from Calendar
+                               // Method to click on Order start Date from Calendar
                                public static void ClickonShippingStartDate_AN() throws Exception
                                                     {      
                                device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("547,792")));
-                               Reporter.log("Clicked on start date in Calendar");
+                               System.out.println("Clicked on start date in Calendar");
                                                         Thread.sleep(10000);   
                                                     }
 
@@ -5857,12 +5963,13 @@ public static void ClickApply() throws Exception
                               }
                                
                                
+
                               
                                // Method to click on Order End Date from Calendar
                                public static void ClickonShippingEndDate() throws Exception
                                                {
                               device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("538,875")));
-                               Reporter.log("Clicked on end date in Calendar");
+                               System.out.println("Clicked on end date in Calendar");
                                Thread.sleep(5000);                                                   
                                  }
                                
@@ -5876,56 +5983,45 @@ public static void ClickApply() throws Exception
                               }
 
 
+
                                public static void ClickOnDeliveryStartDateCalendar_iOS() throws Exception
                                {
                                     nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DeliveryDateCalender"))).click();
-                                    Reporter.log("Clicked on Calendar");
+                                    System.out.println("Clicked on Calendar");
                                    Thread.sleep(2000); 
                                    }
                                
                                public static void ClickOnDateOrderedCalendar_iOS() throws Exception
                                {
                                     nativedriver.findElement(By.xpath(iOS_Objects.getProperty("OrderStartCalender"))).click();
-                                    Reporter.log("Clicked on Calendar");
+                                    System.out.println("Clicked on Calendar");
                                    Thread.sleep(2000); 
                                    }
 
-                               public static void ClickOnEstimatedShipDateCalendar() throws Exception
-                               {
-                                if(Device_Model.contains("iPhone"))
-                                {
-                                ClickOnDeliveryStartDateCalendar_iOS();
-                                }else                
-                             
-                          {
-                                ClickOnEstimatedShipDate_AN();
-                                }
-                                          
-                               }
 
                                
-
                                public static void ClickOnDeliveryEndDateCalendar_iOS() throws Exception
                                {
                                     nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DeliveryEndDateCalender"))).click();
-                                    Reporter.log("Clicked on Calendar");
+                                    System.out.println("Clicked on Calendar");
                                    Thread.sleep(2000); 
                                    }
                                
 
+                               
                                
                                // Method to click on Delivery start Date from Calendar
                                public static void ClickonDeliveryDate_AN() throws Exception
                                                     {      
                                device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("538,792")));
-                               Reporter.log("Clicked on start date in Calendar");
+                               System.out.println("Clicked on start date in Calendar");
                                                         Thread.sleep(10000);   
                                                     }
                                
                                public static void ClickonDeliveryDate_iOS() throws Exception{
                                    
                                    nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DeliveryStartDate"))).click();
-                                   Reporter.log("Clicked on start date in Calendar");
+                                   System.out.println("Clicked on start date in Calendar");
                                   Thread.sleep(2000); 
                                    
                               }
@@ -5949,14 +6045,14 @@ public static void ClickApply() throws Exception
                                public static void ClickonDeliveryEndDate_AN() throws Exception
                                                {
                                device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("538,796")));
-                               Reporter.log("Clicked on end date in Calendar");
+                               System.out.println("Clicked on end date in Calendar");
                                Thread.sleep(10000);                                                   
                                  }
                                
                                public static void ClickonDeliveryEndDate_iOS() throws Exception{
                                    
                                    nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DeliveryEndDate"))).click();
-                                   Reporter.log("Clicked on End date in Calendar");
+                                   System.out.println("Clicked on End date in Calendar");
                                   Thread.sleep(2000); 
                                    
                               }
@@ -5981,7 +6077,7 @@ public static void ClickApply() throws Exception
                                WebElement PreviousMonthArrow = nativedriver.findElement(By.xpath(Android_Objects.getProperty("PreviousMonth")));
                                Thread.sleep(5000);
                                PreviousMonthArrow.click();
-                               Reporter.log("Clicked on Previous Month Arrow");
+                               System.out.println("Clicked on Previous Month Arrow");
                                Thread.sleep(10000);       
                                
                                }
@@ -5991,7 +6087,7 @@ public static void ClickApply() throws Exception
                                WebElement PreviousMonthArrow = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("PreviousMonth")));
                                Thread.sleep(5000);
                                PreviousMonthArrow.click();
-                               Reporter.log("Clicked on Previous Month Arrow");
+                               System.out.println("Clicked on Previous Month Arrow");
                                Thread.sleep(10000);       
                                
                                }
@@ -6014,7 +6110,7 @@ public static void ClickApply() throws Exception
                                WebElement NextMonthArrow = nativedriver.findElement(By.xpath(Android_Objects.getProperty("NextMonth")));
                                Thread.sleep(5000);
                                NextMonthArrow.click();
-                               Reporter.log("Clicked on Next Month Arrow");
+                               System.out.println("Clicked on Next Month Arrow");
                                Thread.sleep(10000);       
                                
                                }
@@ -6024,7 +6120,7 @@ public static void ClickApply() throws Exception
                                WebElement NextMonthArrow = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("NextMonth")));
                                Thread.sleep(5000);
                                NextMonthArrow.click();
-                               Reporter.log("Clicked on Next Month Arrow");
+                               System.out.println("Clicked on Next Month Arrow");
                                Thread.sleep(10000);       
                                
                                }
@@ -6052,7 +6148,7 @@ public static void ClickApply() throws Exception
                                        WebElement ShipDateField= nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShipStartDateField")));
                                        Thread.sleep(5000);
                                        ShipDateField.click();
-                                       Reporter.log("Clicked on Ship Date area");
+                                       System.out.println("Clicked on Ship Date area");
                                        Thread.sleep(10000);       
                                        
                                        }
@@ -6062,7 +6158,7 @@ public static void ClickApply() throws Exception
                             	   WebElement ShipComplete= nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShipStartDateField")));
                             	   Thread.sleep(1000);
                             	   ShipComplete.click();
-                            	   Reporter.log("Ship Complete Data option selected");
+                            	   System.out.println("Ship Complete Data option selected");
                                }
                                
                                public static void ShippedDate() throws Exception
@@ -6070,7 +6166,7 @@ public static void ClickApply() throws Exception
                             	   WebElement ShippedDate= nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShippedDate")));
                             	   Thread.sleep(1000);
                             	   ShippedDate.click();
-                            	   Reporter.log(" Shipped Date option selected");
+                            	   System.out.println(" Shipped Date option selected");
                                }
                                
                                public static void DeliveredDate() throws Exception
@@ -6078,7 +6174,7 @@ public static void ClickApply() throws Exception
                             	   WebElement DeliveredDate= nativedriver.findElement(By.xpath(Android_Objects.getProperty("DeliveredDate")));
                                Thread.sleep(1000);
                                DeliveredDate.click();
-                               Reporter.log(" Delivered Date option selected");
+                               System.out.println(" Delivered Date option selected");
                                }
                                
                                
@@ -6087,7 +6183,7 @@ public static void ClickApply() throws Exception
                                WebElement ShipDateField= nativedriver.findElement(By.xpath(iOS_Objects.getProperty("ShipStartDateField")));
                                Thread.sleep(5000);
                                ShipDateField.click();
-                               Reporter.log("Clicked on Ship Date area");
+                               System.out.println("Clicked on Ship Date area");
                                Thread.sleep(10000);       
                                
                                }
@@ -6113,7 +6209,7 @@ public static void ClickApply() throws Exception
                                WebElement DeliveryStartDateField= nativedriver.findElement(By.xpath(Android_Objects.getProperty("DeliveryStartDateField")));
                                Thread.sleep(5000);
                                DeliveryStartDateField.click();
-                               Reporter.log("Clicked on Delivery Date area");
+                               System.out.println("Clicked on Delivery Date area");
                                Thread.sleep(10000);       
 
                                }
@@ -6123,7 +6219,7 @@ public static void ClickApply() throws Exception
                                WebElement DeliveryStartDateField= nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DeliveryStartDateField")));
                                Thread.sleep(5000);
                                DeliveryStartDateField.click();
-                               Reporter.log("Clicked on Delivery Date area");
+                               System.out.println("Clicked on Delivery Date area");
                                Thread.sleep(10000);       
 
                                }
@@ -6150,7 +6246,7 @@ public static void ClickApply() throws Exception
                                WebElement SearchButton = nativedriver.findElement(By.xpath(Android_Objects.getProperty("SearchButtonAfter")));
                                Thread.sleep(5000);
                                SearchButton.click();
-                               Reporter.log("Clicked on Search button");
+                               System.out.println("Clicked on Search button");
                                Thread.sleep(10000);       
                                
                                }
@@ -6161,7 +6257,7 @@ public static void ClickApply() throws Exception
                                        WebElement SearchButton = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SearchButtonAfter")));
                                        Thread.sleep(5000);
                                        SearchButton.click();
-                                       Reporter.log("Clicked on Search button");
+                                       System.out.println("Clicked on Search button");
                                        Thread.sleep(10000);       
                                        
                                        }
@@ -6189,7 +6285,6 @@ public static void ClickApply() throws Exception
                                             SearchIconWatchAfter.click();
                                             testLog.info("\n Image found is : " + imagePath);
                                             testLog.info("Clicked on Search button");
-                                            Reporter.log("Clicked on Search button");
                                       } catch (Exception e) {
                                             testLog.info("\nImage not present : " + imagePath);    
                                             testLog.info("Search not present");
@@ -6204,7 +6299,30 @@ public static void ClickApply() throws Exception
                                       }
                              }
 
-                       // Method to verify the Watch List Tips
+ public static void ClickOnKeypadGoButton(String imagePath) throws Exception
+                               
+                               {
+                                 try
+                                 {
+                                            WebElement KeypadGo = visualdriver.findElement(ByMobile.image(imagePath));                              
+                                            KeypadGo.click();
+                                            testLog.info("\n Image found is : " + imagePath);
+                                            testLog.info("Clicked on Keypad Go button");
+                                      } catch (Exception e) {
+                                            testLog.info("\nImage not present : " + imagePath);    
+                                            testLog.info("Go button not present in the keypad");
+                                            status1 = 1;
+                                            //Assert.fail();
+                                            CaptureScreenshot("TC_Fail_");				
+                                            //ClickSignOut();
+                                            Close_App_HPE();
+           	                             Thread.sleep(2000);
+                                            Assert.fail("Go button not present in the keypad");
+
+                                      }
+                             }
+                               
+                               // Method to verify the Watch List Tips
                                
                                
                                public static void VerifyWatchListTips() throws Exception
@@ -6255,13 +6373,13 @@ public static void ClickApply() throws Exception
                                ShippingAddress.click();
                                Thread.sleep(5000);
                                ShippingAddress.sendKeys(Search_Keyword);
-                               Reporter.log("Entered Shipping Address ");
+                               System.out.println("Entered Shipping Address ");
                                Thread.sleep(5000);
                                }
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("Shipping Address not entered");                          
+                                      System.out.println("Shipping Address not entered");                          
                                       CaptureScreenshot("TC_Fail_");           
                                       //ClickSignOut();
                                       Close_App_HPE();
@@ -6284,13 +6402,13 @@ public static void ClickApply() throws Exception
                                ShippingAddressBox.click();
                                Thread.sleep(5000);
                                ShippingAddressBox.sendKeys(ShippingAddress);
-                               Reporter.log("Entered Shipping Address ");
+                               System.out.println("Entered Shipping Address ");
                                Thread.sleep(5000);
                                }
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("Shipping Address not entered");                          
+                                      System.out.println("Shipping Address not entered");                          
                                       CaptureScreenshot("TC_Fail_");           
                                       // ClickSignOut();
                                       //Close_App();
@@ -6311,7 +6429,7 @@ public static void ClickApply() throws Exception
                                ShippingAddressBox.click();
                                Thread.sleep(5000);
                                ShippingAddressBox.sendKeys(ShippingAddress);
-                               Reporter.log("Entered Shipping Address ");
+                               System.out.println("Entered Shipping Address ");
                                Thread.sleep(2000);
                                nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DoneButton"))).click();
                                     Thread.sleep(2000);
@@ -6319,7 +6437,7 @@ public static void ClickApply() throws Exception
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("Shipping Address not entered");                          
+                                      System.out.println("Shipping Address not entered");                          
                                       CaptureScreenshot("TC_Fail_");           
                                       // ClickSignOut();
                                       //Close_App();
@@ -6353,18 +6471,20 @@ public static void ClickApply() throws Exception
                                       try
                                             {
                                                                         
-                               WebElement HPEProductNumberBox = nativedriver.findElement(By.xpath(Android_Objects.getProperty("HPEProducttNumber")));
+                               WebElement HPEProductNumberBox = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("HPEProducttNumber")));
                                Thread.sleep(5000);
                                HPEProductNumberBox.click();
                                Thread.sleep(5000);
                                HPEProductNumberBox.sendKeys(HPEProductNumberSearch);
-                               Reporter.log("Entered HPE Product Number ");
-                               Thread.sleep(5000);
+                               System.out.println("Entered HPE Product Number ");
+                               Thread.sleep(5000);                               
+                               nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DoneButton"))).click();
+                                 Thread.sleep(2000);
                                }
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("HPE Product Number not entered");                          
+                                      System.out.println("HPE Product Number not entered");                          
                                       CaptureScreenshot("TC_Fail_");           
                                       //ClickSignOut();
                                       Close_App_HPE();
@@ -6388,13 +6508,13 @@ public static void ClickApply() throws Exception
                                HPEProductNumberBox.click();
                                Thread.sleep(5000);
                                HPEProductNumberBox.sendKeys(HPEProductNumberSearch);
-                               Reporter.log("Entered HPE Product Number ");
+                               System.out.println("Entered HPE Product Number ");
                                Thread.sleep(5000);
                                }
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("HPE Product Number not entered");                          
+                                      System.out.println("HPE Product Number not entered");                          
                                       CaptureScreenshot("TC_Fail_");           
                                       // ClickSignOut();
                                       //Close_App();
@@ -6414,7 +6534,7 @@ public static void ClickApply() throws Exception
                                HPEProductNumberBox.click();
                                Thread.sleep(5000);
                                HPEProductNumberBox.sendKeys(HPEProductNumberSearch);
-                               Reporter.log("Entered HPE Product Number ");
+                               System.out.println("Entered HPE Product Number ");
                                Thread.sleep(5000);
                                nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DoneButton"))).click();
                                     Thread.sleep(2000);
@@ -6422,7 +6542,7 @@ public static void ClickApply() throws Exception
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("HPE Product Number not entered");                          
+                                      System.out.println("HPE Product Number not entered");                          
                                       CaptureScreenshot("TC_Fail_");           
                                       // ClickSignOut();
                                       //Close_App();
@@ -6430,19 +6550,7 @@ public static void ClickApply() throws Exception
                                }
                                }
 
-public static void HPEProdcutNumber() throws Exception
-{
-    if(Device_Model.contains("iPhone"))
-       {
-           HPEProdcutNumber_iOS(config.getProperty("HPEProductNumberSearch"));
-                                    	 
-        } else
-        {
-          HPEProdcutNumber_AN(config.getProperty("HPEProductNumberSearch"));;
-        }
-                                                                               
- }
-                            
+                               
                                
                             // Method to click on Search button, greyed out      
                                public static void ClickSearchAdvanceSearchBefore(String imagePath) throws Exception
@@ -6455,7 +6563,6 @@ public static void HPEProdcutNumber() throws Exception
                                                           SearchIconWatchBefore.click();
                                                           testLog.info("\n Image found is : " + imagePath);
                                                           testLog.info("Clicked on Search, Search Icon Greyed out");
-                                                          Reporter.log("Clicked on Search, Search Icon Greyed out");
                                                           Thread.sleep(5000);
                                                     } catch (Exception e) {
                                                           testLog.info("\nImage not present : " + imagePath);    
@@ -6500,7 +6607,6 @@ public static void HPEProdcutNumber() throws Exception
                                                     {
                                                   	  ClickOnSearchButtonAfter("C://HPE//FunctionalTesting//Images//SearchButtonAfter"+".png");
                                                     }
-                                      
 
                                                                                
                                }
@@ -6531,13 +6637,13 @@ public static void HPEProdcutNumber() throws Exception
                                CustomerName.click();
                                Thread.sleep(5000);
                                CustomerName.sendKeys(Search_Keyword);
-                               Reporter.log("Entered Customer Name ");
+                               System.out.println("Entered Customer Name ");
                                Thread.sleep(5000);
                                }
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("Customer Name not entered");                          
+                                      System.out.println("Customer Name not entered");                          
                                       CaptureScreenshot("TC_Fail_");           
                                       // ClickSignOut();
                                       //Close_App();
@@ -6557,7 +6663,7 @@ public static void HPEProdcutNumber() throws Exception
                                CustomerName.click();
                                Thread.sleep(5000);
                                CustomerName.sendKeys(Search_Keyword);
-                               Reporter.log("Entered Customer Name ");
+                               System.out.println("Entered Customer Name ");
                                Thread.sleep(5000);
                                nativedriver.findElement(By.xpath(iOS_Objects.getProperty("DoneButton"))).click();
                                  Thread.sleep(2000);
@@ -6565,7 +6671,7 @@ public static void HPEProdcutNumber() throws Exception
                                
                                catch(Exception e)
                                {
-                                      Reporter.log("Customer Name not entered");                          
+                                      System.out.println("Customer Name not entered");                          
                                       //CaptureScreenshot("TC_Fail_");           
                                       ClickSignOut();
                                      // Close_App();
@@ -6588,13 +6694,13 @@ public static void HPEProdcutNumber() throws Exception
                                                   CustomerName.click();
                                                   Thread.sleep(5000);
                                                   CustomerName.sendKeys(Search_Keyword);
-                                                  Reporter.log("Entered Customer Name ");
+                                                  System.out.println("Entered Customer Name ");
                                                   Thread.sleep(5000);
                                                   }
                                                   
                                                   catch(Exception e)
                                                   {
-                                                         Reporter.log("Customer Name not entered");                          
+                                                         System.out.println("Customer Name not entered");                          
                                                          CaptureScreenshot("TC_Fail_");           
                                                          //ClickSignOut();
                                                          Close_App_HPE();
@@ -6613,7 +6719,6 @@ public static void HPEProdcutNumber() throws Exception
                                                                             SearchIconWatchAfter.click();
                                                                             testLog.info("\n Image found is : " + imagePath);
                                                                             testLog.info("Clicked on Search");
-                                                                            Reporter.log("Clicked on Search");
                                                                       } catch (Exception e) {
                                                                             testLog.info("\nImage not present : " + imagePath);    
                                                                             testLog.info("Search not present");
@@ -6621,7 +6726,7 @@ public static void HPEProdcutNumber() throws Exception
                                                                             CaptureScreenshot("TC_Fail_");				
                                                                             //ClickSignOut();
                                                                             Close_App_HPE();
-                                           	                             	Thread.sleep(2000);
+                                           	                             Thread.sleep(2000);
                                                                             Assert.fail("Search Icon is not present");
 
                                                                       }
@@ -6631,7 +6736,7 @@ public static void HPEProdcutNumber() throws Exception
                                                 	{	
                                                 	
                                                 		device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("547,1220")));
-                                                		Reporter.log("Clicked on the Search button");
+                                                		System.out.println("Clicked on the Search button");
                                                 	    Thread.sleep(10000); 		    
                                                 				
                                                 	}
@@ -6653,7 +6758,7 @@ public static void HPEProdcutNumber() throws Exception
                                                   {       
                                                   
                                                      nativedriver.findElement(By.xpath(iOS_Objects.getProperty("ClickAdvancedSearchButton"))).click();
-                                                           Reporter.log("Clicked on the Search button");
+                                                           System.out.println("Clicked on the Advance Search button");
                                                       Thread.sleep(10000);                     
                                                                            
                                                    }
@@ -6667,19 +6772,19 @@ public static void HPEProdcutNumber() throws Exception
                                                       {
                                                               Thread.sleep(5000);
                                                               WebElement WatchListResult = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchListResults")));
-                                                              if (WatchListResult.isDisplayed())
+                                                              if (!WatchListResult.isDisplayed())
                                                               {
                                                             	  nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                                                             	  WatchListResult1 = WatchListResult.getAttribute("name");
-                                                            	  Reporter.log("Below is the Watch List Results");
-                                                            	  Reporter.log(WatchListResult1);                          
+                                                            	  System.out.println("Below is the Watch List Results");
+                                                            	  System.out.println(WatchListResult1);                          
                                                             	  Thread.sleep(2000); 
                                                               }
                                                       }
                                                             	 
                                                             	catch(Exception e)
                                                              {
-                                                                    Reporter.log("Watch List Result is not Present");                        
+                                                                    System.out.println("Watch List Result is not Present");                        
                                                                     CaptureScreenshot("TC_Fail_");                         
                                                                     //ClickSignOut();
                                                                     Close_App_HPE();
@@ -6698,18 +6803,18 @@ public static void HPEProdcutNumber() throws Exception
                                                       {
                                                               Thread.sleep(5000);
                                                               WebElement WatchListResult = nativedriver.findElement(By.xpath(Android_Objects.getProperty("WatchListResults")));
-                                                              Reporter.log("Found Watch List Results");
+                                                              System.out.println("Found Watch List Results");
                                                             	  nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                                                             	  WatchListResult1 = WatchListResult.getAttribute("contentDesc");
-                                                            	  Reporter.log("Below is the Watch List Results");
-                                                            	  Reporter.log(WatchListResult1);                          
+                                                            	  System.out.println("Below is the Watch List Results");
+                                                            	  System.out.println(WatchListResult1);                          
                                                             	  Thread.sleep(2000); 
                                                               
                                                       }
                                                             	 
                                                             	catch(Exception e)
                                                              {
-                                                                    Reporter.log("Watch List Result is not Present");                        
+                                                                    System.out.println("Watch List Result is not Present");                        
                                                                     CaptureScreenshot("TC_Fail_");                         
                                                                     ClickSignOut();
                                                                     //Close_App();
@@ -6745,7 +6850,6 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement MenuBar = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Search Icon is Highlighted");
-                                                  			Reporter.log("Search Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Search Icon is not Highlighted");
@@ -6770,14 +6874,19 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                              	VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search_iPhone5S" +".png");
-                                                          }else if(Device_Model.equals("iPhone-6S"))
-                                                          {
-                                                           	VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search" +".png");
-                                                        }
-                                                             else
+                                                          }else if(Device_Model.contains("Pixel"))
                                                              {
                                                                		VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search_Pixel" +".png");
-                                                             }
+                                                             } else if(Device_Model.contains("Galaxy S6"))
+                                                             {
+                                                            	 VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search_Galaxy" +".png");
+                                                             } else if(Device_Model.contains("Galaxy S7"))
+                                                             {
+                                                            	 VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search_GalaxyS7" +".png");
+                                                             }else if(Device_Model.equals("iPhone-6S"))
+                                                             {
+                                                             	VerifySearchIconHighlight("C://HPE//FunctionalTesting//Images//Footer_Search" +".png");
+                                                          }
                                                          }
 
                                                   
@@ -6791,14 +6900,19 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                            	VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist_iPhone5S" +".png");
-                                                            }else if(Device_Model.equals("iPhone-6S"))
-                                                            {
-                                                          	VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist" +".png");
-                                                           }
-                                                             else
+                                                            }else if(Device_Model.equals("Pixel"))
                                                              {
                                                             	 VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist_Pixel" +".png");
-                                                             }
+                                                             } else if(Device_Model.equals("Galaxy S6"))
+                                                             {
+                                                            	 VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist_Galaxy" +".png");
+                                                             } else if(Device_Model.equals("Galaxy S7"))
+                                                             {
+                                                            	 VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist_GalaxyS7" +".png");
+                                                             }else if(Device_Model.equals("iPhone-6S"))
+                                                             {
+                                                           	VerifyWatchListIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Watchlist" +".png");
+                                                            }
                                                          }
                                                   
                                                   
@@ -6813,7 +6927,7 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                            	VerifyAlertsIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Alerts_iPhone5S" +".png");
-                                                            }else if(Device_Model.equals("iPhone-6S"))
+                                                            }else if(Device_Model.equals("iPhone-7"))
                                                             {
                                                           	VerifyAlertsIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Alerts" +".png");
                                                            }
@@ -6821,7 +6935,8 @@ public static void HPEProdcutNumber() throws Exception
                                                              {
                                                             	 VerifyAlertsIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_Alerts_Pixel" +".png");
                                                              }
-                                                         }
+                                                             }
+                                                         
               
                                            
                                                // Method to Verify Recent Searches icon highlighted
@@ -6834,14 +6949,19 @@ public static void HPEProdcutNumber() throws Exception
                                                              }else if(Device_Model.equals("iPhone-5S"))
                                                              {
                                                            	VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches_iPhone5S" +".png");
-                                                            }else if(Device_Model.equals("iPhone-6S"))
-                                                            {
-                                                          	VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches" +".png");
-                                                           }
-                                                             else
+                                                            }else if(Device_Model.equals("Pixel"))
                                                              {
                                                             	 VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches_Pixel" +".png");
-                                                             }
+                                                             } else if(Device_Model.equals("Galaxy S6"))
+                                                             {
+                                                            	 VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches_Galaxy" +".png");
+                                                             } else if(Device_Model.equals("Galaxy S7"))
+                                                             {
+                                                            	 VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches_GalaxyS7" +".png");
+                                                             }else if(Device_Model.equals("iPhone-6S"))
+                                                             {
+                                                           	VerifyRecentSearchesIconIconHighlighted("C://HPE//FunctionalTesting//Images//Footer_RecentSearches" +".png");
+                                                            }
                                                          }
               
                                                   
@@ -6855,7 +6975,6 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement Watchlist = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Watch List Icon is Highlighted");
-                                                  			Reporter.log("Watch List Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Watch List Icon is not Highlighted");
@@ -6875,7 +6994,6 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement Alerts = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Alerts Icon is Highlighted");
-                                                  			Reporter.log("Alerts Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Alerts Icon is not Highlighted");
@@ -6897,7 +7015,6 @@ public static void HPEProdcutNumber() throws Exception
                                                   			WebElement RecentSearch = visualdriver.findElement(ByMobile.image(imagePath));					
                                                   			testLog.info("\n Image found is : " + imagePath);
                                                   			testLog.info("Recent Searches Icon is Highlighted");
-                                                  			Reporter.log("Recent Searches Icon is Highlighted");
                                                   		} catch (Exception e) {
                                                   			testLog.info("\nImage not present : " + imagePath);	
                                                   			testLog.info("Recent Searches Icon is not Highlighted");
@@ -6924,7 +7041,6 @@ public static void HPEProdcutNumber() throws Exception
                                                                RecentSearch.click();
                                                                testLog.info("\n Image found is : " + imagePath);
                                                                testLog.info("Clicked Advanced Search");
-                                                               Reporter.log("Clicked Advanced Search");
                                                          } catch (Exception e) {
                                                                testLog.info("\nImage not present : " + imagePath);    
                                                                testLog.info("Advanced Searchnot present");
@@ -6967,7 +7083,6 @@ public static void HPEProdcutNumber() throws Exception
                  TandC.findElement(By.linkText(linktext));
                  testLog.info("\n Element found is : " + linktext);
                  testLog.info("Terms & COnditions page is present");
-                 Reporter.log("Terms & COnditions page is present");
                  Thread.sleep(2000);
                  SwipeUp();
                  ClickDecline();
@@ -6992,11 +7107,11 @@ public static void HPEProdcutNumber() throws Exception
         	    formatter.setLenient(false);
         	    
         	    parsedDate = (Date) formatter.parse(dateToValdate);
-				Reporter.log("++validated DATE TIME ++"+formatter.format(parsedDate));
+				System.out.println("++validated DATE TIME ++"+formatter.format(parsedDate));
         	   
         	  }catch(Exception e)
         	  {
-        		  Reporter.log("Date is not found");
+        		  System.out.println("Date is not found");
         	  }
         	  return parsedDate;
         	}
@@ -7009,16 +7124,16 @@ public static void HPEProdcutNumber() throws Exception
                                     {
                                       nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                                     WebElement TermsAndConditions = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("T&C")));
-                                    if(TermsAndConditions.isDisplayed())
+                                    if(!TermsAndConditions.isDisplayed())
                                     {      
                                       TermsAndConditions.click();
-                                    Reporter.log("Clicked on TermsAndConditions");
+                                    System.out.println("Clicked on TermsAndConditions");
                                     Thread.sleep(10000);
                                     }
                                     }
                                     catch(Exception e)
                                     {
-                                    Reporter.log("TermsAndConditions button is not Present");                          
+                                    System.out.println("TermsAndConditions button is not Present");                          
                                     CaptureScreenshot("TC_Fail_");                         
                                     //ClickSignOut1();
                                     Close_App_HPE();
@@ -7038,7 +7153,6 @@ public static void HPEProdcutNumber() throws Exception
                               TermsAndCondition.click();
                               testLog.info("\n Image found is : " + imagePath);
                               testLog.info("Clicked on Terms And Conditions");
-                              Reporter.log("Clicked on Terms And Conditions");
                         } catch (Exception e) {
                               testLog.info("\nImage not present : " + imagePath);    
                               testLog.info("Terms And Condition Menu option is not found");
@@ -7064,14 +7178,16 @@ public static void HPEProdcutNumber() throws Exception
                  }else if(Device_Model.contains("Pixel"))
                  {
                      ClickTermsAndConditions_AN("C://HPE//FunctionalTesting//Images//TermsAndConditions"+".png");
-                 }else if(Device_Model.contains("Galaxy"))
+                 }else if(Device_Model.contains("Galaxy S6"))
                  {
                    ClickTermsAndConditions_AN("C://HPE//FunctionalTesting//Images//TermsAndConditions_Galaxy"+".png");
                    Thread.sleep(2000);
+                 }   else if(Device_Model.contains("Galaxy S7"))
+                 {
+                 ClickPrivacyStatement_AN("C://HPE//FunctionalTesting//Images//PrivacyStatement_GalaxyS7"+".png");
                  }
-                        
+                           
                 }
-
 
 
               public static void ClickRecentSearchesfirstKeyword_iOS()throws Exception {
@@ -7080,10 +7196,10 @@ public static void HPEProdcutNumber() throws Exception
                        nativedriver.findElement(By.xpath(iOS_Objects.getProperty("RecentSearchesFirstKeyword")));
                 Thread.sleep(2000);
                 
-                       Reporter.log("The Order details page is diaplayed");
+                       System.out.println("The Order details page is diaplayed");
                 } catch (Exception e) {
 
-                       Reporter.log("The Order details page is not diaplayed");                        
+                       System.out.println("The Order details page is not diaplayed");                        
                       HPECommonFunctions.CaptureScreenshot("TC_Fail_");                         
                       //ClickSignOut();
                       Close_App_HPE();
@@ -7100,10 +7216,10 @@ public static void HPEProdcutNumber() throws Exception
          try {
                 nativedriver.findElement(By.xpath(Android_Objects.getProperty("RecentSearchesFirstKeyword")));
                 Thread.sleep(2000);
-                Reporter.log("The Order details page is diaplayed");
+                System.out.println("The Order details page is diaplayed");
          } catch (Exception e) {
 
-                Reporter.log("The Order details page is not diaplayed");                        
+                System.out.println("The Order details page is not diaplayed");                        
                 HPECommonFunctions.CaptureScreenshot("TC_Fail_");                         
                 //ClickSignOut();
                 Close_App_HPE();
@@ -7128,7 +7244,7 @@ public static void HPEProdcutNumber() throws Exception
   
   public static void ClickOnShipStartDateCalender_iOS() throws Exception{
       nativedriver.findElement(By.xpath(iOS_Objects.getProperty("ShipStartDateCalender"))).click();
-      Reporter.log("Clicked on Calendar");
+      System.out.println("Clicked on Calendar");
      Thread.sleep(10000);
  }
 
@@ -7153,7 +7269,7 @@ public static void HPEProdcutNumber() throws Exception
  public static void ClickOnShipEndDateCalender_AN() throws Exception
                       {      
  device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("1016,901")));
- Reporter.log("Clicked on Calendar");
+ System.out.println("Clicked on Calendar");
  Thread.sleep(10000);                     
                       }
  public static void ClickOnShipEndDateCalender_iOS() throws Exception{
@@ -7190,13 +7306,13 @@ public static void HPEProdcutNumber() throws Exception
  {
        if(Device_Model.contains("Pixel"))
        {
-              //ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Pixel"+".png");
+              ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Pixel"+".png");
        } else if(Device_Model.contains("iPhone"))
        {
-    	   Reporter.log("No need to close the keypad in iphone");
+    	   System.out.println("No need to close the keypad in iphone");
        }else 
        {
-           //ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Galaxy"+".png");
+           ClickOnKeypadGoButton_AN("C://HPE//FunctionalTesting//Images//KeypadGoicon_Galaxy"+".png");
     }
  }
 
@@ -7207,11 +7323,11 @@ public static void HPEProdcutNumber() throws Exception
     	 WebElement Done = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Done")));
     	 Thread.sleep(2000);
     	 Done.click();
-            Reporter.log("Clicked on Done");
+            System.out.println("Clicked on Done");
             Thread.sleep(5000);
      } catch (Exception e) {
 
-            Reporter.log("Done is not diaplayed");                        
+            System.out.println("Done is not diaplayed");                        
            HPECommonFunctions.CaptureScreenshot("TC_Fail_");                         
            //ClickSignOut();
            Close_App_HPE();
@@ -7222,7 +7338,7 @@ public static void HPEProdcutNumber() throws Exception
    }
    
  
-	
+
 	// Method to click on Ship Date range - Start
     public static void ClickOnDateOrdered() throws Exception
                          { 
@@ -7233,17 +7349,29 @@ public static void HPEProdcutNumber() throws Exception
         }else
         {
         	device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("490,774")));
-        	Reporter.log("Clicked on Date Ordered Calendar, Start");
+        	System.out.println("Clicked on Date Ordered Calendar, Start");
         	Thread.sleep(10000);                  
         }
      }
 
-     
+    public static void ClickOnEstimatedShipDateCalendar() throws Exception
+    {
+     if(Device_Model.contains("iPhone"))
+     {
+     ClickOnDeliveryStartDateCalendar_iOS();
+     }else                
+  
+{
+     ClickOnEstimatedShipDate_AN();
+     }
+               
+    }
+    
  // Method to click on Delivery Date range - Start
     public static void ClickOnEstimatedShipDate_AN() throws Exception
                          {      
     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("481,1002")));
-    Reporter.log("Clicked on Calendar");
+    System.out.println("Clicked on Calendar");
     Thread.sleep(10000);                  
     }
     
@@ -7265,7 +7393,7 @@ public static void HPEProdcutNumber() throws Exception
     public static void ClickOnEstimatedEndDateCalendar_AN() throws Exception
                          {      
     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("1019,988")));
-    Reporter.log("Clicked on Calendar");
+    System.out.println("Clicked on Calendar");
     Thread.sleep(10000);                     
                          }
 
@@ -7281,20 +7409,20 @@ public static void HPEProdcutNumber() throws Exception
         }else
         {
     device.getMobileTouchScreen().touch(new MobileCoordinates(new MobilePoint("1032,778")));
-    Reporter.log("Clicked on Calendar");
+    System.out.println("Clicked on Calendar");
     Thread.sleep(10000);                     
        }
    }
 
+    
     public static void ClickOnDateOrderedEndCalendar_iOS() throws Exception
     {
          nativedriver.findElement(By.xpath(iOS_Objects.getProperty("OrderEndCalender"))).click();
-         Reporter.log("Clicked on Calendar");
+         System.out.println("Clicked on Calendar");
         Thread.sleep(2000); 
         }
     
-
-
+    
     public static void ClickonDateOrderedStartDate() throws Exception
     {
      if(Device_Model.contains("iPhone"))
@@ -7314,109 +7442,109 @@ public static void HPEProdcutNumber() throws Exception
 
     public static void NinetyDayValidationStart_AN(String PastDate) throws Exception
 
-                     {
-                            try
-                                  {
-WebElement PastDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("DateOrderedStart")));
-                     Thread.sleep(5000);
-                     PastDateCheck.click();
-                     Thread.sleep(5000);
-                     PastDateCheck.sendKeys(PastDate);
-                     Reporter.log("Date Entered in Date ordered start field");
-                     Thread.sleep(2000);
-                                  }
-                            catch (Exception e)
-                            {
-                            	Reporter.log("Date not entered");
-                            	CaptureScreenshot("TC_Fail_");           
-                                //ClickSignOut();
-                                Close_App_HPE();
-	                             Thread.sleep(2000);
-                                Assert.fail("Date not entered");
-                            }
-                     }
+                        {
+                               try
+                                     {
+   WebElement PastDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("DateOrderedStart")));
+                        Thread.sleep(5000);
+                        PastDateCheck.click();
+                        Thread.sleep(5000);
+                        PastDateCheck.sendKeys(PastDate);
+                        System.out.println("Date Entered in Date ordered start field");
+                        Thread.sleep(2000);
+                                     }
+                               catch (Exception e)
+                               {
+                               	System.out.println("Date not entered");
+                               	CaptureScreenshot("TC_Fail_");           
+                                   //ClickSignOut();
+                                   Close_App_HPE();
+   	                             Thread.sleep(2000);
+                                   Assert.fail("Date not entered");
+                               }
+                        }
 
-//Method to click on Date field, End
+   //Method to click on Date field, End
 
 
    public static void NinetyDayValidationEnd_AN(String FutureDate) throws Exception
 
-                    {
-                           try
-                                 {
-WebElement FutureDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("DateOrderedEnd")));
-                    Thread.sleep(5000);
-                    FutureDateCheck.click();
-                    Thread.sleep(5000);
-                    FutureDateCheck.sendKeys(FutureDate);
-                    Reporter.log("Date Entered in Date ordered End field");
-                    Thread.sleep(2000);
-                                 }
-                           catch (Exception e)
-                           {
-                           	Reporter.log("Date not entered");
-                           	CaptureScreenshot("TC_Fail_");           
-                               //ClickSignOut();
-                               Close_App_HPE();
-	                             Thread.sleep(2000);
-                               Assert.fail("Date not entered");
-                           }
-                    }
+                       {
+                              try
+                                    {
+   WebElement FutureDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("DateOrderedEnd")));
+                       Thread.sleep(5000);
+                       FutureDateCheck.click();
+                       Thread.sleep(5000);
+                       FutureDateCheck.sendKeys(FutureDate);
+                       System.out.println("Date Entered in Date ordered End field");
+                       Thread.sleep(2000);
+                                    }
+                              catch (Exception e)
+                              {
+                              	System.out.println("Date not entered");
+                              	CaptureScreenshot("TC_Fail_");           
+                                  //ClickSignOut();
+                                  Close_App_HPE();
+   	                             Thread.sleep(2000);
+                                  Assert.fail("Date not entered");
+                              }
+                       }
 
 
-//Method to click on Date field, Start
+   //Method to click on Date field, Start
 
 
    public static void NinetyDayValidationForShipStart_AN(String PastDate) throws Exception
 
-                   {
-                          try
-                                {
-WebElement PastDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShipStartDate")));
-                   Thread.sleep(5000);
-                   PastDateCheck.click();
-                   Thread.sleep(5000);
-                   PastDateCheck.sendKeys(PastDate);
-                   Reporter.log("Date Entered in Shippment start field");
-                   Thread.sleep(2000);
-                                }
-                          catch (Exception e)
-                          {
-                          	Reporter.log("Date not entered");
-                          	CaptureScreenshot("TC_Fail_");           
-                              //ClickSignOut();
-                              Close_App_HPE();
-	                             Thread.sleep(2000);
-                              Assert.fail("Date not entered");
-                          }
-                   }
+                      {
+                             try
+                                   {
+   WebElement PastDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShipStartDate")));
+                      Thread.sleep(5000);
+                      PastDateCheck.click();
+                      Thread.sleep(5000);
+                      PastDateCheck.sendKeys(PastDate);
+                      System.out.println("Date Entered in Shippment start field");
+                      Thread.sleep(2000);
+                                   }
+                             catch (Exception e)
+                             {
+                             	System.out.println("Date not entered");
+                             	CaptureScreenshot("TC_Fail_");           
+                                 //ClickSignOut();
+                                 Close_App_HPE();
+   	                             Thread.sleep(2000);
+                                 Assert.fail("Date not entered");
+                             }
+                      }
 
-//Method to click on Date field, End
+   //Method to click on Date field, End
 
 
    public static void NinetyDayValidationForShipEnd_AN(String FutureDate) throws Exception
 
-                  {
-                         try
-                               {
-WebElement FutureDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShipEndDate")));
-                  Thread.sleep(5000);
-                  FutureDateCheck.click();
-                  Thread.sleep(5000);
-                  FutureDateCheck.sendKeys(FutureDate);
-                  Reporter.log("Date Entered in Shipment end field");
-                  Thread.sleep(2000);
-                               }
-                         catch (Exception e)
-                         {
-                         	Reporter.log("Date not entered");
-                         	CaptureScreenshot("TC_Fail_");           
-                             //ClickSignOut();
-                             Close_App_HPE();
-	                             Thread.sleep(2000);
-                             Assert.fail("Date not entered");
-                         }
-                  }
+                     {
+                            try
+                                  {
+   WebElement FutureDateCheck = nativedriver.findElement(By.xpath(Android_Objects.getProperty("ShipEndDate")));
+                     Thread.sleep(5000);
+                     FutureDateCheck.click();
+                     Thread.sleep(5000);
+                     FutureDateCheck.sendKeys(FutureDate);
+                     System.out.println("Date Entered in Shipment end field");
+                     Thread.sleep(2000);
+                                  }
+                            catch (Exception e)
+                            {
+                            	System.out.println("Date not entered");
+                            	CaptureScreenshot("TC_Fail_");           
+                                //ClickSignOut();
+                                Close_App_HPE();
+   	                             Thread.sleep(2000);
+                                Assert.fail("Date not entered");
+                            }
+                     }
 
    public static void NinetyDayValidationStart_iOS(String PastDate) throws Exception
 
@@ -7428,12 +7556,12 @@ WebElement PastDateCheck = nativedriver.findElement(By.xpath(iOS_Objects.getProp
    PastDateCheck.click();
    Thread.sleep(5000);
    PastDateCheck.sendKeys(PastDate);
-   Reporter.log("Date Entered in Date ordered start field");
+   System.out.println("Date Entered in Date ordered start field");
    Thread.sleep(2000);
                 }
           catch (Exception e)
           {
-          	Reporter.log("Date not entered");
+          	System.out.println("Date not entered");
           	CaptureScreenshot("TC_Fail_");           
               //ClickSignOut();
               Close_App_HPE();
@@ -7455,12 +7583,12 @@ WebElement FutureDateCheck = nativedriver.findElement(By.xpath(iOS_Objects.getPr
   FutureDateCheck.click();
   Thread.sleep(5000);
   FutureDateCheck.sendKeys(FutureDate);
-  Reporter.log("Date Entered in Date ordered End field");
+  System.out.println("Date Entered in Date ordered End field");
   Thread.sleep(2000);
                }
          catch (Exception e)
          {
-         	Reporter.log("Date not entered");
+         	System.out.println("Date not entered");
          	CaptureScreenshot("TC_Fail_");           
              //ClickSignOut();
              Close_App_HPE();
@@ -7483,12 +7611,12 @@ WebElement PastDateCheck = nativedriver.findElement(By.xpath(iOS_Objects.getProp
  PastDateCheck.click();
  Thread.sleep(5000);
  PastDateCheck.sendKeys(PastDate);
- Reporter.log("Date Entered in Shippment start field");
+ System.out.println("Date Entered in Shippment start field");
  Thread.sleep(2000);
               }
         catch (Exception e)
         {
-        	Reporter.log("Date not entered");
+        	System.out.println("Date not entered");
         	CaptureScreenshot("TC_Fail_");           
             //ClickSignOut();
             Close_App_HPE();
@@ -7510,12 +7638,12 @@ Thread.sleep(5000);
 FutureDateCheck.click();
 Thread.sleep(5000);
 FutureDateCheck.sendKeys(FutureDate);
-Reporter.log("Date Entered in Shipment end field");
+System.out.println("Date Entered in Shipment end field");
 Thread.sleep(2000);
              }
        catch (Exception e)
        {
-       	Reporter.log("Date not entered");
+       	System.out.println("Date not entered");
        	CaptureScreenshot("TC_Fail_");           
            //ClickSignOut();
            Close_App_HPE();
@@ -7578,6 +7706,40 @@ public static void NinetyDayValidationForShipEnd() throws Exception
 	          
 } 
 
+
+
+
+/*//change orientation to landscape from portrait
+ public static void Rotate_Device() throws Exception
+ {
+       Thread.sleep(5000);           
+                         try{
+             
+             Orient=device.getOrientation();
+             System.out.println("Device Orientation is in  ");
+             System.out.println(Orient); 
+                                     
+               if (Orient.value().equals(ScreenOrientation.LANDSCAPE.value()))
+                 //if (Orient.value().equals(ScreenOrientation.PORTRAIT.value()))
+                               
+       {
+             Thread.sleep(5000);
+             System.out.println("Device is already in Landscape mode");
+                               
+       }
+             else
+             {
+                   System.out.println("Device Orientation will be changed to Landscape mode1");
+                   device.rotate(Landscape);
+             }
+       }
+       catch(Exception e)
+       {
+             System.out.println("Device Orientation will be changed to Landscape mode");
+             device.rotate(Landscape);
+       
+       }
+ }*/
 
   
   
