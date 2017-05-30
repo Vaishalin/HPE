@@ -71,7 +71,6 @@ public class HPETest extends BaseClassHPE
 			Reporter.log("Device Version is: "+Device_OS_Version);
 			Reporter.log("Device Model is: "+Device_Model);
 			Reporter.log("Device OS is: "+Device_OS);
-			Reporter.log("Test script validates if the device under test is connected to either Wifi or 4g");
 	    
 		    HPECommonFunctions.screen();
 			System.out.println("Starting of TC_136_ValidateConnectivity");
