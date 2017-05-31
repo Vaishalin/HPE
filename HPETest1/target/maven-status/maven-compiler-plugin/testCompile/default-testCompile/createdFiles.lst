@@ -1,0 +1,4 @@
+Libraries\HPECommonFunctions.class
+Libraries\HPEOperations.class
+Regression_Utilities\BaseClassHPE.class
+Regression_Utilities\HPETest.class
