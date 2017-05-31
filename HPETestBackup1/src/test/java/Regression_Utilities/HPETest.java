@@ -59,8 +59,7 @@ public class HPETest extends BaseClassHPE
 {	
 	public static String date=null;
 	
-	
-	
+		
 	@Test(priority=1,groups={"Primary","Secondary"},enabled=true, description="Test script validates if the device under test is connected to either Wifi or 4g")
 
 	public void TC_136_ValidateConnectivity()throws Exception

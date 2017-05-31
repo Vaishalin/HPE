@@ -1813,7 +1813,6 @@ public static void ClickSignOut1() throws Exception
 				WatchFlagIcon.click();
 				System.out.println("Clicked on Watchlist Flag Icon");
 				Thread.sleep(10000);
-				
 			}
 			}
 			catch(Exception e)

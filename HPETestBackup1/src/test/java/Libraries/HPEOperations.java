@@ -100,9 +100,8 @@ public class HPEOperations extends BaseClassHPE
                 public static String contentDesc = null;
                // public static XLS_Reader datatable=null;
                 //public static XLS_Reader datatable1=null;
-                
                
-            	
+               	
     //Method to Login into HPE Application first time after the installation
     public static void FirstLogin_App1() throws Exception
       {
