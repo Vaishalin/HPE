@@ -46,7 +46,7 @@ public static IMobileDevice device = null; // interface provides methods for wor
 public static FileInputStream fp=null;
 public static FileInputStream fp1=null;
 public static FileInputStream fp2=null;
-public static final Logger testLog = Logger.getLogger("debugLogger");
+public static Logger testLog = Logger.getLogger("debugLogger");
 //public static Logger testLog = null;
 public static FileInputStream file_Stream_OR=null;
 public static Properties config=null;
@@ -197,6 +197,7 @@ public static void Load_Properties_File_iOS() throws IOException
 		App_Objects.load(file_Stream_OR);
 	
 	}
+
 
 
 @AfterSuite(alwaysRun=true)
