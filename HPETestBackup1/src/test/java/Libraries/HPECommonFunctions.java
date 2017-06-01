@@ -3191,8 +3191,8 @@ public static void ClickApply() throws Exception
                     	} catch (Exception e) {
                     		testLog.info("\nElement not found : " + linktext);
                     		testLog.info("\n User is not connected to 4g or wifi");
-                    		CaptureScreenshot("TC_Fail_");	
-                    		Close_App_HPE();
+                    		//CaptureScreenshot("TC_Fail_");	
+                    		//Close_App_HPE();
                             Thread.sleep(2000);
                     		Assert.fail("\n User is not connected to 4g or wifi");
                     		status1 = 1;
