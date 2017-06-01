@@ -75,9 +75,9 @@ public class HPETest extends BaseClassHPE
 			System.out.println("Starting of TC_136_ValidateConnectivity");
 			HPECommonFunctions.screen();
 		    
-		    //HPECommonFunctions.Open_App_HPE();
+		    HPECommonFunctions.Open_App_HPE();
 		    HPECommonFunctions.VerifyConnectivity("Sign In");	
-		    //HPECommonFunctions.Close_App_HPE();
+		    HPECommonFunctions.Close_App_HPE();
 			
 			HPECommonFunctions.screen();
 		    System.out.println("Ending of TC_136_ValidateConnectivity");
