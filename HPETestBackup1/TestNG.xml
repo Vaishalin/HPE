@@ -7,14 +7,16 @@
 <listeners>
       <listener class-name="org.uncommons.reportng.HTMLReporter"/>
       <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+
   </listeners>
+  
 
 
 <!--  <parameter name="deviceId" value=${deviceId}></parameter>-->
      <test name="HPETest">
      <groups>
         <run>      
-          <include name="Primary"/>
+          <include name="Secondary"/>
           <!-- <include name="Secondary"/>-->
        </run>
      </groups>
