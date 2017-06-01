@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 100.104 s <<< FAILURE! - in TestSuite
+TC_134_ValidateErrorMessageForWrongUsername(Regression_Utilities.HPETest)  Time elapsed: 57.244 s  <<< FAILURE!
+org.openqa.selenium.NoSuchElementException: 
+Element with by xpath 'xpath|(//*[@label="Address"])[2]			' wasn't found.
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.48.2', revision: '41bccdd10cf2c0560f637404c2d96164b67d9d67', time: '2015-10-09 13:08:06'
+System info: host: 'BDC8-LX-5111KRH', ip: '192.168.1.5', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_121'
+Driver info: driver.version: unknown
+	at Regression_Utilities.HPETest.TC_134_ValidateErrorMessageForWrongUsername(HPETest.java:88)
+
