@@ -1631,6 +1631,13 @@ public static void ClickSignOut1() throws Exception
 		}
 	}
 		
+		Map<String, Object> params1 = new HashMap<>();
+		params1.put("location", "170,324");
+		params1.put("duration", "5");
+		Object result1 = driver.executeScript("mobile:touch:tap", params1);
+		
+		
+		
 		//Method to click on white flag icon 
 	    public static void ClickGreenFlag() throws Exception
 			      {
