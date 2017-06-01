@@ -170,7 +170,7 @@ public class HPEOperations extends BaseClassHPE
     		
 			WebElement TermsCondition = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
 			//WebElement TermsCondition = nativedriver.findElement(By.linkText("Terms and Conditions"));
-			if(!TermsCondition.isDisplayed())
+			if(TermsCondition.isDisplayed())
 			{
 				HPECommonFunctions.SwipeUp();	    		   		
 	    		HPECommonFunctions.ClickAccept();
@@ -307,7 +307,7 @@ public class HPEOperations extends BaseClassHPE
   			{	
   			visualdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   			WebElement GO = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Go")));
-  			if(!GO.isDisplayed())
+  			if(GO.isDisplayed())
   			{				
   				GO.click();
   				System.out.println("Clicked on GO button");
@@ -376,7 +376,7 @@ public class HPEOperations extends BaseClassHPE
 		  			{			
 		  			visualdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		  			WebElement Install = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Install")));
-		  			if(!Install.isDisplayed())
+		  			if(Install.isDisplayed())
 		  			{				
 		  				Install.click();
 		  				System.out.println("Clicked on Install");
@@ -690,7 +690,7 @@ public class HPEOperations extends BaseClassHPE
             
             public static void ValidateCollapsing() throws Exception{
             	try{
-            		if(!nativedriver.findElement(By.xpath("//*[@class='UIAWebView']/text[4]")).isDisplayed())
+            		if(nativedriver.findElement(By.xpath("//*[@class='UIAWebView']/text[4]")).isDisplayed())
             		{
                        Thread.sleep(2000);
                        System.out.println("The last FAQ content that was expanded is not collapsed.");
@@ -721,7 +721,7 @@ public class HPEOperations extends BaseClassHPE
             	
             	nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     			WebElement PoweredByOSS = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("PoweredByOSS")));
-    			if (!PoweredByOSS.isDisplayed()) {
+    			if (PoweredByOSS.isDisplayed()) {
     				WatchlistCount = PoweredByOSS.getAttribute("name");
     				System.out.println("End Customer Name is Present & below is the name");
     				System.out.println(WatchlistCount);
@@ -901,7 +901,7 @@ public class HPEOperations extends BaseClassHPE
             		try {
             			nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             			WebElement WatchlistCount1 = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchlistCount")));
-            			if (!WatchlistCount1.isDisplayed()) {
+            			if (WatchlistCount1.isDisplayed()) {
             				WatchlistCount = WatchlistCount1.getAttribute("name");
             				System.out.println("End Customer Name is Present & below is the name");
             				System.out.println(WatchlistCount);
@@ -1303,7 +1303,7 @@ public class HPEOperations extends BaseClassHPE
             	try {
             		visualdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             		WebElement WhiteFlag = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WhiteFLag")));
-            		if (!WhiteFlag.isDisplayed()) {
+            		if (WhiteFlag.isDisplayed()) {
             			
             			System.out.println("Order is Removed from the WatchList");
             			Thread.sleep(2000);
