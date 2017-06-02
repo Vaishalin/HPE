@@ -791,7 +791,12 @@ public class HPECommonFunctions extends HPEOperations
                     	   SwipeUp_iOS_iPhone5S();
                        }else if(Device_Model.equals("iPhone-6S"))
                        {
-                    	   SwipeUp_iOS();
+                    	   //SwipeUp_iOS();
+                       	    System.out.println("Swiping up on the screen");
+                       		device.getMobileTouchScreen().swipe(new MobileCoordinates(new MobilePoint("301,1174")), new MobileCoordinates(new MobilePoint("289,179")), 1);
+                       				
+                       		Thread.sleep(5000);		
+                           
                        }
                        else
                        {
@@ -1630,13 +1635,7 @@ public static void ClickSignOut1() throws Exception
 							
 		}
 	}
-		
-		Map<String, Object> params1 = new HashMap<>();
-		params1.put("location", "170,324");
-		params1.put("duration", "5");
-		Object result1 = driver.executeScript("mobile:touch:tap", params1);
-		
-		
+
 		
 		//Method to click on white flag icon 
 	    public static void ClickGreenFlag() throws Exception
