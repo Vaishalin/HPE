@@ -239,7 +239,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
 
     
-    @Test(priority=7,groups={"Primary","Secondary"},enabled=true, description="Test script validates if the flag icon is present in the Home screen of the application")
+    @Test(priority=7,groups={"Primary","Secondary"},enabled=false, description="Test script validates if the flag icon is present in the Home screen of the application")
     public void TC_123_ValidateFlagIcon_Home()throws Exception
     {    	
     		Reporter.log("Test script validates if the flag icon is present in the Home screen of the application");
@@ -270,7 +270,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     
   
     
-    @Test(priority=8,groups={"Primary"},enabled=true, description="Test script validates if user is able to delete an order from the Watchlist, once deleted the order should not be displayed in the watchlist page")
+    @Test(priority=8,groups={"Primary"},enabled=false, description="Test script validates if user is able to delete an order from the Watchlist, once deleted the order should not be displayed in the watchlist page")
     public void TC_125_ValidateOrderDeletionFromWatchlist()throws Exception
     {    	   	
     		
@@ -298,7 +298,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     	
     }
     
-    @Test(priority=9,groups={"Primary","Secondary"},enabled=true, description="Test Script validates that Order details page is displayed on clicking any of the order")
+    @Test(priority=9,groups={"Primary","Secondary"},enabled=false, description="Test Script validates that Order details page is displayed on clicking any of the order")
     public void TC_5_ValidateOrderDetailsPage()throws Exception
     {                
        
@@ -327,7 +327,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
   
-    @Test(priority=10,groups={"Primary"},enabled=true)
+    @Test(priority=10,groups={"Primary"},enabled=false)
     public void TC_115_Validate3LineMenu()throws Exception
     {    	   	
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -357,7 +357,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=11,groups={"Primary"},enabled=true)
+    @Test(priority=11,groups={"Primary"},enabled=false)
     public void TC_93_BackButtonFromWatchListPage()throws Exception
     {    	   	
        		Reporter.log("Application Name is: "+"HPE Go");
@@ -385,7 +385,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
 		    
     }
     
-    @Test(priority=12,groups={"Primary","Secondary"},enabled=true)
+    @Test(priority=12,groups={"Primary","Secondary"},enabled=false)
     public void TC_96_VerifyVersionNumberOnMenuPage()throws Exception
     {                
        	Reporter.log("Application Name is: "+"HPE Go");
@@ -413,7 +413,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
                   
     }
     
-    @Test(priority=13,groups={"Primary"},enabled=true)
+    @Test(priority=13,groups={"Primary"},enabled=false)
     public void TC_105_VerifyGetSupportOption()throws Exception
     {                
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -442,7 +442,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
                   
     }
     
-    @Test(priority=14,groups={"Primary"},enabled=true)
+    @Test(priority=14,groups={"Primary"},enabled=false)
     public void TC_106_ClickGetSupportOption()throws Exception
     {                
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -473,7 +473,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=15,groups={"Primary"},enabled=true)
+    @Test(priority=15,groups={"Primary"},enabled=false)
     public void TC_91_BackButtonFromSearchResultsPage()throws Exception
     {    	   	
     	Reporter.log("Application Name is: "+"HPE Go");
@@ -505,7 +505,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }
     
     
-    @Test(priority=16,groups={"Primary"},enabled=true)
+    @Test(priority=16,groups={"Primary"},enabled=false)
     public void TC_92_BackButtonFromAlertsPage()throws Exception
     {    	   	
     	
@@ -538,7 +538,7 @@ public void TC_135_ValidateErrorMessageForWrongPassword()throws Exception
     }    
 
 
-@Test(priority=17,groups={"Primary"},enabled=true)
+@Test(priority=17,groups={"Primary"},enabled=false)
 public void TC_94_BackButtonFromOrderDetailScreen()throws Exception
 {    	   	
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -567,7 +567,7 @@ public void TC_94_BackButtonFromOrderDetailScreen()throws Exception
 	    
 }
 
-@Test(priority=18,groups={"Primary"},enabled=true)
+@Test(priority=18,groups={"Primary"},enabled=false)
 public void TC_95_BackButtonFromRecentSearchesScreen()throws Exception
 {    	   	
 	
@@ -604,7 +604,7 @@ public void TC_95_BackButtonFromRecentSearchesScreen()throws Exception
 
   
 
-@Test(priority=19,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=19,groups={"Primary","Secondary"},enabled=false)
 public void TC_32_ValidateDeletionOfSearchFromRecentSearchesScreen()throws Exception
 {             
        
@@ -632,7 +632,7 @@ public void TC_32_ValidateDeletionOfSearchFromRecentSearchesScreen()throws Excep
 
 
 
-@Test(priority=20,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=20,groups={"Primary","Secondary"},enabled=false)
 public void TC_17_ValidateAdvanceSearchFunctionality()throws Exception
 {    	   	
 	
@@ -661,7 +661,7 @@ public void TC_17_ValidateAdvanceSearchFunctionality()throws Exception
 	    
 }
 
-@Test(priority=21,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=21,groups={"Primary","Secondary"},enabled=false)
 public void TC_19_ValidateFilterIconFunctionality()throws Exception
 {    	   	
 	
@@ -691,7 +691,7 @@ public void TC_19_ValidateFilterIconFunctionality()throws Exception
 	    
 }
 
-@Test(priority=22,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=22,groups={"Primary","Secondary"},enabled=false)
 public void TC_55_CommonPageLayoutForAlerts()throws Exception
 {    	   	
 	
@@ -719,7 +719,7 @@ public void TC_55_CommonPageLayoutForAlerts()throws Exception
 	    
 }
 
-@Test(priority=23,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=23,groups={"Primary","Secondary"},enabled=false)
 public void TC_16_ValidateBackArrowButton()throws Exception
 {                
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -749,7 +749,7 @@ public void TC_16_ValidateBackArrowButton()throws Exception
    
 }
 
-@Test(priority=24,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=24,groups={"Primary","Secondary"},enabled=false)
 public void TC_98_ValidateInvoiceAvailableDeliveredOrders()throws Exception
 {                
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -778,7 +778,7 @@ public void TC_98_ValidateInvoiceAvailableDeliveredOrders()throws Exception
    
 }
 
-@Test(priority=25,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=25,groups={"Primary","Secondary"},enabled=false)
 public void TC_18_ValidateSortIcon()throws Exception
 {                
 	Reporter.log("Application Name is: "+"HPE Go");
@@ -808,7 +808,7 @@ public void TC_18_ValidateSortIcon()throws Exception
    
 }
 
-@Test(priority=26,groups={"Primary"},enabled=true)
+@Test(priority=26,groups={"Primary"},enabled=false)
 public void TC_99_ValidateInvoiceDoesnotAvailableCancelledOrders()throws Exception
 {                
    
@@ -841,7 +841,7 @@ public void TC_99_ValidateInvoiceDoesnotAvailableCancelledOrders()throws Excepti
 }
 
 
-@Test(priority=27,groups={"Primary"},enabled=true)
+@Test(priority=27,groups={"Primary"},enabled=false)
 public void TC_100_ValidateInvoiceDoesnotAvailableSubmittedOrders()throws Exception
 {                
 	
@@ -872,7 +872,7 @@ public void TC_100_ValidateInvoiceDoesnotAvailableSubmittedOrders()throws Except
    
 }
 
-@Test(priority=28,groups={"Primary"},enabled=true)
+@Test(priority=28,groups={"Primary"},enabled=false)
 public void TC_101_ValidateInvoiceDoesnotAvailableAcceptedOrders()throws Exception
 {                
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -902,7 +902,7 @@ public void TC_101_ValidateInvoiceDoesnotAvailableAcceptedOrders()throws Excepti
    
 }
 
-@Test(priority=29,groups={"Primary"},enabled=true)
+@Test(priority=29,groups={"Primary"},enabled=false)
 public void TC_102_ValidateInvoiceDoesnotAvailableInProductionOrders()throws Exception
 {                
    
@@ -927,7 +927,7 @@ public void TC_102_ValidateInvoiceDoesnotAvailableInProductionOrders()throws Exc
    
 }
 
-@Test(priority=30,groups={"Primary"},enabled=true)
+@Test(priority=30,groups={"Primary"},enabled=false)
 public void TC_103_ValidateInvoiceDoesnotAvailableShippedOrders()throws Exception
 {                
    
@@ -952,7 +952,7 @@ public void TC_103_ValidateInvoiceDoesnotAvailableShippedOrders()throws Exceptio
    
 }
 
-@Test(priority=31,groups={"Primary"},enabled=true)
+@Test(priority=31,groups={"Primary"},enabled=false)
 public void TC_104_ValidateInvoiceAvailableIsNotClickable()throws Exception
 {                
    
@@ -978,7 +978,7 @@ public void TC_104_ValidateInvoiceAvailableIsNotClickable()throws Exception
 
 
 
-@Test(priority=32,groups={"Primary"},enabled=true, description="Test Script validates all the menu options displayed when clicked on 3 line menu bar in the home screen of the application ")
+@Test(priority=32,groups={"Primary"},enabled=false, description="Test Script validates all the menu options displayed when clicked on 3 line menu bar in the home screen of the application ")
 public void TC_116_ValidatetheMenuItems()throws Exception
 
 {
@@ -1014,7 +1014,7 @@ public void TC_116_ValidatetheMenuItems()throws Exception
 }
 
 
-@Test(priority=33,groups={"Primary","Secondary"},enabled=true,description="Test Script Validates that on clicking each of the menu options, respective page is displayed")
+@Test(priority=33,groups={"Primary","Secondary"},enabled=false,description="Test Script Validates that on clicking each of the menu options, respective page is displayed")
 public void TC_117_MainMenuPages()throws Exception
 {                
    
@@ -1057,7 +1057,7 @@ public void TC_117_MainMenuPages()throws Exception
    
 }
 
-@Test(priority=34,groups={"Primary"},enabled=true, description="Test Script validates that in the Get Support page, Contact Us menu option is displayed")
+@Test(priority=34,groups={"Primary"},enabled=false, description="Test Script validates that in the Get Support page, Contact Us menu option is displayed")
 public void TC_108_ValidateContactUS()throws Exception
 {
 		Reporter.log("Test Script validates that in the Get Support page, Contact Us menu option is displayed");
@@ -1087,7 +1087,7 @@ public void TC_108_ValidateContactUS()throws Exception
 }
 
 
-@Test(priority=35,groups={"Primary"},enabled=true, description="Test script validates that on searching an order, respective order search page will be displayed with all the details of the order")
+@Test(priority=35,groups={"Primary"},enabled=false, description="Test script validates that on searching an order, respective order search page will be displayed with all the details of the order")
 public void TC_1_ValidateSearchResultPageInformation()throws Exception
 {    	   	
 			
@@ -1126,7 +1126,7 @@ public void TC_1_ValidateSearchResultPageInformation()throws Exception
 
 
 
-@Test(priority=36,groups={"Primary","Secondary"},enabled=true, description="Test script validates if FAQ, Frequently Asked Questions are displayed in Get Support Page")
+@Test(priority=36,groups={"Primary","Secondary"},enabled=false, description="Test script validates if FAQ, Frequently Asked Questions are displayed in Get Support Page")
 public void TC_107_ValidateFAQsection()throws Exception
 {
 	Reporter.log("Test script validates if FAQ, Frequently Asked Questions are displayed in Get Support Page");
@@ -1165,7 +1165,7 @@ public void TC_107_ValidateFAQsection()throws Exception
     
     }
 
-@Test(priority=37,groups={"Primary","Secondary"},enabled=true, description="Test Script validates that Powered by HPSS is displayed in the home page of the Application")
+@Test(priority=37,groups={"Primary","Secondary"},enabled=false, description="Test Script validates that Powered by HPSS is displayed in the home page of the Application")
 public void TC_65_ValidatePoweredByHPEOSS()throws Exception
 {
 	Reporter.log("Test Script validates that Powered by HPSS is displayed in the home page of the Application");
@@ -1195,7 +1195,7 @@ public void TC_65_ValidatePoweredByHPEOSS()throws Exception
 }
 
 
-@Test(priority=38,groups={"Primary"},enabled=true)
+@Test(priority=38,groups={"Primary"},enabled=false)
 public void TC_10_SearchResultnumberValidation()throws Exception{
        
        
@@ -1217,7 +1217,7 @@ public void TC_10_SearchResultnumberValidation()throws Exception{
        
 }
 
-@Test(priority=39,groups={"Primary"},enabled=true)
+@Test(priority=39,groups={"Primary"},enabled=false)
 public void TC_62_VerifyOrderDetailsfromWatchListpage()throws Exception{
        
        
@@ -1237,7 +1237,7 @@ public void TC_62_VerifyOrderDetailsfromWatchListpage()throws Exception{
 }
 
 
-@Test(priority=40,groups={"Primary"},enabled=true, description="Test Script validates that clear icon is displayed in the search page")
+@Test(priority=40,groups={"Primary"},enabled=false, description="Test Script validates that clear icon is displayed in the search page")
 public void TC_15_ValidateClearIconSearchPage()throws Exception
 {                
 		Reporter.log("Test Script validates that clear icon is displayed in the search page");
@@ -1267,7 +1267,7 @@ public void TC_15_ValidateClearIconSearchPage()throws Exception
    
 }
 
-@Test(priority=41,groups={"Primary","Secondary"},enabled=true, description="Test Script validates that when a search keyword is entered in the search field and click on search icon, search result page is displayed")
+@Test(priority=41,groups={"Primary","Secondary"},enabled=false, description="Test Script validates that when a search keyword is entered in the search field and click on search icon, search result page is displayed")
 public void TC_14_ValidateSearchBarFunctionality()throws Exception
 {                
 	Reporter.log("Test Script validates that when a search keyword is entered in the search field and click on search icon, search result page is displayed");
@@ -1303,7 +1303,7 @@ public void TC_14_ValidateSearchBarFunctionality()throws Exception
 
 
 	
-@Test(priority=42,groups={"Primary"},enabled=true, description="Test Script validates the order details page displayed when clicked on an order in the watchlist page")
+@Test(priority=42,groups={"Primary"},enabled=false, description="Test Script validates the order details page displayed when clicked on an order in the watchlist page")
 public void TC_61_VerifyUIOrderDetailsPageFromWatchList()throws Exception
 {
        
@@ -1332,7 +1332,7 @@ public void TC_61_VerifyUIOrderDetailsPageFromWatchList()throws Exception
 }
 
 
-@Test(priority=43,groups={"Primary"},enabled=true, description="Test Script validates that Search tips are displayed in the Search page, when the entered keywords search results are not found")
+@Test(priority=43,groups={"Primary"},enabled=false, description="Test Script validates that Search tips are displayed in the Search page, when the entered keywords search results are not found")
 public void TC_8_ValidateSearchTips()throws Exception
 {      
 		Reporter.log("Test Script validates that Search tips are displayed in the Search page, when the entered keywords search results are not found");
@@ -1364,7 +1364,7 @@ public void TC_8_ValidateSearchTips()throws Exception
 }
 
 
-@Test(priority=44,groups={"Primary"},enabled=true, description="Test Script validates that order detail page is displayed on clicking any order in the Search Page")
+@Test(priority=44,groups={"Primary"},enabled=false, description="Test Script validates that order detail page is displayed on clicking any order in the Search Page")
 public void TC_60_VerifyBasicInfoOrderDetailsfromSearchPage()throws Exception{
        
 		Reporter.log("Test Script validates that order detail page is displayed on clicking any order in the Search Page");
@@ -1401,7 +1401,7 @@ public void TC_60_VerifyBasicInfoOrderDetailsfromSearchPage()throws Exception{
 
 
 
-@Test(priority=45,groups={"Primary","Secondary"},enabled=true, description="Test Script validates if Terms and Condition page is displayed on clicking Terms and Conditions Menu option")
+@Test(priority=45,groups={"Primary","Secondary"},enabled=false, description="Test Script validates if Terms and Condition page is displayed on clicking Terms and Conditions Menu option")
 public void TC_77_ValidateTermsAndConditionPageFromMenu()throws Exception
 {      
 		Reporter.log("Test Script validates if Terms and Condition page is displayed on clicking Terms and Conditions Menu option");
@@ -1441,7 +1441,7 @@ public void TC_77_ValidateTermsAndConditionPageFromMenu()throws Exception
     
 }
 
-@Test(priority=46,groups={"Primary"},enabled=true, description="Test Script validates if the date and time is displayed in the Order detail page, on clicking any of the order")
+@Test(priority=46,groups={"Primary"},enabled=false, description="Test Script validates if the date and time is displayed in the Order detail page, on clicking any of the order")
 public void TC_9_ValidateOrderSearchDateAndTime()throws Exception
 {    	   	
 	
@@ -1475,7 +1475,7 @@ public void TC_9_ValidateOrderSearchDateAndTime()throws Exception
 }
 
 
-@Test(priority=47,groups={"Primary"},enabled=true, description="Test script validates the number of orders in the watchlist page")
+@Test(priority=47,groups={"Primary"},enabled=false, description="Test script validates the number of orders in the watchlist page")
 public void TC_126_ValidateNumberOfOrdersWatchList()throws Exception
 {    	   	
 		
@@ -1503,7 +1503,7 @@ Reporter.log("Device OS is: "+Device_OS);
 	
 }
 
-@Test(priority=48,groups={"Primary"},enabled=true, description="Test script validates that orders add are reflected in the watchlist page")
+@Test(priority=48,groups={"Primary"},enabled=false, description="Test script validates that orders add are reflected in the watchlist page")
 public void TC_127_ValidateOrdersAddedReflectWatchList()throws Exception
 {    	   	
 	
@@ -1541,7 +1541,7 @@ Reporter.log("Device OS is: "+Device_OS);
 	
 }
 
-@Test(priority=49,groups={"Primary"},enabled=true, description="Test script validates that orders removed from the watchlist page is not reflected")
+@Test(priority=49,groups={"Primary"},enabled=false, description="Test script validates that orders removed from the watchlist page is not reflected")
 public void TC_128_ValidateOrdersemovedReflectWatchList()throws Exception
 {    	   	
 	
@@ -1577,7 +1577,7 @@ public void TC_128_ValidateOrdersemovedReflectWatchList()throws Exception
 	
 }
 
-@Test(priority=50,groups={"Primary","Secondary"},enabled=true, description="Test script validates the Order elements of an order, when searched")
+@Test(priority=50,groups={"Primary","Secondary"},enabled=false, description="Test script validates the Order elements of an order, when searched")
 public void TC_130_ValidateOrderElements()throws Exception{
         
         	
@@ -1613,7 +1613,7 @@ public void TC_130_ValidateOrderElements()throws Exception{
         
 }
 
-@Test(priority=51,groups={"Primary"},enabled=true)
+@Test(priority=51,groups={"Primary"},enabled=false)
 public void TC_33_ValidateOrderSearchDateAndTimeinSavedSearches()throws Exception
 
 {               
@@ -1639,7 +1639,7 @@ public void TC_33_ValidateOrderSearchDateAndTimeinSavedSearches()throws Exceptio
 }
 
 
-@Test(priority=52,groups={"Primary"},enabled=true, description="Test script validates the pop up screen in the watchlist page")
+@Test(priority=52,groups={"Primary"},enabled=false, description="Test script validates the pop up screen in the watchlist page")
 public void TC_118_ValidateWatchListPopUpScreen()throws Exception{
 	
 	
@@ -1667,7 +1667,7 @@ public void TC_118_ValidateWatchListPopUpScreen()throws Exception{
 
 }
 
-@Test(priority=53,groups={"Primary"},enabled=true, description="Test script validates that user is able to search for an order by entering ordered data as a criteria in advance search page")
+@Test(priority=53,groups={"Primary"},enabled=false, description="Test script validates that user is able to search for an order by entering ordered data as a criteria in advance search page")
 public void TC_23_ValidateDateOrdered()throws Exception
 {
 	
@@ -1705,7 +1705,7 @@ public void TC_23_ValidateDateOrdered()throws Exception
 
 }
 
-@Test(priority=54,groups={"Primary"},enabled=true, description="Test script validates that user is able to search for an order by entering estimated ship complete data as a criteria in advance search page")
+@Test(priority=54,groups={"Primary"},enabled=false, description="Test script validates that user is able to search for an order by entering estimated ship complete data as a criteria in advance search page")
 public void TC_24_ValidateEstimatedShipCompleteDate()throws Exception
 {
 	Reporter.log("Test script validates that user is able to search for an order by entering estimated ship complete data as a criteria in advance search page");
@@ -1742,7 +1742,7 @@ public void TC_24_ValidateEstimatedShipCompleteDate()throws Exception
 }
 
 
-@Test(priority=55,groups={"Primary"},enabled=true, description="Test script validates that user is able to search for an order by entering HPE product number as a criteria in advance search page")
+@Test(priority=55,groups={"Primary"},enabled=false, description="Test script validates that user is able to search for an order by entering HPE product number as a criteria in advance search page")
 public void TC_22_ValidateHPEProductNumber()throws Exception
 {
 	Reporter.log("Test script validates that user is able to search for an order by entering HPE product number as a criteria in advance search page");
@@ -1776,7 +1776,7 @@ public void TC_22_ValidateHPEProductNumber()throws Exception
 }
 
 
-@Test(priority=56,groups={"Primary","Secondary"},enabled=true, description="Test script validates that user is able to search for an order by entering Shipping address as a criteria in advance search page")
+@Test(priority=56,groups={"Primary","Secondary"},enabled=false, description="Test script validates that user is able to search for an order by entering Shipping address as a criteria in advance search page")
 public void TC_21_AdvanceSearchShipAddress()throws Exception
 {
 	Reporter.log("Test script validates that user is able to search for an order by entering Shipping address as a criteria in advance search page");
@@ -1810,7 +1810,7 @@ public void TC_21_AdvanceSearchShipAddress()throws Exception
 }
 
 
-@Test(priority=57,groups={"Primary"},enabled=true, description="Test script validates that user is able to enter multiple search criteria in the Advance search page while searching")
+@Test(priority=57,groups={"Primary"},enabled=false, description="Test script validates that user is able to enter multiple search criteria in the Advance search page while searching")
 public void TC_26_AdvanceSearchMultipleConditions()throws Exception
 {
 	
@@ -1850,7 +1850,7 @@ public void TC_26_AdvanceSearchMultipleConditions()throws Exception
 }
 
 
-@Test(priority=58,groups={"Primary"},enabled=true, description="Test script validates that user is able to enter the End customer name in the advance search page")
+@Test(priority=58,groups={"Primary"},enabled=false, description="Test script validates that user is able to enter the End customer name in the advance search page")
 public void TC_20_AdvanceSearchEndCustomer()throws Exception
 {
 	
@@ -1885,7 +1885,7 @@ public void TC_20_AdvanceSearchEndCustomer()throws Exception
 }
 
 
-@Test(priority=59,groups={"Primary"},enabled=true, description="Test script validates the watchlist page after the orders are flagged")
+@Test(priority=59,groups={"Primary"},enabled=false, description="Test script validates the watchlist page after the orders are flagged")
 public void TC_51_CheckWatchListPageAfterOrdersFlagged()throws Exception
 {    	   	
 	
@@ -1920,7 +1920,7 @@ public void TC_51_CheckWatchListPageAfterOrdersFlagged()throws Exception
 	    	HPECommonFunctions.screen();
 }
 
-@Test(priority=60,groups={"Primary","Secondary"},enabled=true, description="Test script validates the options displayed in the Preference Page")
+@Test(priority=60,groups={"Primary","Secondary"},enabled=false, description="Test script validates the options displayed in the Preference Page")
 public void TC_35_ValidateUserPreferencesPage()throws Exception
 {    	
 		Reporter.log("Test script validates the options displayed in the Preference Page");
@@ -1956,7 +1956,7 @@ public void TC_35_ValidateUserPreferencesPage()throws Exception
 	    	HPECommonFunctions.screen();
 }
 
-@Test(priority=61,groups={"Primary"},enabled=true, description="Test script validates functionality, when no orders are flagged in the watchlist page")
+@Test(priority=61,groups={"Primary"},enabled=false, description="Test script validates functionality, when no orders are flagged in the watchlist page")
 public void TC_50_CheckWatchListPageWhenNoOrdersFlgged()throws Exception
 {    	   	
 	
@@ -1985,7 +1985,7 @@ public void TC_50_CheckWatchListPageWhenNoOrdersFlgged()throws Exception
 }
 
 
-@Test(priority=62,groups={"Primary"},enabled=true, description="Test script validates that user is able to scroll the arrows of the calendar, in the advance search page")
+@Test(priority=62,groups={"Primary"},enabled=false, description="Test script validates that user is able to scroll the arrows of the calendar, in the advance search page")
 public void TC_27_ValidateCalendarArrows()throws Exception
 {
 		
@@ -2052,7 +2052,7 @@ public void TC_27_ValidateCalendarArrows()throws Exception
 
 }
 
-@Test(priority=63,groups={"Primary","Secondary"},enabled=true)
+@Test(priority=63,groups={"Primary","Secondary"},enabled=false)
 public void TC_129_ValidateOrderDetails()throws Exception
 {                
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -2080,7 +2080,7 @@ public void TC_129_ValidateOrderDetails()throws Exception
 }
 
 
-@Test(priority=64,groups={"Primary"},enabled=true)
+@Test(priority=64,groups={"Primary"},enabled=false)
 public void TC_57_VerifyLayoutCommonPageForSearch()throws Exception
 {                
    	Reporter.log("Application Name is: "+"HPE Go");
@@ -2108,7 +2108,7 @@ public void TC_57_VerifyLayoutCommonPageForSearch()throws Exception
 
 }
 
-@Test(priority=65,groups={"Primary"},enabled=true, description="Test script validates the parameters and details displayed in Watchlist page")
+@Test(priority=65,groups={"Primary"},enabled=false, description="Test script validates the parameters and details displayed in Watchlist page")
 public void TC_58_VerifyLayoutCommonPageForWatchList()throws Exception
 {        
 	
@@ -2140,7 +2140,7 @@ public void TC_58_VerifyLayoutCommonPageForWatchList()throws Exception
 
 }
 
-@Test(priority=66,groups={"Primary"},enabled=true, description="Test script validates the parameters and details displayed in Order details page, when clicked on any of the order")
+@Test(priority=66,groups={"Primary"},enabled=false, description="Test script validates the parameters and details displayed in Order details page, when clicked on any of the order")
 public void TC_59_VerifyLayoutCommonPageForOrderDetailsPage()throws Exception
 {                
 		Reporter.log("Test script validates the parameters and details displayed in Order details page, when clicked on any of the order");
@@ -2177,7 +2177,7 @@ public void TC_59_VerifyLayoutCommonPageForOrderDetailsPage()throws Exception
 
 }
 
-@Test(priority=67,groups={"Primary"},enabled=true)
+@Test(priority=67,groups={"Primary"},enabled=false)
 public void TC_124_ValidateOrderAddedToWatchList()throws Exception
 {                
    
@@ -2206,7 +2206,7 @@ public void TC_124_ValidateOrderAddedToWatchList()throws Exception
 
 //No test Data, so Incomplete
 
-@Test(priority=68,groups={"Primary"},enabled=true, description="Test script validates that shipping dates should not be displayed for the cancelled orders")
+@Test(priority=68,groups={"Primary"},enabled=false, description="Test script validates that shipping dates should not be displayed for the cancelled orders")
 public void TC_3_ValidatingNoShippingDatesForCancelledOrders()throws Exception
 {
 	
@@ -2237,7 +2237,7 @@ public void TC_3_ValidatingNoShippingDatesForCancelledOrders()throws Exception
 	
 }
 
-@Test(priority=69,groups={"Primary"},enabled=true, description="Test Script validates the format of date displayed in the order detail page")
+@Test(priority=69,groups={"Primary"},enabled=false, description="Test Script validates the format of date displayed in the order detail page")
 public void TC_2_ValidatingDateFormat()throws Exception{
 	
 	
@@ -2275,7 +2275,7 @@ public void TC_2_ValidatingDateFormat()throws Exception{
 }
 
 
-@Test(priority=70,groups={"Primary"},enabled=true)
+@Test(priority=70,groups={"Primary"},enabled=false)
 public void TC_56_ValidateLayoutofCommonPageSavedSearches()throws Exception{
 	
 	HPECommonFunctions.screen();
@@ -2298,7 +2298,7 @@ public void TC_56_ValidateLayoutofCommonPageSavedSearches()throws Exception{
 }
 
 
-@Test(priority=71,groups={"Primary","Secondary"},enabled=true, description="Test script validates the functionalities of common page footer in the search page")
+@Test(priority=71,groups={"Primary","Secondary"},enabled=false, description="Test script validates the functionalities of common page footer in the search page")
 public void TC_54_ValidateCommonPageFooterFunctionality()throws Exception{
 	
    		
@@ -2331,7 +2331,7 @@ public void TC_54_ValidateCommonPageFooterFunctionality()throws Exception{
 	HPECommonFunctions.screen();
 }
 
-@Test(priority=72,groups={"Primary"},enabled=true, description="Test Script validates if the user is able to delete the orders from the watchlist page")
+@Test(priority=72,groups={"Primary"},enabled=false, description="Test Script validates if the user is able to delete the orders from the watchlist page")
 public void TC_53_RemoveOrdersfromWatchlist()throws Exception{
 	
 	
@@ -2364,7 +2364,7 @@ public void TC_53_RemoveOrdersfromWatchlist()throws Exception{
 	HPECommonFunctions.screen();
 }
 
-@Test(priority=73,groups={"Primary"},enabled=true, description="Test Script validates if the latest searched order is displayed as first entry in the Recent search page")
+@Test(priority=73,groups={"Primary"},enabled=false, description="Test Script validates if the latest searched order is displayed as first entry in the Recent search page")
 public void TC_31_ValidateSearchSavedInRecentSearches()throws Exception{
 	
 	
@@ -2398,7 +2398,7 @@ public void TC_31_ValidateSearchSavedInRecentSearches()throws Exception{
 
 }
 
-@Test(priority=74,groups={"Primary"},enabled=true, description="Test Script validates if the latest searched order is displayed as first entry in the Recent search page")
+@Test(priority=74,groups={"Primary"},enabled=false, description="Test Script validates if the latest searched order is displayed as first entry in the Recent search page")
 public void TC_34_ValidateSearchUsingSavedSearches()throws Exception{
 	
 	
@@ -2430,7 +2430,7 @@ public void TC_34_ValidateSearchUsingSavedSearches()throws Exception{
 
 
 
-@Test(priority=75,groups={"Primary"},enabled=true, description="Test script validates that user cannot auto-populate date beyond 90 days, in advance search page")
+@Test(priority=75,groups={"Primary"},enabled=false, description="Test script validates that user cannot auto-populate date beyond 90 days, in advance search page")
 public void TC_28_Validate90daysinCalendar()throws Exception
 {
 	
@@ -2466,7 +2466,7 @@ public void TC_28_Validate90daysinCalendar()throws Exception
 }
 
 
-@Test(priority=76,groups={"Primary","Secondary"},enabled=true, description="Test Script validates the functionality when clicked on Flag icon in the watchlist page")
+@Test(priority=76,groups={"Primary","Secondary"},enabled=false, description="Test Script validates the functionality when clicked on Flag icon in the watchlist page")
 public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	
 		Reporter.log("Test Script validates the functionality when clicked on Flag icon in the watchlist page");
@@ -2498,7 +2498,7 @@ public void TC_7_ValidateClickFunctionOfWatchListFlag()throws Exception{
 	HPECommonFunctions.screen();
 } 
 
-@Test(priority=77,groups={"Primary"},enabled=true, description="Test Script validates that in the advance search page, when selected a date in the calendar, date gets auto-populated")
+@Test(priority=77,groups={"Primary"},enabled=false, description="Test Script validates that in the advance search page, when selected a date in the calendar, date gets auto-populated")
 public void TC_29_ValidateAutoPopulateOfDateinAdvancedSearch()throws Exception{
 	
 		Reporter.log("Test Script validates that in the advance search page, when selected a date in the calendar, date gets auto-populated");
