@@ -624,7 +624,7 @@ public class HPECommonFunctions extends HPEOperations
 							{
 								nativedriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 								WebElement Skip = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Skip")));
-								if(!Skip.isDisplayed())
+								if(Skip.isDisplayed())
 							{
 								
 									System.out.println("Tutorial page is displayed");
@@ -728,7 +728,7 @@ public class HPECommonFunctions extends HPEOperations
 					{
 					
 					WebElement TandC = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
-					if(!TandC.isDisplayed())
+					if(TandC.isDisplayed())
 					{
 						System.out.println("Terms & Condition page is displayed");
 						Thread.sleep(2000);
@@ -812,7 +812,7 @@ public class HPECommonFunctions extends HPEOperations
 			{
 			Thread.sleep(5000);
 			WebElement Decline = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Decline")));
-			if(!Decline.isDisplayed())
+			if(Decline.isDisplayed())
 			{
 				System.out.println("Decline button is Present");
 				Thread.sleep(2000);
@@ -880,7 +880,7 @@ public class HPECommonFunctions extends HPEOperations
 			{
 			Thread.sleep(5000);
 			WebElement Accept = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
-			if(!Accept.isDisplayed())
+			if(Accept.isDisplayed())
 			{
 				System.out.println("Accept button is Present");
 				Thread.sleep(2000);
@@ -952,7 +952,7 @@ public class HPECommonFunctions extends HPEOperations
 					nativedriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			//Thread.sleep(10000);
 			WebElement Allow = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Allow")));
-			if(!Allow.isDisplayed())
+			if(Allow.isDisplayed())
 			{
 				System.out.println("Allow button is Present");
 				Thread.sleep(5000);
@@ -1074,7 +1074,7 @@ public class HPECommonFunctions extends HPEOperations
 			 Thread.sleep(5000);
 	         WebElement Accept = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Accept")));
 	         Thread.sleep(2000);
-	         if (!Accept.isDisplayed())
+	         if (Accept.isDisplayed())
 	         {
 	         Accept.click();
 	         Thread.sleep(5000);	         
@@ -1331,7 +1331,7 @@ public static void ClickSignOut1() throws Exception
 					{
 					Thread.sleep(5000);
 					WebElement Preferences = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Preferences")));
-					if(!Preferences.isDisplayed())
+					if(Preferences.isDisplayed())
 					{
 						
 						Preferences.click();
@@ -1523,7 +1523,7 @@ public static void ClickSignOut1() throws Exception
 			{
 			Thread.sleep(5000);
 			WebElement FlagIcon = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("FlagIcon")));
-			if(!FlagIcon.isDisplayed())
+			if(FlagIcon.isDisplayed())
 			{
 				System.out.println("FlagIcon is Present");
 				Thread.sleep(2000);				
@@ -1553,7 +1553,7 @@ public static void ClickSignOut1() throws Exception
 			try
 			{			
 			WebElement WatchList = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchListArrow")));
-			if(!WatchList.isDisplayed())
+			if(WatchList.isDisplayed())
 			{	
 				Thread.sleep(2000);	
 				WatchList.click();
@@ -1816,7 +1816,7 @@ public static void ClickSignOut1() throws Exception
 			{
 			
 			WebElement WatchFlagIcon = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("WatchFlagIcon")));
-			if(!WatchFlagIcon.isDisplayed())
+			if(WatchFlagIcon.isDisplayed())
 			{
 				System.out.println("Watchlist FlagIcon is Present");
 				Thread.sleep(2000);
@@ -1992,7 +1992,7 @@ public static void ClickSignOut1() throws Exception
 				try
 				{
 				WebElement MenuSlide = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("Home")));
-				if(!MenuSlide.isDisplayed())
+				if(MenuSlide.isDisplayed())
 				{				
 					System.out.println("User is able to see a menu slide from the left");
 					Thread.sleep(5000);				
@@ -2193,7 +2193,7 @@ public static void ClickSignOut1() throws Exception
 	                                                              
 	                    		 WebElement SearchPage = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SearchPageTitle")));
 	                    		 Thread.sleep(1000);
-	                    		 if (!SearchPage.isDisplayed())
+	                    		 if (SearchPage.isDisplayed())
 	                    		 {
 	                    			 System.out.println("Search Page is displayed");
 	                    			 Thread.sleep(5000);
