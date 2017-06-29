@@ -449,15 +449,20 @@ public class HPECommonFunctions extends HPEOperations
 		//Method to Click on Sign In Button for iOS
 		public static void ClickSignIn_iOS() throws Exception
 		{
-		WebElement SignInElement = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignInIpad")));
+		WebElement SignInElement = nativedriver.findElement(By.xpath(iOS_Objects.getProperty("SignIn")));
 		Thread.sleep(2000);
+		if(SignInElement.isDisplayed())
+		{
 		SignInElement.click();
+		System.out.println("Clicked on SignIn");
+		}
 		try
 		{
 			CheckServiceError("C://HPE//FunctionalTesting//Images//ServiceErrorOK" +".png");
 			
 				        
-		}catch (Exception e)
+		}
+		catch (Exception e)
 		
 		{
 			try{
@@ -4757,7 +4762,7 @@ public static void ClickApply() throws Exception
    	 					} catch (Exception e) {
    	 						 testLog.info("\nImage not present : " + imagePath);	
    	 						 testLog.info("WatchList arrow is not found");
-   	 						 Close_App_HPE();
+   	 						 //Close_App_HPE();
    	 						 status1 = 1;   	 						 
    	 						 Assert.fail("WatchList arrow is not found");
    	 					}
