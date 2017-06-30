@@ -16,7 +16,7 @@
      <test name="HPETest">
      <groups>
         <run>      
-          <include name="Secondary"/>
+          <include name="Primary"/>
           <!-- <include name="Secondary"/>-->
        </run>
      </groups>
