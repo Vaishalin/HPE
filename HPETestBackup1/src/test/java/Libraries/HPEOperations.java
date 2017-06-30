@@ -87,7 +87,6 @@ import java.util.concurrent.TimeUnit ;
 
 public class HPEOperations extends BaseClassHPE
 {
-
 				public static IMobileWebDriver visualdriver = device.getVisualDriver();
                 public static IMobileWebDriver nativedriver = device.getNativeDriver();
                 public static IMobileWebDriver domdriver = device.getDOMDriver();                               

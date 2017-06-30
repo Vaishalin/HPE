@@ -154,8 +154,7 @@ public class HPECommonFunctions extends HPEOperations
 					
 					}
 				}
-				*/
-				
+				*/				
 				/*
 				//change orientation to landscape from portrait
 				public static void Rotate_Device_Landscape() throws Exception
